@@ -3,7 +3,7 @@ version: '3.4'
 
 services:
   silvestreapp:
-    image: silvestreapp
+    image: silvestreblog.azurecr.io/silvestre-blog:latest
     build:
       context: .
       dockerfile: Silvestre.App.Web/Dockerfile

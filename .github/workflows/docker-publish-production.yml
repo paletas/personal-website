@@ -15,3 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker-compose build --parallel
+    - name: Login to Repository
+      run: docker login -u silvestreblog -p ${{ secrets.AZUREREPOSITORY_PASSWORD }} silvestreblog.azurecr.io
+    - name: Push to Repository
+      run: docker-compose push
