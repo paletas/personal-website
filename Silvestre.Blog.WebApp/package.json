@@ -1,0 +1,12 @@
+{
+  "name": "silvestre.blog.webapp",
+  "version": "0.1.0",
+  "devDependencies": {
+    "bootstrap": "^5.0.0-alpha1",
+    "gulp": "latest",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "rimraf": "latest"
+  }
+}
