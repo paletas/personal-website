@@ -1,2 +1,3 @@
 # personal-website
-My own personal website. Using this to learn, experiment and basically get back in the game.
+My own personal website.
+Using this to learn , experiments and get back in the game.
