@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "defaultDestination": "wwwroot/lib/",
+  "libraries": [
+    {
+      "library": "Chart.js@2.9.3",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "library": "chartjs-plugin-annotation@0.5.7",
+      "destination": "wwwroot/lib/Chart.js/plugins/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "chartjs-chart-box-and-violin-plot@2.3.0",
+      "destination": "wwwroot/lib/Chart.js/plugins/",
+      "files": [
+        "build/Chart.BoxPlot.js",
+        "build/Chart.BoxPlot.min.js"
+      ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "chartjs-plugin-datalabels@0.7.0",
+      "destination": "wwwroot/lib/Chart.js/plugins/",
+      "files": [
+        "dist/chartjs-plugin-datalabels.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.0.0-alpha2",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/js/bootstrap.bundle.js",
+        "dist/js/bootstrap.bundle.js.map",
+        "dist/js/bootstrap.bundle.min.js",
+        "dist/js/bootstrap.bundle.min.js.map",
+        "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map",
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.css.map"
+      ]
+    }
+  ]
+}
