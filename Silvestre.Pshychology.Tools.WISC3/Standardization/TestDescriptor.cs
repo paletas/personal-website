@@ -1,4 +1,6 @@
-﻿namespace Silvestre.Pshychology.Tools.WISC3
+﻿using System.Collections.Generic;
+
+namespace Silvestre.Pshychology.Tools.WISC3
 {
     public class TestDescriptor
     {
@@ -10,11 +12,14 @@
             this._testStandardizer = testStandardizer;
             this._testType = testType;
             this.Mandatory = mandatory;
+            this.SupportedAgeIntervals = testStandardizer.SupportedAgeIntervals;
         }
 
         public bool Mandatory { get; }
 
-        public (short Min, short? Max) GetBoundaries((int, int, int) subjectAge)
+        public IEnumerable<(Age From, Age To)> SupportedAgeIntervals { get; }
+
+        public (short Min, short? Max) GetBoundaries(Age subjectAge)
         {
             var descriptorBySubject = this._testStandardizer.GetTestDescriptorPerAge(this._testType, subjectAge);
             return descriptorBySubject.Boundaries;

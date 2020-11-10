@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvestre.Pshychology.Tools
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvestre.Pshychology.Tools.WebApp.Shared", "Silvestre.Pshychology.Tools.WebApp\Shared\Silvestre.Pshychology.Tools.WebApp.Shared.csproj", "{47AAC930-59F0-4A88-9A22-851204C39030}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silvestre.Pshychology.Tools.WISC3", "Silvestre.Pshychology.Tools.WISC3\Silvestre.Pshychology.Tools.WISC3.csproj", "{3BB8F39B-2237-4576-A700-E8D983BE834B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvestre.Pshychology.Tools.WISC3", "Silvestre.Pshychology.Tools.WISC3\Silvestre.Pshychology.Tools.WISC3.csproj", "{3BB8F39B-2237-4576-A700-E8D983BE834B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

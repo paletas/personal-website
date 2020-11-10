@@ -7,9 +7,9 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
     {
         private readonly ITestStandardizer _testStandardizer;
         private readonly TestTypeEnum _testType;
-        private TestDescriptor _testDescriptor;
-        private TestDescriptorPerAge _testDescriptorPerAge;
-        private (int Years, int Months, int Days)? _subjectAge;
+        private readonly TestDescriptor _testDescriptor;
+        private TestDescriptorPerAge? _testDescriptorPerAge;
+        private Age? _subjectAge;
         private short? _rawResult;
 
         public WISC3TestViewModel(string testName, string category, ITestStandardizer testStandardizer, TestTypeEnum testType)
@@ -22,7 +22,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
             this.TestName = testName;
         }
 
-        public event EventHandler OnStandardResultsUpdated;
+        public event EventHandler? OnStandardResultsUpdated;
 
         public string TestCategory { get; }
 
@@ -30,7 +30,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
 
         public bool Mandatory => this._testDescriptor.Mandatory;
 
-        public (int Years, int Months, int Days)? SubjectAge
+        public Age? SubjectAge
         {
             get => this._subjectAge;
             set
@@ -38,19 +38,19 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
                 this._subjectAge = value;
 
                 if (this._subjectAge == null) this._testDescriptorPerAge = null;
-                else this._testDescriptorPerAge = this._testStandardizer.GetTestDescriptorPerAge(this._testType, this.SubjectAge.Value);
+                else this._testDescriptorPerAge = this._testStandardizer.GetTestDescriptorPerAge(this._testType, this._subjectAge.Value);
 
-                if (this.ReadyToCalculate()) UpdateStandardResults();
+                UpdateStandardResults();
             }
         }
 
-        public short? RawResult 
-        { 
-            get => this._rawResult; 
+        public short? RawResult
+        {
+            get => this._rawResult;
             set
             {
                 this._rawResult = value;
-                if (this.ReadyToCalculate()) UpdateStandardResults();
+                UpdateStandardResults();
             }
         }
 
@@ -66,17 +66,12 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
 
         public (short MinValue, short? MaxValue)? GetRawResultBoundaries()
         {
-            return this._testDescriptorPerAge.Boundaries;
-        }
-
-        private bool ReadyToCalculate()
-        {
-            return this._subjectAge != null && this._rawResult != null;
+            return this._testDescriptorPerAge?.Boundaries;
         }
 
         internal void UpdateStandardResults()
         {
-            if (ReadyToCalculate())
+            if (this.SubjectAge != null && this.RawResult != null)
             {
                 var results = this._testStandardizer.Standerdization(this._testType, this.SubjectAge.Value, this.RawResult.Value);
 

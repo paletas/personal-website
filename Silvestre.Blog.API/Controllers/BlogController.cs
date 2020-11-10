@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Silvestre.Blog.API.Data;
 using Silvestre.Blog.API.Model;
 using Silvestre.Blog.API.Model.Mapper;
-using System;
 using System.Threading.Tasks;
 
 namespace Silvestre.Blog.API.Controllers

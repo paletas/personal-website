@@ -28,7 +28,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.Pages
             foreach (var test in this.WISC3ViewModel.StanderdizationPhase.AllTests)
             {
                 var boundaries = test.GetRawResultBoundaries();
-                test.RawResult = (short) rng.Next(boundaries?.MinValue ?? 1, boundaries?.MaxValue ?? 1);
+                test.RawResult = (short)rng.Next(boundaries?.MinValue ?? 1, boundaries?.MaxValue ?? 1);
             }
 #endif
         }
@@ -45,7 +45,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.Pages
 
         public DateTime? TestDate { get; set; }
 
-        public WISC3ViewModel WISC3ViewModel { get; private set; }
+        public WISC3ViewModel? WISC3ViewModel { get; private set; }
 
         public ElementReference StandardResultsChart { get; private set; }
 
@@ -55,11 +55,13 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.Pages
 
         protected void TestOrSubjectDatesUpdated(KeyboardEventArgs args)
         {
+            if (this.WISC3ViewModel == null) throw new ArgumentNullException(nameof(WISC3ViewModel));
+
             if (SubjectBirthday == null || TestDate == null)
                 this.WISC3ViewModel.SubjectAge = null;
             else
             {
-                var subjectAge = (TestDate.Value.Year - SubjectBirthday.Value.Year, TestDate.Value.Month - SubjectBirthday.Value.Month, TestDate.Value.Day - SubjectBirthday.Value.Day);
+                var subjectAge = new Age(TestDate.Value.Year - SubjectBirthday.Value.Year, TestDate.Value.Month - SubjectBirthday.Value.Month, TestDate.Value.Day - SubjectBirthday.Value.Day);
                 this.IsInitialInputValid = true;
                 this.WISC3ViewModel.SubjectAge = subjectAge;
             }
@@ -67,7 +69,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.Pages
 
         private void WISC3ViewModel_OnStandardResultsUpdated(object sender, EventArgs e)
         {
-            if (this.WISC3ViewModel.ShouldShowCharts)
+            if (this.WISC3ViewModel != null && this.WISC3ViewModel.ShouldShowCharts)
             {
                 this.JsRuntime.InvokeVoidAsync("wisc3.drawStandardResultsChart", this.StandardResultsChart, this.WISC3ViewModel.GetStandardResultsChartData());
                 this.JsRuntime.InvokeVoidAsync("wisc3.drawStandardFactorialIndicesChart", this.StandardFactorialIndicesChart, this.WISC3ViewModel.GetStandardFactorialIndicesChartData());
@@ -75,7 +77,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.Pages
             }
         }
 
-        private IDictionary<string, object> GetTestResultAttributes(short? rawResult, short? standardizedResult)
+        private IDictionary<string, object>? GetTestResultAttributes(short? rawResult, short? standardizedResult)
         {
             if (rawResult != null && standardizedResult != null) return null;
             else

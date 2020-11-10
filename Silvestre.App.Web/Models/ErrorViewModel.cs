@@ -1,5 +1,3 @@
-using System;
-
 namespace Silvestre.App.Web.Models
 {
     public class ErrorViewModel

@@ -6,9 +6,9 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3.Charts
     {
         public WISC3StandardFactorialIndicesChartViewModel(WISC3ViewModel viewModel)
         {
-            this.Labels =  new string[] { "Inf", "Sem", "Voc", "Com", "CG", "DG", "Cb", "CO", "Cd", "PS" };
+            this.Labels = new string[] { "Inf", "Sem", "Voc", "Com", "CG", "DG", "Cb", "CO", "Cd", "PS" };
 
-            this.VerbalComprehension = new short?[] 
+            this.VerbalComprehension = new short?[]
             {
                 viewModel.StanderdizationPhase[WISC3ViewModel.TEST_INFORMATION].StandardVerbalComprehension,
                 viewModel.StanderdizationPhase[WISC3ViewModel.TEST_SIMILARITIES].StandardVerbalComprehension,

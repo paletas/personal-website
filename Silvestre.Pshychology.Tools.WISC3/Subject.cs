@@ -2,7 +2,7 @@
 {
     public class Subject
     {
-        public Subject((int Years, int Months, int Days) age, short verbalStandard, short realizationStandard, short completeStandard, short verbalComprehensionStandard, short perceptionOrganizationStandard, short processingVelocityStandard)
+        public Subject(Age age, short verbalStandard, short realizationStandard, short completeStandard, short verbalComprehensionStandard, short perceptionOrganizationStandard, short processingVelocityStandard)
         {
             this.Age = age;
             this.VerbalStandard = verbalStandard;
@@ -13,7 +13,7 @@
             this.ProcessingVelocityStandard = processingVelocityStandard;
         }
 
-        public (int Years, int Months, int Days) Age { get; }
+        public Age Age { get; }
 
         public short VerbalStandard { get; }
 

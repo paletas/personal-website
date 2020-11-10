@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Silvestre.Pshychology.Tools.WISC3.Calculator.ConvertionScales.Portugal
+﻿namespace Silvestre.Pshychology.Tools.WISC3.Calculator.ConvertionScales.Portugal
 {
     internal class PortugalCalculator : IQICalculator
     {

@@ -1,7 +1,6 @@
-﻿using Silvestre.Pshychology.Tools.WISC3.Standardization.Standardizers;
-using System;
+﻿using System;
 
-namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
+namespace Silvestre.Pshychology.Tools.WISC3.Standardization.Standardizers.Portugal
 {
     internal class EightYearMonthLookupTable : IStandardizerLookupTable
     {
@@ -30,7 +29,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 16 => 17,
                 17 => 18,
                 var r when r >= 18 && r <= 30 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -62,7 +61,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 var r when r >= 50 && r <= 51 => 17,
                 var r when r >= 52 && r <= 53 => 18,
                 var r when r >= 54 && r <= 119 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -92,7 +91,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 15 => 17,
                 16 => 18,
                 var r when r >= 17 && r <= 36 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -124,7 +123,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 var r when r >= 53 && r <= 56 => 17,
                 var r when r >= 57 && r <= 58 => 18,
                 var r when r >= 59 && r <= 69 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -154,7 +153,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 17 => 16,
                 18 => 18,
                 var r when r >= 19 && r <= 30 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -185,7 +184,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 22 => 17,
                 23 => 18,
                 var r when r >= 24 && r <= 30 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -217,7 +216,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 var r when r >= 35 && r <= 36 => 17,
                 var r when r >= 37 && r <= 38 => 18,
                 var r when r >= 39 && r <= 64 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -246,7 +245,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 16 => 17,
                 17 => 18,
                 var r when r >= 18 && r <= 30 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -278,7 +277,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 26 => 17,
                 27 => 18,
                 28 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -310,7 +309,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 var r when r >= 34 && r <= 35 => 17,
                 var r when r >= 36 && r <= 37 => 18,
                 var r when r >= 38 && r <= 44 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -339,7 +338,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 14 => 17,
                 15 => 18,
                 var r when r >= 16 && r <= 33 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -371,7 +370,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 26 => 17,
                 27 => 18,
                 var r when r >= 28 && r <= 45 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
 
@@ -403,7 +402,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests.Standardizers.Portugal
                 24 => 17,
                 25 => 18,
                 var r when r >= 26 && r <= 60 => 19,
-                _ => throw new ArgumentOutOfRangeException(nameof(rawResult)),
+                _ => throw new ArgumentOutOfRangeException(nameof(rawResult), $"'{rawResult}' is outside of the supported values."),
             };
         }
     }

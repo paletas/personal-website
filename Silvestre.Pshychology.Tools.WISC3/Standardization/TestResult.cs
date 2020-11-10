@@ -19,6 +19,6 @@
 
         public short? PerceptiveOrganization { get; }
 
-        public short? ProcessingVelocity { get; }        
+        public short? ProcessingVelocity { get; }
     }
 }

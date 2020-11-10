@@ -11,7 +11,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
     {
         private readonly WISC3CalculatedQIViewModel _verbal, _realization, _completeScale, _verbalComprehension, _perceptiveOrganization, _processingVelocity;
         private readonly IStringLocalizer _localizationServices;
-        private (int Years, int Months, int Days)? subjectAge;
+        private Age? subjectAge;
 
         public const string CATEGORY_VERBAL = "Verbal", CATEGORY_REALIZATION = "Realization";
         public const string TEST_IMAGECOMPLETION = "ImageCompletion";
@@ -39,7 +39,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
             this._localizationServices = localizationServices;
 
             this.StanderdizationPhase = new WISC3StanderdizationViewModel
-            (
+            (   standardizer,
                 new WISC3TestViewModel(TEST_IMAGECOMPLETION, CATEGORY_REALIZATION, standardizer, TestTypeEnum.ImageCompletion),
                 new WISC3TestViewModel(TEST_INFORMATION, CATEGORY_VERBAL, standardizer, TestTypeEnum.Information),
                 new WISC3TestViewModel(TEST_CODE, CATEGORY_REALIZATION, standardizer, TestTypeEnum.Code),
@@ -69,9 +69,9 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
             this.StanderdizationPhase.OnStandardResultsUpdated += (sender, args) => this.OnStandardResultsUpdated?.Invoke(this, args);
         }
 
-        public (int Years, int Months, int Days)? SubjectAge 
-        { 
-            get => subjectAge; 
+        public Age? SubjectAge
+        {
+            get => subjectAge;
             set
             {
                 subjectAge = value;
@@ -85,7 +85,7 @@ namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
 
         public bool ShouldShowCharts { get; private set; }
 
-        public event EventHandler OnStandardResultsUpdated;
+        public event EventHandler? OnStandardResultsUpdated;
 
         public WISC3StandardResultsChartViewModel GetStandardResultsChartData()
         {

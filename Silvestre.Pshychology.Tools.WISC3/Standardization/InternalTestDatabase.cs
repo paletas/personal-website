@@ -26,7 +26,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Tests
             };
         }
 
-        public static TestDescriptorPerAge GetTestDescriptorPerAge(IStandardizerLookupTable lookupTable, TestTypeEnum testType, (int Years, int Months, int Days) subjectAge)
+        public static TestDescriptorPerAge GetTestDescriptorPerAge(IStandardizerLookupTable lookupTable, TestTypeEnum testType)
         {
             return testType switch
             {

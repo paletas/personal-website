@@ -1,30 +1,33 @@
-﻿ using Silvestre.Pshychology.Tools.WISC3.Tests;
+﻿using Silvestre.Pshychology.Tools.WISC3.Tests;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Silvestre.Pshychology.Tools.WISC3.Standardization.Standardizers
 {
     public abstract class LookupStandardizer : ITestStandardizer
     {
-        protected abstract IStandardizerLookupTable GetStandardizerTableFor(int years, int months, int days);
+        public IEnumerable<(Age From, Age To)> SupportedAgeIntervals => this.GetLookupTables().Keys;
 
         public TestDescriptor GetTestDescriptor(TestTypeEnum testType)
         {
             return InternalTestDatabase.GetTestDescriptor(this, testType);
         }
 
-        public TestDescriptorPerAge GetTestDescriptorPerAge(TestTypeEnum testType, (int Years, int Months, int Days) age)
+        public IEnumerable<TestDescriptorPerAge> GetTestDescriptorsPerType(TestTypeEnum testType)
         {
-            var lookupTable = this.GetStandardizerTableFor(age.Years, age.Months, age.Days);
-            return InternalTestDatabase.GetTestDescriptorPerAge(lookupTable, testType, age);
+            return this.GetLookupTables().Select(t => t.Value).Select(t => InternalTestDatabase.GetTestDescriptorPerAge(t, testType));
         }
 
-        public TestDescriptor GetTestDescriptor(TestTypeEnum testType, (int Years, int Months, int Days) age)
+        public TestDescriptorPerAge GetTestDescriptorPerAge(TestTypeEnum testType, Age age)
         {
-            return InternalTestDatabase.GetTestDescriptor(this, testType);
+            var lookupTable = this.GetStandardizerTableFor(age);
+            return InternalTestDatabase.GetTestDescriptorPerAge(lookupTable, testType);
         }
 
-        public TestResult Standerdization(TestTypeEnum testType, (int Years, int Months, int Days) age, short rawResult)
+        public TestResult Standerdization(TestTypeEnum testType, Age age, short rawResult)
         {
-            var lookupTable = this.GetStandardizerTableFor(age.Years, age.Months, age.Days);
+            var lookupTable = this.GetStandardizerTableFor(age);
             return testType switch
             {
                 TestTypeEnum.Arithmetic => ResultForArithmetic(lookupTable, rawResult),
@@ -42,6 +45,25 @@ namespace Silvestre.Pshychology.Tools.WISC3.Standardization.Standardizers
                 TestTypeEnum.Labyrinth => ResultForLabyrinth(lookupTable, rawResult),
                 _ => throw new System.NotImplementedException()
             };
+        }
+
+        protected abstract IDictionary<(Age From, Age To), IStandardizerLookupTable> GetLookupTables();
+
+        private IStandardizerLookupTable GetStandardizerTableFor(Age age)
+        {
+            var lookupTables = this.GetLookupTables();
+            
+            foreach (var lookupTable in lookupTables.OrderBy(key => key.Key.From))
+            {
+                var (From, To) = lookupTable.Key;
+
+                if (age.Years <= To.Years && age.Months <= To.Months && age.Days <= To.Days)
+                {
+                    return lookupTable.Value;
+                }
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(age), "Age provided is outside of supported range");
         }
 
         private static TestResult ResultForArithmetic(IStandardizerLookupTable lookupTable, short rawResult)
@@ -88,7 +110,7 @@ namespace Silvestre.Pshychology.Tools.WISC3.Standardization.Standardizers
 
         private static TestResult ResultForInformation(IStandardizerLookupTable lookupTable, short rawResult)
         {
-            var standardResult = lookupTable.GetLabyrinthStandardizedResult(rawResult);
+            var standardResult = lookupTable.GetInformationStandardizedResult(rawResult);
             return new TestResult(standardResult, null, standardResult, null, null);
         }
 

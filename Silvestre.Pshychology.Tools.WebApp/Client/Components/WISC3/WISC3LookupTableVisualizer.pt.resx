@@ -117,148 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button.Hide" xml:space="preserve">
-    <value>Esconder</value>
+  <data name="TableHeader.RealizationTests" xml:space="preserve">
+    <value>Subtestes de Realização</value>
   </data>
-  <data name="Button.ShowLookupTable" xml:space="preserve">
-    <value>Ver Tabela</value>
-  </data>
-  <data name="ConfidenceInterval" xml:space="preserve">
-    <value>Intervalo de confiança</value>
-  </data>
-  <data name="LookupVisualizer" xml:space="preserve">
-    <value>Tabela de Conversão</value>
-  </data>
-  <data name="Percentil" xml:space="preserve">
-    <value>Percentil</value>
-  </data>
-  <data name="QI" xml:space="preserve">
-    <value>QI / Índice</value>
-  </data>
-  <data name="QI.CompleteScale" xml:space="preserve">
-    <value>Escala Completa</value>
-  </data>
-  <data name="QI.PerceptiveOrganization" xml:space="preserve">
-    <value>Organização Perceptiva</value>
-  </data>
-  <data name="QI.ProcessingVelocity" xml:space="preserve">
-    <value>Velocidade de Processamento</value>
-  </data>
-  <data name="QI.Realization" xml:space="preserve">
-    <value>Realização</value>
-  </data>
-  <data name="QI.Verbal" xml:space="preserve">
-    <value>Verbal</value>
-  </data>
-  <data name="QI.VerbalComprehension" xml:space="preserve">
-    <value>Compreensão Verbal</value>
-  </data>
-  <data name="SubjectAge" xml:space="preserve">
-    <value>Idade</value>
-  </data>
-  <data name="SubjectAge.Display.Day" xml:space="preserve">
-    <value>Dia</value>
-  </data>
-  <data name="SubjectAge.Display.Month" xml:space="preserve">
-    <value>Mês</value>
-  </data>
-  <data name="SubjectAge.Display.Year" xml:space="preserve">
-    <value>Ano</value>
-  </data>
-  <data name="SubjectBirthday" xml:space="preserve">
-    <value>Data de Nascimento</value>
-  </data>
-  <data name="Test.Arithmetic" xml:space="preserve">
-    <value>Aritmética</value>
-  </data>
-  <data name="Test.Code" xml:space="preserve">
-    <value>Código</value>
-  </data>
-  <data name="Test.Comprehension" xml:space="preserve">
-    <value>Compreensão</value>
-  </data>
-  <data name="Test.Cubes" xml:space="preserve">
-    <value>Cubos</value>
-  </data>
-  <data name="Test.DigitMemory" xml:space="preserve">
-    <value>Memória de Dígitos</value>
-  </data>
-  <data name="Test.ImageCompletion" xml:space="preserve">
-    <value>Completamento de Gravuras</value>
-  </data>
-  <data name="Test.ImageDisposition" xml:space="preserve">
-    <value>Disposição de Gravuras</value>
-  </data>
-  <data name="Test.Information" xml:space="preserve">
-    <value>Informação</value>
-  </data>
-  <data name="Test.Labyrinth" xml:space="preserve">
-    <value>Labirintos</value>
-  </data>
-  <data name="Test.ObjectComposition" xml:space="preserve">
-    <value>Composição de Objectos</value>
-  </data>
-  <data name="Test.Similarities" xml:space="preserve">
-    <value>Semelhanças</value>
-  </data>
-  <data name="Test.SumResults" xml:space="preserve">
-    <value>Soma dos Resultados Padronizados</value>
-  </data>
-  <data name="Test.SymbolSearch" xml:space="preserve">
-    <value>Pesquisa de Símbolos</value>
-  </data>
-  <data name="Test.Vocabulary" xml:space="preserve">
-    <value>Vocabulário</value>
-  </data>
-  <data name="TestDate" xml:space="preserve">
-    <value>Data do Teste</value>
-  </data>
-  <data name="TestsDescription" xml:space="preserve">
-    <value>Subtestes</value>
-  </data>
-  <data name="TestsPatternResults" xml:space="preserve">
+  <data name="TableHeader.StandardizedResults" xml:space="preserve">
     <value>Resultados Padronizados</value>
   </data>
-  <data name="TestsPatternResults.PerceptiveOrganization" xml:space="preserve">
-    <value>OP</value>
+  <data name="TableHeader.Test.Arithmetic" xml:space="preserve">
+    <value>Aritmética</value>
   </data>
-  <data name="TestsPatternResults.PerceptiveOrganization.MouseHover" xml:space="preserve">
-    <value>Organização Perceptiva</value>
+  <data name="TableHeader.Test.Code" xml:space="preserve">
+    <value>Código</value>
   </data>
-  <data name="TestsPatternResults.ProcessingVelocity" xml:space="preserve">
-    <value>VP</value>
+  <data name="TableHeader.Test.Comprehension" xml:space="preserve">
+    <value>Compreensão</value>
   </data>
-  <data name="TestsPatternResults.ProcessingVelocity.MouseHover" xml:space="preserve">
-    <value>Velocidade de Processamento</value>
+  <data name="TableHeader.Test.Cubes" xml:space="preserve">
+    <value>Cubos</value>
   </data>
-  <data name="TestsPatternResults.Realization" xml:space="preserve">
-    <value>Real.</value>
+  <data name="TableHeader.Test.DigitMemory" xml:space="preserve">
+    <value>Memória de Dígitos</value>
   </data>
-  <data name="TestsPatternResults.Realization.MouseHover" xml:space="preserve">
-    <value>Realização</value>
+  <data name="TableHeader.Test.ImageCompletion" xml:space="preserve">
+    <value>Completamento de Gravuras</value>
   </data>
-  <data name="TestsPatternResults.Verbal" xml:space="preserve">
-    <value>Verb.</value>
+  <data name="TableHeader.Test.ImageDisposition" xml:space="preserve">
+    <value>Disposição de Gravuras</value>
   </data>
-  <data name="TestsPatternResults.Verbal.MouseHover" xml:space="preserve">
-    <value>Verbal</value>
+  <data name="TableHeader.Test.Information" xml:space="preserve">
+    <value>Informação</value>
   </data>
-  <data name="TestsPatternResults.VerbalComprehension" xml:space="preserve">
-    <value>CV</value>
+  <data name="TableHeader.Test.Labyrinth" xml:space="preserve">
+    <value>Labirintos</value>
   </data>
-  <data name="TestsPatternResults.VerbalComprehension.MouseHover" xml:space="preserve">
-    <value>Compreensão Verbal</value>
+  <data name="TableHeader.Test.ObjectComposition" xml:space="preserve">
+    <value>Composição de Objectos</value>
   </data>
-  <data name="TestsRawResults" xml:space="preserve">
-    <value>Resultados Brutos</value>
+  <data name="TableHeader.Test.Similarities" xml:space="preserve">
+    <value>Semelhanças</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>AVISO</value>
+  <data name="TableHeader.Test.SymbolSearch" xml:space="preserve">
+    <value>Pesquisa de Símbolos</value>
   </data>
-  <data name="WarningDetails" xml:space="preserve">
-    <value>Não é o objetivo desta calculadora explicar como o teste funciona mas sim, providenciar uma plataforma em que seja mais rápido, e com menos risco de erro, calcular os resultados do mesmo.</value>
+  <data name="TableHeader.Test.Vocabulary" xml:space="preserve">
+    <value>Vocabulário</value>
   </data>
-  <data name="WISC3.Description" xml:space="preserve">
-    <value>Calculadora de Resultados</value>
+  <data name="TableHeader.VerbalTests" xml:space="preserve">
+    <value>Subtestes Verbais</value>
   </data>
 </root>

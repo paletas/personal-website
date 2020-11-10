@@ -1,5 +1,4 @@
 using System;
-using System.Security.Policy;
 
 namespace Silvestre.Blog.API.Data
 {

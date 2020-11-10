@@ -23,7 +23,7 @@ namespace Silvestre.Blog.API.Data
 
             using var sqlConnection = new SqlConnection(this._connectionString);
 
-            var createCommand = new CommandDefinition("INSERT INTO blog.BlogPost (Url, When, Content, Version) VALUES (@Url, @When, @Content)", 
+            var createCommand = new CommandDefinition("INSERT INTO blog.BlogPost (Url, When, Content, Version) VALUES (@Url, @When, @Content)",
                 new { Url = post.Url, When = post.When, Content = post.Content }
             );
 

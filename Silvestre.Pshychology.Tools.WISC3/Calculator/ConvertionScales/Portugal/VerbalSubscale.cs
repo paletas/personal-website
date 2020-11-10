@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Silvestre.Pshychology.Tools.WISC3.Calculator.ConvertionScales.Portugal

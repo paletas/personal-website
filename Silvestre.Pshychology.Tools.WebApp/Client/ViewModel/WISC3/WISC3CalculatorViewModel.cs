@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Silvestre.Pshychology.Tools.WebApp.Client.ViewModel.WISC3
 {
