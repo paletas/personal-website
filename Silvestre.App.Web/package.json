@@ -15,6 +15,6 @@
     "tailwindcss": "2.0.2"
   },
   "dependencies": {
-    "postcss": "^8.2.1"
+    "postcss": "^8.2.10"
   }
 }
