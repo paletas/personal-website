@@ -1,20 +1,16 @@
 {
-  "name": "Silvestre.Website",
-  "version": "0.1.0",
-  "peerDependencies": {
-    "autoprefixer": "10.1.0",
-    "postcss": "8.2.1"
-  },
+  "name": "silvestre.website",
+  "version": "0.2.0",
   "devDependencies": {
-    "@tailwindcss/forms": "^0.2.1",
-    "autoprefixer": "10.1.0",
+    "autoprefixer": "^10.4.7",
     "gulp": "4.0.2",
     "gulp-clean": "0.4.0",
-    "gulp-postcss": "9.0.0",
+    "gulp-concat": "2.6.1",
+    "gulp-flatten": "0.4.0",
+    "gulp-postcss": "9.0.1",
+    "gulp-rename": "2.0.0",
+    "postcss": "^8.4.14",
     "precss": "4.0.0",
-    "tailwindcss": "2.0.2"
-  },
-  "dependencies": {
-    "postcss": "^8.2.1"
+    "tailwindcss": "^3.1.3"
   }
 }

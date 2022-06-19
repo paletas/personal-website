@@ -25,3 +25,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+Silvestre = function () {
+    var darkMode = false;
+
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+        darkMode = true;
+    } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+    }
+
+    function setCheckboxValue(className, enabled) {
+        var toggles = document.getElementsByClassName(className);
+        for (var ix = 0; ix < toggles.length; ix++) {
+            toggles[ix].checked = enabled;
+        }
+    }
+
+    setCheckboxValue("theme-toggle", darkMode);
+
+    return {
+        darkMode: darkMode,
+
+        toggleDarkMode: function () {
+            this.darkMode = !this.darkMode;
+
+            if (this.darkMode) {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+            else {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            }
+
+            setCheckboxValue("theme-toggle", this.darkMode);
+        }
+    };
+}();

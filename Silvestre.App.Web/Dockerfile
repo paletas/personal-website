@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:6.0.5 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:6.0.5 AS build
 WORKDIR /src
 COPY ["Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
 RUN dotnet restore "Silvestre.App.Web/Silvestre.App.Web.csproj"
