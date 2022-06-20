@@ -18,4 +18,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npx tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css" />
+  </Target>
 </Project>

@@ -5,23 +5,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
     <meta name="keywords" content="silvestre" />
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    gridTemplateRows: {
-                        // Complex site-specific row configuration
-                        'grid-rows-header-2': 'auto repeat(2, minmax(0, 1fr))',
+
+    <environment name="Development">        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
                     }
                 }
             }
-        }
-    </script>
+        </script>
+    </environment>
 </head>
 <body class="dark:bg-gray-600 dark:text-gray-300">
     <nav class="bg-sky-500 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
@@ -103,7 +102,7 @@
         <CultureSelector />
     </footer>
 
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true" ></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
