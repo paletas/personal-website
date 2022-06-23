@@ -41,7 +41,7 @@ namespace Silvestre.App.Web
             {
                 OnPrepareResponse = ctx =>
                 {
-                    ctx.Context.Response.Headers.CacheControl = new Microsoft.Extensions.Primitives.StringValues(new[] { "public", $"max-age={TimeSpan.FromDays(7).TotalSeconds}" });
+                    ctx.Context.Response.Headers.CacheControl = new Microsoft.Extensions.Primitives.StringValues(new[] { "public", $"max-age={TimeSpan.FromDays(365).TotalSeconds}" });
                 },
                 HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
                 ServeUnknownFileTypes = true
