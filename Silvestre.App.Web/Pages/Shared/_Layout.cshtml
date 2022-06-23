@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
     <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
     <meta name="keywords" content="silvestre" />
 
@@ -102,7 +102,7 @@
         <CultureSelector />
     </footer>
 
-    <script src="~/js/site.js" asp-append-version="true" ></script>
+    <script src="~/js/site.js?v=@App.AppVersion" asp-append-version="true" ></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

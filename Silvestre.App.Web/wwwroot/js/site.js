@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
+
+
 Silvestre = function () {
     var darkMode = false;
 
@@ -64,6 +67,10 @@ Silvestre = function () {
             }
 
             setCheckboxValue("theme-toggle", this.darkMode);
+        },
+
+        noAvifSupport: function (sender) {
+            sender.src = "~\wwwroot\img\profile.webp";
         }
     };
 }();
