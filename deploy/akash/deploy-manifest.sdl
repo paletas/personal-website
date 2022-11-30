@@ -1,0 +1,36 @@
+---
+version: '2.0'
+services:
+  silvestre-website-personal:
+    image: 'paletas/silvestre-website:latest'
+    expose:
+      - port: 80
+        as: 80
+        accept:
+          - "web3.itssilvestre.com"
+        to:
+          - global: true
+    env:
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - ASPNETCORE_URLS=http://web3.itssilvestre.com:80
+profiles:
+  compute:
+    silvestre-website-personal:
+      resources:
+        cpu:
+          units: 0.5
+        memory:
+          size: 128Mi
+        storage:
+          - size: 1Gi
+  placement:
+    silvestre-prod-noncritical:
+      pricing:
+        silvestre-website-personal:
+          denom: uakt
+          amount: 50
+deployment:
+  silvestre-website-personal:
+    silvestre-prod-noncritical:
+      profile: silvestre-website-personal
+      count: 1
