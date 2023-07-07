@@ -3,12 +3,11 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
+COPY ["src/Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
 RUN dotnet restore "Silvestre.App.Web/Silvestre.App.Web.csproj"
-COPY . .
+COPY src/ .
 WORKDIR "/src/Silvestre.App.Web"
 RUN dotnet build "Silvestre.App.Web.csproj" -c Release -o /app/build
 
