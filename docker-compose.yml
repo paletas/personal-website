@@ -1,11 +1,8 @@
-# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
-version: '3.4'
+version: '3.8'
 
 services:
-  silvestreapp:
-    image: silvestreblog.azurecr.io/silvestre-blog:latest
+  silvestre.app.web:
+    image: ${DOCKER_REGISTRY-}silvestreappweb
     build:
       context: .
-      dockerfile: Silvestre.App.Web/Dockerfile
-    ports:
-      - 80
+      dockerfile: src/Silvestre.App.Web/Dockerfile
