@@ -8,6 +8,7 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <ImplicitUsings>disable</ImplicitUsings>
+    <Version>1.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />

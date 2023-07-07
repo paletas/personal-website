@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net app to Azure Web App - silvestre-website
+name: Build and deploy docker image - silvestre-website
 
 on:
   push:
@@ -11,46 +11,44 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x'
-
-    - name: Build with dotnet
-      run: dotnet build Silvestre.App.Web --configuration Release
-
-    - name: dotnet publish
-      run: dotnet publish Silvestre.App.Web -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: .net-app
-        path: ${{env.DOTNET_ROOT}}/myapp
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: .net-app
-
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'silvestre-website'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_94e98781d312494f853c9b995c555200 }}
-        package: .
+    - uses: actions/checkout@v3
+    - name: Get version from csproj
+      id: version
+      run: |
+        $xml=[xml](Get-Content .\Silvestre.App.Web.csproj)
+        $version=$xml.Project.PropertyGroup.Version
+        echo "project_version=$version" >> $env:GITHUB_OUTPUT
+      shell: pwsh
+      working-directory: src/Silvestre.App.Web
+    - name: Print version
+      run: echo "The version is ${{ steps.version.outputs.project_version }}"
+    - name: Build the Docker image
+      run: |
+        SHOULD_PUBLISH='true'
+        VERSION_SUFFIX=""
+        if [[ "$GITHUB_REF" == refs/heads/* ]]; then
+          if [ "$GITHUB_REF_NAME" == "master" ]; then
+            VERSION_SUFFIX=""
+          elif [ "$GITHUB_REF_NAME" == "develop" ]; then
+            VERSION_SUFFIX="-dev"
+          else
+            SHOULD_PUBLISH='false'
+          fi
+        else
+          SHOULD_PUBLISH='false'
+        fi
+        echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
+        echo "SHOULD_PUBLISH=$SHOULD_PUBLISH" >> $GITHUB_ENV
+        docker build -f src/Silvestre.App.Web/Dockerfile --tag ghcr.io/paletas/personal-website:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX} --tag ghcr.io/paletas/personal-website:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX} .
+    - name: Log into GitHub Container Registry
+      if: env.SHOULD_PUBLISH == 'true'
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Push Docker image
+      if: env.SHOULD_PUBLISH == 'true'
+      run: |
+        docker push ghcr.io/paletas/personal-website:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX}
+        docker push ghcr.io/paletas/personal-website:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}
+      env:
+        VERSION_SUFFIX: ${{ env.VERSION_SUFFIX }}
