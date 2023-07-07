@@ -32,7 +32,7 @@ jobs:
         if [[ "$GITHUB_REF" == refs/heads/* ]]; then
           if [ "$GITHUB_REF_NAME" == "master" ]; then
             VERSION_SUFFIX=""
-          elif [ "$GITHUB_REF_NAME" == "develop" ]; then
+          elif [ "$GITHUB_REF_NAME" == "dev" ]; then
             VERSION_SUFFIX="-dev"
           else
             SHOULD_PUBLISH='false'
