@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  silvestre.app.web:
+    image: ghcr.io/paletas/personal-website:1.0
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "10000:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    networks:
+      - personal-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.personalwebsite.rule=Host(`itssilvestre.com`)"
+      - "traefik.http.routers.personalwebsite.entrypoints=webs"
+      - "traefik.http.services.personalwebsite.loadbalancer.server.port=80"
+      - "traefik.http.routers.personalwebsite.tls=true"
+      - "traefik.http.routers.personalwebsite.tls.certresolver=le-http"
+
+networks:
+  personal-network:
+    driver: bridge
+    name: personal-network

@@ -35,7 +35,6 @@ namespace Silvestre.App.Web
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles(new StaticFileOptions
             {
                 OnPrepareResponse = ctx =>
