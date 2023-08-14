@@ -6,9 +6,11 @@
 
         public string HtmlContent { get; set; } = null!;
 
-        public string? Title { get; set; } = null!;
+        public string? Title { get; set; }
 
-        public string? Description { get; set; } = null!;
+        public string? Description { get; set; }
+
+        public string? Summary { get; set; } = null!;
 
         public string[] Tags { get; set; } = Array.Empty<string>();
 

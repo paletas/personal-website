@@ -1,5 +1,7 @@
 ---
 title: Test Post
+description: This is a test post.
+summary: This post illustrates an example of a large post.
 tags: 
   - test
 creationDate: 2023-08-14

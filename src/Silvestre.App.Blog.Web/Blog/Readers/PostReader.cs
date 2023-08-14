@@ -23,8 +23,11 @@ namespace Silvestre.App.Blog.Web.Blog.Readers
                 RawContent = markdownDocument.RawContent,
                 HtmlContent = markdownDocument.HtmlContent ?? throw new InvalidOperationException("missing html data for the post"),
                 Title = markdownDocument.FrontMatter.Title,
+                Description = markdownDocument.FrontMatter.Description,
+                Summary = markdownDocument.FrontMatter.Summary,
                 Tags = markdownDocument.FrontMatter.Tags,
-                CreationDate = markdownDocument.FrontMatter.CreationDate
+                CreationDate = markdownDocument.FrontMatter.CreationDate,
+                UpdateDate = markdownDocument.FrontMatter.UpdateDate
             };
         }
     }

@@ -1,6 +1,9 @@
 using Silvestre.App.Blog.Web.Blog;
+using Silvestre.App.Blog.Web.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<FeedOptions>(builder.Configuration.GetSection("Feeds"));
 
 builder.Services.AddScoped<IBlogRepository, LocalBlogRepository>(sp => new LocalBlogRepository("Blog/Content"));
 
