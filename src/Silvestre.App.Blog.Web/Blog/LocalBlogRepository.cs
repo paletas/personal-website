@@ -25,19 +25,25 @@ namespace Silvestre.App.Blog.Web.Blog
                 return null;
         }
 
+        public async Task<IEnumerable<BlogPost>> GetBlogPosts(CancellationToken cancellationToken = default)
+        {
+            await EnsureInitialization();
+            return this._blogPosts.Values;
+        }
+
         public async Task<IEnumerable<BlogCategory>> GetCategories(CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
             return this._blogCategories.Values;
         }
 
-        public async Task<IEnumerable<BlogPost>> GetLatestPosts(int count, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<BlogPost>> GetLatestBlogPosts(int count, CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
             return this._blogPosts.Values.OrderByDescending(post => post.CreatedAt).Take(count);
         }
 
-        public async Task<IEnumerable<BlogPost>> GetLatestPostsForCategory(string categoryUri, int count, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<BlogPost>> GetLatestBlogPostsForCategory(string categoryUri, int count, CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
             return this._blogPosts.Values.Where(post => post.Category.Uri == categoryUri).OrderByDescending(post => post.CreatedAt).Take(count);
@@ -49,7 +55,7 @@ namespace Silvestre.App.Blog.Web.Blog
             return this._blogPosts.Values.Where(post => post.Tags.Contains(tag)).Select(post => post.Category);
         }
 
-        public async Task<IEnumerable<BlogPost>> GetLatestPostsForTag(string tag, int count, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<BlogPost>> GetLatestBlogPostsForTag(string tag, int count, CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
             return this._blogPosts.Values.Where(post => post.Tags.Contains(tag)).OrderByDescending(post => post.CreatedAt).Take(count);
@@ -92,7 +98,7 @@ namespace Silvestre.App.Blog.Web.Blog
                 Post? post = await postReader.ReadPost();
                 if (post is null) continue;
 
-                BlogPost blogPost = new(postUri, post.Title, post.RawContent, post.HtmlContent, blogCategory, localTags.Concat(post.Tags).ToArray(), post.CreationDate);
+                BlogPost blogPost = new(postUri, post.Title, post.Description, post.RawContent, post.HtmlContent, blogCategory, localTags.Concat(post.Tags).ToArray(), post.CreationDate, post.UpdateDate ?? post.CreationDate);
                 if (posts.TryAdd(postUri, blogPost) == false)
                 {
                     throw new InvalidOperationException($"duplicate post {postUri}");

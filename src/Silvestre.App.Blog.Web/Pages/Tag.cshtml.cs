@@ -22,7 +22,7 @@ namespace Silvestre.App.Blog.Web.Pages
         public async Task OnGet([FromRoute(Name = "uri")] string tag)
         {
             this.Tag = tag;
-            this.LatestPosts = await this._blogRepository.GetLatestPostsForTag(tag, 10, base.HttpContext.RequestAborted);
+            this.LatestPosts = await this._blogRepository.GetLatestBlogPostsForTag(tag, 10, base.HttpContext.RequestAborted);
             this.Categories = await this._blogRepository.GetCategoriesUsingTag(tag, base.HttpContext.RequestAborted);
         }
     }

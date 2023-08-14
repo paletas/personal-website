@@ -8,8 +8,12 @@
 
         public string? Title { get; set; } = null!;
 
+        public string? Description { get; set; } = null!;
+
         public string[] Tags { get; set; } = Array.Empty<string>();
 
         public DateOnly CreationDate { get; set; }
+
+        public DateOnly? UpdateDate { get; set; }
     }
 }

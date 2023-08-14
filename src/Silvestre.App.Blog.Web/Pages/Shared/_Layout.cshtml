@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - João Silvestre's Blog</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Silvestre.App.Blog.Web.styles.css" asp-append-version="true" />
 </head>
@@ -18,6 +20,7 @@
                         Blog
                     </div>
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,6 +31,12 @@
                             <a class="nav-link fw-medium text-body" asp-area="" asp-page="/Index">Home</a>
                         </li>
                     </ul>
+
+                    <div>
+                        <a href="~/feed/rss">
+                            <i class="fa-solid fa-rss"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>

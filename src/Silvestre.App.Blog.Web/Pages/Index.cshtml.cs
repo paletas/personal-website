@@ -18,7 +18,7 @@ namespace Silvestre.App.Blog.Web.Pages
 
         public async Task OnGet()
         {
-            this.LatestPosts = await this._blogRepository.GetLatestPosts(10, base.HttpContext.RequestAborted);
+            this.LatestPosts = await this._blogRepository.GetLatestBlogPosts(10, base.HttpContext.RequestAborted);
             this.Categories = await this._blogRepository.GetCategories(base.HttpContext.RequestAborted);
         }
     }

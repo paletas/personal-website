@@ -21,7 +21,7 @@ namespace Silvestre.App.Blog.Web.Pages
 
         public async Task OnGet([FromRoute(Name = "uri")]string categoryUri)
         {
-            this.LatestPosts = await this._blogRepository.GetLatestPostsForCategory(categoryUri, 10, base.HttpContext.RequestAborted);
+            this.LatestPosts = await this._blogRepository.GetLatestBlogPostsForCategory(categoryUri, 10, base.HttpContext.RequestAborted);
             this.OtherCategories = await this._blogRepository.GetCategories(base.HttpContext.RequestAborted);
 
             this.Category = this.OtherCategories.Single(c => c.Uri == categoryUri);
