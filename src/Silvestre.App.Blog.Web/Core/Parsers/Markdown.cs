@@ -10,7 +10,9 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
         static Markdown()
         {
             _PipelineBuilder = new MarkdownPipelineBuilder()
-                .UseYamlFrontMatter();
+                .UseYamlFrontMatter()
+                .UseBootstrap()
+                .UseAutoLinks();
         }
 
         public static async Task<MarkdownDocument> Deserialize(Stream markdownStream, CancellationToken cancellationToken = default)

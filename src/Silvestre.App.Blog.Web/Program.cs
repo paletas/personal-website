@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<FeedOptions>(builder.Configuration.GetSection("Feeds"));
 
-builder.Services.AddScoped<IBlogRepository, LocalBlogRepository>(sp => new LocalBlogRepository("Blog/Content"));
+builder.Services.AddScoped<IBlogRepository, LocalBlogRepository>(sp => new LocalBlogRepository("Blog/Content", loadDrafts: builder.Environment.IsDevelopment()));
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();

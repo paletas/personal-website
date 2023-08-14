@@ -14,6 +14,8 @@
 
         public string[] Tags { get; set; } = Array.Empty<string>();
 
+        public bool Draft { get; set; }
+
         public DateOnly CreationDate { get; set; }
 
         public DateOnly? UpdateDate { get; set; }

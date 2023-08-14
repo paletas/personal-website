@@ -6,14 +6,16 @@ namespace Silvestre.App.Blog.Web.Blog
     public class LocalBlogRepository : IBlogRepository
     {
         private readonly string _blogRootPath;
+        private readonly bool _loadDrafts;
         private volatile bool _isInitialized;
 
         private readonly ConcurrentDictionary<string, BlogCategory> _blogCategories = new();
         private readonly ConcurrentDictionary<string, BlogPost> _blogPosts = new();
 
-        public LocalBlogRepository(string blogRootPath)
+        public LocalBlogRepository(string blogRootPath, bool loadDrafts = false)
         {
             this._blogRootPath = blogRootPath;
+            this._loadDrafts = loadDrafts;
         }
 
         public async Task<BlogPost?> GetBlogPost(string postUri, CancellationToken cancellationToken = default)
@@ -66,11 +68,11 @@ namespace Silvestre.App.Blog.Web.Blog
             if (this._isInitialized)
                 return;
 
-            await ParseDirectory(this._blogRootPath, this._blogCategories, this._blogPosts);
+            await ParseDirectory(this._blogRootPath, this._loadDrafts, this._blogCategories, this._blogPosts);
             this._isInitialized = true;
         }
 
-        private static async Task ParseDirectory(string directoryPath, ConcurrentDictionary<string, BlogCategory> categories, ConcurrentDictionary<string, BlogPost> posts, string[]? tags = null)
+        private static async Task ParseDirectory(string directoryPath, bool loadDrafts, ConcurrentDictionary<string, BlogCategory> categories, ConcurrentDictionary<string, BlogPost> posts, string[]? tags = null)
         {
             List<string> localTags = new(tags ?? Array.Empty<string>());
 
@@ -78,16 +80,16 @@ namespace Silvestre.App.Blog.Web.Blog
 
             if (blogCategory is not null)
             {
-                await ParsePostFiles(directoryPath, posts, localTags, blogCategory);
+                await ParsePostFiles(directoryPath, loadDrafts, posts, localTags, blogCategory);
             }
 
             foreach (string subDirectory in Directory.GetDirectories(directoryPath))
             {
-                await ParseDirectory(subDirectory, categories, posts, localTags.ToArray());
+                await ParseDirectory(subDirectory, loadDrafts, categories, posts, localTags.ToArray());
             }
         }
 
-        private static async Task ParsePostFiles(string directoryPath, ConcurrentDictionary<string, BlogPost> posts, List<string> localTags, BlogCategory blogCategory)
+        private static async Task ParsePostFiles(string directoryPath, bool loadDrafts, ConcurrentDictionary<string, BlogPost> posts, List<string> localTags, BlogCategory blogCategory)
         {
             foreach (string postFile in Directory.EnumerateFiles(directoryPath, "*.md", SearchOption.TopDirectoryOnly))
             {
@@ -96,7 +98,7 @@ namespace Silvestre.App.Blog.Web.Blog
 
                 PostReader postReader = new(postStream);
                 Post? post = await postReader.ReadPost();
-                if (post is null) continue;
+                if (post is null || (!loadDrafts && post.Draft)) continue;
 
                 ArgumentNullException.ThrowIfNullOrEmpty(post.Title, nameof(post.Title));
                 ArgumentNullException.ThrowIfNullOrEmpty(post.Summary, nameof(post.Summary));
