@@ -1,0 +1,29 @@
+﻿@page "/category/{uri}"
+@using Silvestre.App.Blog.Web.Blog;
+@model Silvestre.App.Blog.Web.Pages.BlogCategoryModel
+
+<div class="row border-bottom">
+    <h1>Category: @this.Model.Category.Title</h1>
+    <small>@this.Model.Category.Description</small>
+</div>
+<div class="row mt-4">
+    <div class="col-8">
+        <h2>Latest Posts</h2>
+        @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
+        {
+            <vc:blog-post-reader post="post" show-summary="true"></vc:blog-post-reader>
+        }
+    </div>
+    <div class="col-4 border-start">
+        <h3>Other Categories</h3>
+
+        <ul class="list-group">
+            @foreach (BlogCategory category in this.Model.OtherCategories)
+            {
+                <li class="list-group-item border-0">
+                    <a href="/category/@category.Uri">@category.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

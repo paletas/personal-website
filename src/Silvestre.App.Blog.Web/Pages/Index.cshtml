@@ -1,0 +1,28 @@
+﻿@page
+@using Silvestre.App.Blog.Web.Blog;
+@model IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="row">
+    <div class="col-8">
+        <h1>Latest Posts</h1>
+        @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
+        {
+            <vc:blog-post-reader post="post" show-summary="true"></vc:blog-post-reader>
+        }
+    </div>
+    <div class="col-4 border-start">
+        <h2>Categories</h2>
+
+        <ul class="list-group">
+            @foreach (BlogCategory category in this.Model.Categories)
+            {
+                <li class="list-group-item border-0">
+                    <a href="/category/@category.Uri">@category.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

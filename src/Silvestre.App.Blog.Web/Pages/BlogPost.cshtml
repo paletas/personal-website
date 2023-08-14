@@ -1,0 +1,36 @@
+﻿@page "/{postUri}"
+@using Silvestre.App.Blog.Web.Blog;
+
+@model Silvestre.App.Blog.Web.Pages.BlogPostModel
+
+@{
+    ViewBag.Title = this.Model.Post.Title;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><a href="/category/@this.Model.Post.Category.Uri">@this.Model.Post.Category.Title</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@this.Model.Post.Title</li>
+    </ol>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <vc:blog-post-reader post="this.Model.Post"></vc:blog-post-reader> 
+        </div>
+
+        <div class="col-4 border-start">
+            <h2>Categories</h2>
+
+            <ul class="list-group">
+                @foreach (BlogCategory category in this.Model.Categories)
+                {
+                    <li class="list-group-item border-0">
+                        <a href="/category/@category.Uri">@category.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  silvestre.app.web:
+    image: ${DOCKER_REGISTRY-}silvestreappweb
+    build:
+      context: ..\..
+      dockerfile: src/Silvestre.App.Web/Dockerfile
+
+  silvestre.blog.web:
+    image: ${DOCKER_REGISTRY-}silvestreblogweb
+    build:
+      context: ..\..
+      dockerfile: src/Silvestre.App.Blog.Web/Dockerfile
+

@@ -7,7 +7,7 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>silvestre.app.web</DockerServiceName>
-    <DockerComposeProjectName>silvestre-personal-website</DockerComposeProjectName>
+    <DockerComposeProjectName>personal-website</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

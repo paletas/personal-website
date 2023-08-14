@@ -1,0 +1,25 @@
+﻿@using Silvestre.App.Blog.Web.Blog;
+
+@model BlogPost
+
+<div class="row border-bottom">
+    <div class="sticky-top">
+        <h1 class="d-inline float-start">@this.Model.Title</h1>
+        <small class="float-end">@this.Model.CreatedAt.ToString("yyyy-MM-dd")</small>
+    </div>
+</div>
+<div class="row">
+    @Html.Raw(this.Model.HtmlContent)
+</div>
+<div class="row">
+    <ul class="list-group list-group-horizontal">
+        @foreach (string tag in this.Model.Tags)
+        {
+            <li class="list-group-item border-0">
+                <a href="/tag/@tag">
+                    <span class="badge bg-secondary">@tag</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

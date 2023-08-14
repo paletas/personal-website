@@ -1,0 +1,31 @@
+﻿@using Silvestre.App.Blog.Web.Blog;
+
+@model BlogPost
+
+<div class="container position-relative">
+    <div class="row border-bottom">
+        <div class="sticky-top">
+            <h2 class="d-inline float-start">@this.Model.Title</h2>
+            <small class="float-end">@this.Model.CreatedAt.ToString("yyyy-MM-dd")</small>
+        </div>
+    </div>
+    <div class="row">
+        <span class="overflow-hidden" style="max-height: 300px">
+            @Html.Raw(this.Model.HtmlContent)
+        </span>
+        <span>...</span>
+        <a href="/@this.Model.Uri" class="stretched-link">Continue reading</a>
+    </div>
+    <div class="row">
+        <ul class="list-group list-group-horizontal z-2">
+            @foreach (string tag in this.Model.Tags)
+            {
+                <li class="list-group-item border-0">
+                    <a href="/tag/@tag">
+                        <span class="badge bg-secondary">@tag</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
