@@ -19,4 +19,5 @@ RUN dotnet publish "Silvestre.App.Blog.Web.csproj" -c Release -o /app/publish /p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=publish /src/src/Silvestre.App.Blog.Web/Blog/Content Blog/Content
 ENTRYPOINT ["dotnet", "Silvestre.App.Blog.Web.dll"]
