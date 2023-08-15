@@ -20,8 +20,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.CacheControl = new Microsoft.Extensions.Primitives.StringValues(new[] { "public", $"max-age={TimeSpan.FromDays(365).TotalSeconds}" });
+    },
+    HttpsCompression = Microsoft.AspNetCore.Http.Features.HttpsCompressionMode.Compress,
+    ServeUnknownFileTypes = true
+});
 
 app.UseRouting();
 
