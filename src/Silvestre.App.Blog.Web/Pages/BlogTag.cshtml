@@ -1,0 +1,32 @@
+﻿@page "/tag/{uri}"
+@using Silvestre.App.Blog.Web.Blog;
+
+@model Silvestre.App.Blog.Web.Pages.TagModel
+
+<div class="row border-bottom">
+    <h1>Tag: @this.Model.Tag</h1>
+</div>
+<div class="row mt-4">
+    <div class="col-12 col-lg-8">
+        <h2>Latest Posts</h2>
+        <ul class="list-group">
+            @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
+            {
+                <li class="list-group-item list-group-item-action bg-body-tertiary">
+                    <vc:blog-post-reader post="post" show-summary="true"></vc:blog-post-reader>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+        <h3>Categories</h3>
+        <ul class="list-group">
+            @foreach (BlogCategory category in this.Model.Categories)
+            {
+                <li class="list-group-item border-0">
+                    <a href="/category/@category.Uri">@category.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
