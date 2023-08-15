@@ -7,7 +7,7 @@
     <h1>Tag: @this.Model.Tag</h1>
 </div>
 <div class="row mt-4">
-    <div class="col-8">
+    <div class="col-12 col-lg-8">
         <h2>Latest Posts</h2>
         <ul class="list-group">
             @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
@@ -18,9 +18,8 @@
             }
         </ul>
     </div>
-    <div class="col-4 border-start">
+    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
         <h3>Categories</h3>
-
         <ul class="list-group">
             @foreach (BlogCategory category in this.Model.Categories)
             {

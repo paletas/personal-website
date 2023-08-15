@@ -54,6 +54,7 @@ So in order to understand how it works, we need to lay out a few concepts first.
    ```
 
 Assembly is the lowest level of language we have, but even assembly is compiled into machine code, which is just a bunch of binary data that is loaded and executed by the CPU. See the following example of how that might be structured:
+
 ![diagram showing machine code](img/blog/content/technical/computers/how-do-cpus-work/machine-code.png "Low Level Code to Machine Code diagram")
 	
 In the example you can see two examples of the two instruction we used above, it's showing the instructions in hexadecimal, I used the first 4 bits to represent the instruction being used, and then the following 12 bits for parameters, this is very suboptimal but great for showing off. The add has three arguments, 4 bits each, representing the registers R1, R2 and R3, and the move has two arguments, 4 bits for the register and 8 bits for the constant value. This is a very simple example, but it shows how the CPU can understand the instructions and execute them.
