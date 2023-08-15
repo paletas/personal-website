@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - João Silvestre's Blog</title>
+    <link rel="manifest" href="~/site.webmanifest" />
+    <link rel="apple-touch-icon" href="~/favicon-180x180.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" />
@@ -13,12 +15,10 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-0 box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <div class="flex-shrink-0">
-                        <img style="width: 2rem; height: 2rem;" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
-                        Blog
-                    </div>
+            <div class="container-fluid container-lg">
+                <a class="navbar-brand p-0" asp-area="" asp-page="/Index">
+                    <img style="width: 4rem; height: 4rem;" src="~/favicon-192x192.png" alt="João Silvestre">
+                    Blog
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,7 +28,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link fw-medium text-body" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link fw-medium text-body" href="https://itssilvestre.com/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium text-body" asp-area="" asp-page="/Index">Blog</a>
                         </li>
                     </ul>
 
@@ -44,7 +47,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid container-lg">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
