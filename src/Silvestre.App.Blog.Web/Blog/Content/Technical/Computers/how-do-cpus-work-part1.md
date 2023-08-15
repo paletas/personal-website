@@ -6,8 +6,8 @@ tags:
   - processor
   - cpu
   - how-does-it-work
-draft: true
-creationDate: 2023-08-14
+draft: false
+creationDate: 2023-08-15
 ---
 
 First things first, if you don't know, CPU stands for central processing unit and it's far easier to type, so I'll be using that from now on.
@@ -53,7 +53,10 @@ So in order to understand how it works, we need to lay out a few concepts first.
    MOV R1, R5 // Stores the value in R5 in R1
    ```
 
-   Assembly is the lowest level of language we have, but even assembly is compiled into machine code, which is just a bunch of binary data that is loaded and intreperted by the CPU.
+Assembly is the lowest level of language we have, but even assembly is compiled into machine code, which is just a bunch of binary data that is loaded and executed by the CPU. See the following example of how that might be structured:
+![diagram showing machine code](img/blog/content/technical/computers/how-do-cpus-work/machine-code.png "Low Level Code to Machine Code diagram")
+	
+In the example you can see two examples of the two instruction we used above, it's showing the instructions in hexadecimal, I used the first 4 bits to represent the instruction being used, and then the following 12 bits for parameters, this is very suboptimal but great for showing off. The add has three arguments, 4 bits each, representing the registers R1, R2 and R3, and the move has two arguments, 4 bits for the register and 8 bits for the constant value. This is a very simple example, but it shows how the CPU can understand the instructions and execute them.
 
 1. **Instruction Set**:	Then we have the instruction set, that is the collection of all operations a certain CPU can perform. Now this is not per CPU, otherwise companies like Microsoft, that makes an operative system capable of running on hundreds of CPUs would be unable to support so many of them. There are standard intruction sets that rule which operations are available and how they work, so that any CPU that implements that instruction set can run the same code. The most common instruction set nowadays is the x86-64, which is the one used by Intel and AMD CPUs, but there are others, like ARM, RISC-V, etc. ARM is a licensable instruction set and CPU designer that is used by many producers, while RISC-V aims to be an open-source CPU arquitechture.
 1. **Program**: The next concept is the program, a program is a collection of instructions that are executed in order to perform a certain task. A program can be anything from a simple calculator to a complex video game.
@@ -74,7 +77,7 @@ Once started the CPU will generally be looking at the address 0 to look for it's
  * Decode the instruction in the IR register, this means looking at the instruction set and understanding what the instruction means and what it does.
  * Execute the instruction, this means performing the operation the instruction is meant to do, like adding two numbers, moving data from memory to a register, etc.
 
- This is typically called the "fetch-decode-execute cycle" and will happen for every instruction in the program. Also note that some of these steps may be performed in parallel by the CPU, such as incrementing the PC register and decoding the instruction in the same cycle, but again for simplification sake let's assume a sequential order. The above steps are just a massive loop that the CPU will keep on executing until it's turned off, it's that simple. In modern day CPUs there's also a different technique called "pipelining" that allows the CPU to start executing the next instruction before the current one is finished, but again, for simplification sake let's assume a sequential order in our examples.
+ This is typically called the "fetch-decode-execute cycle" and will happen for every instruction in the program. The above steps are just a massive loop that the CPU will keep on executing until it's turned off, it's that simple. Here we're assuming every step happens sequentially, and every instruction too, but in modern day CPUs there's also a different technique called "pipelining" that allows the CPU to start executing the next instruction before the current one is finished, but again, for simplification sake let's assume a sequential order in our examples.
 
 Each step may take one or more clock cycles to execute, would be safe to assume that loading the instruction and incrementing the PC register takes one clock cycle, while decoding and executing the instruction may take more than one, but again, decoding maybe takes a fixed amount of clock cycles but execution will vary depending on the instruction. In modern CPUs there will often exist many ways of accomplishing the same task, it's up for the compilers to choose the instructions that take the least amount of clock cycles to improve application performance. This is also why CPUs of newer generations may be faster than older generations, even when they have the same clock speed, they may support new instructions that are faster to execute and that can be used by the compiler to improve performance, even if it requires the application developer to release a new version.
 
@@ -83,3 +86,6 @@ Each step may take one or more clock cycles to execute, would be safe to assume 
 As this part comes to an end I hope that you can now have a better understanding of how a program is executed by the CPU, and how the CPU works in general. This is the foundation of knowledge I truly believe has allowed me to be a better employee, a better colleague and ultimately a better software engineer.
 
 In the next part we'll take a look at how the CPU interacts with the rest of the computer.
+
+If you have any questions, comments or suggestions, please let me know, I'm always looking to improve my writing and my knowledge.
+Reach me at [Twitter](https://twitter.com/itspaletas), [GitHub](https://github.com/paletas), [LinkedIn](https://www.linkedin.com/in/joaosilvestre/) or via email at blog[at]itssilvestre.com.
