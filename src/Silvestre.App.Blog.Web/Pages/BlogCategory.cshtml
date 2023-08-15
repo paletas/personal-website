@@ -2,9 +2,20 @@
 @using Silvestre.App.Blog.Web.Blog;
 @model Silvestre.App.Blog.Web.Pages.BlogCategoryModel
 
-<div class="row border-bottom">
-    <h1>Category: @this.Model.Category.Title</h1>
-    <small>@this.Model.Category.Description</small>
+<div class="d-flex border-bottom justify-content-between align-items-end">
+    <div>
+        <h1>Category: @this.Model.Category.Title</h1>
+        <small>@this.Model.Category.Description</small>
+    </div>
+
+    <div>
+        <a asp-controller="Feeds" asp-action="GetRssFeed" asp-route-category="@this.Model.Category.Uri">
+            <i class="fa-solid fa-rss"></i>
+        </a>
+        <a asp-controller="Feeds" asp-action="GetAtomFeed" asp-route-category="@this.Model.Category.Uri">
+            <i class="fa-solid fa-atom"></i>
+        </a>
+    </div>
 </div>
 <div class="row mt-4">
     <div class="col-12 col-lg-8">

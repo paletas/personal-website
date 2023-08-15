@@ -3,9 +3,19 @@
 
 @model Silvestre.App.Blog.Web.Pages.TagModel
 
-<div class="row border-bottom">
+<div class="d-flex border-bottom justify-content-between align-items-end">
     <h1>Tag: @this.Model.Tag</h1>
+
+    <div>
+        <a asp-controller="Feeds" asp-action="GetRssFeed" asp-route-category="@this.Model.Tag">
+            <i class="fa-solid fa-rss"></i>
+        </a>
+        <a asp-controller="Feeds" asp-action="GetAtomFeed" asp-route-category="@this.Model.Tag">
+            <i class="fa-solid fa-atom"></i>
+        </a>
+    </div>
 </div>
+
 <div class="row mt-4">
     <div class="col-12 col-lg-8">
         <h2>Latest Posts</h2>

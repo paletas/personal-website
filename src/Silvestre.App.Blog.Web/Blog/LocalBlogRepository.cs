@@ -27,10 +27,20 @@ namespace Silvestre.App.Blog.Web.Blog
                 return null;
         }
 
-        public async Task<IEnumerable<BlogPost>> GetBlogPosts(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<BlogPost>> GetBlogPosts(string? category, string? tag, CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
-            return this._blogPosts.Values;
+            IEnumerable<BlogPost> posts = this._blogPosts.Values;
+            if (category is not null)
+            {
+                posts = posts.Where(p => p.Category.Uri == category);
+            }
+
+            if (tag is not null)
+            {
+                posts = posts.Where(p => p.Tags.Contains(tag));
+            }
+            return posts;
         }
 
         public async Task<IEnumerable<BlogCategory>> GetCategories(CancellationToken cancellationToken = default)

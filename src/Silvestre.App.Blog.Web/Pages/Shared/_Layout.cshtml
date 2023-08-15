@@ -36,10 +36,10 @@
                     </ul>
 
                     <div>
-                        <a href="~/feed/rss">
+                        <a asp-controller="Feeds" asp-action="GetRssFeed">
                             <i class="fa-solid fa-rss"></i>
                         </a>
-                        <a href="~/feed/atom">
+                        <a asp-controller="Feeds" asp-action="GetAtomFeed">
                             <i class="fa-solid fa-atom"></i>
                         </a>
                     </div>
