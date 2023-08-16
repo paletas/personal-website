@@ -5,8 +5,10 @@ namespace Silvestre.App.Blog.Web.ViewComponents
 {
     public class BlogPostReader : ViewComponent
     {
-        public IViewComponentResult Invoke(BlogPost post, bool showSummary = false)
+        public IViewComponentResult Invoke(BlogPost post, string baseUri, bool showSummary = false)
         {
+            this.ViewBag.BaseUri = baseUri;
+
             if (showSummary)
             {
                 return View("Summary", post);

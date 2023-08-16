@@ -1,9 +1,12 @@
 using Silvestre.App.Blog.Web.Blog;
+using Silvestre.App.Blog.Web.Core.Parsers;
 using Silvestre.App.Blog.Web.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<FeedOptions>(builder.Configuration.GetSection("Feeds"));
+IConfigurationSection feedSection = builder.Configuration.GetSection("Feeds");
+FeedOptions feedOptions = feedSection.Get<FeedOptions>() ?? throw new InvalidOperationException();
+builder.Services.Configure<FeedOptions>(feedSection);
 
 builder.Services.AddScoped<IBlogRepository, LocalBlogRepository>(sp => new LocalBlogRepository("Blog/Content", loadDrafts: builder.Environment.IsDevelopment()));
 

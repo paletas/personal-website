@@ -15,25 +15,7 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
                 .UseAutoLinks();
         }
 
-        public static async Task<MarkdownDocument> Deserialize(Stream markdownStream, CancellationToken cancellationToken = default)
-        {
-            using StreamReader reader = new(markdownStream);
-            string rawMarkdown = await reader.ReadToEndAsync(cancellationToken);
-
-            using StringWriter htmlWriter = new();
-            Markdig.Renderers.HtmlRenderer htmlRenderer = new(htmlWriter);
-
-            MarkdownPipeline pipeline = _PipelineBuilder.Build();
-            pipeline.Setup(htmlRenderer);
-
-            Markdig.Markdown.Parse(rawMarkdown, pipeline);
-
-            return new MarkdownDocument
-            {
-                RawContent = rawMarkdown,
-                HtmlContent = htmlWriter.ToString()
-            };
-        }
+        public static string BaseUrlPlaceholder { get; set; } = "PLACEHOLDER_BASE_URL";
 
         public static async Task<MarkdownDocument<T>> Deserialize<T>(Stream markdownStream, CancellationToken cancellationToken = default)
         {
@@ -41,7 +23,10 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
             string rawMarkdown = await reader.ReadToEndAsync(cancellationToken);
 
             using StringWriter htmlWriter = new();
-            Markdig.Renderers.HtmlRenderer htmlRenderer = new(htmlWriter);
+            Markdig.Renderers.HtmlRenderer htmlRenderer = new(htmlWriter)
+            {
+                LinkRewriter = path => $"{BaseUrlPlaceholder}{(path.StartsWith("/") ? string.Empty : "/")}{path}"
+            };
 
             MarkdownPipeline pipeline = _PipelineBuilder.Build();
             pipeline.Setup(htmlRenderer);
@@ -64,6 +49,11 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
                 HtmlContent = htmlWriter.ToString(),
                 FrontMatter = metadata
             };
+        }
+
+        private static bool IsRelativeUri(string path)
+        {
+            return !string.IsNullOrEmpty(path) && Uri.TryCreate(path, UriKind.Relative, out _);
         }
     }
 }
