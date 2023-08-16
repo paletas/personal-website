@@ -31,9 +31,9 @@ namespace Silvestre.App.Blog.Web.Controllers
         }
 
         [HttpGet("rss")]
-        public async Task<IActionResult> GetRssFeed()
+        public async Task<IActionResult> GetRssFeed([FromQuery] string? category, [FromQuery] string? tag)
         {
-            IEnumerable<BlogPost> blogPosts = await this._blogRepository.GetBlogPosts(this.HttpContext.RequestAborted);
+            IEnumerable<BlogPost> blogPosts = await this._blogRepository.GetBlogPosts(category, tag, this.HttpContext.RequestAborted);
             FeedOptions feedOptions = this._feedOptions.Value;
 
             StringWriter stringWriter = new();
@@ -44,7 +44,7 @@ namespace Silvestre.App.Blog.Web.Controllers
                 await feedWriter.WriteDescription(feedOptions.BlogDescription);
                 await feedWriter.WriteGenerator(GeneratorName);
                 await feedWriter.WritePubDate(DateTimeOffset.Now);
-                await feedWriter.WriteLastBuildDate(new DateTimeOffset(blogPosts.Max(p => p.CreatedAt).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero));
+                await feedWriter.WriteLastBuildDate(blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.CreatedAt).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
                 await feedWriter.WriteValue("link", feedOptions.BlogUrl);
 
                 await GeneratePostEntries(feedOptions, blogPosts, feedWriter);
@@ -54,9 +54,9 @@ namespace Silvestre.App.Blog.Web.Controllers
         }
 
         [HttpGet("atom")]
-        public async Task<IActionResult> GetAtomFeed()
+        public async Task<IActionResult> GetAtomFeed([FromQuery] string? category, [FromQuery] string? tag)
         {
-            IEnumerable<BlogPost> blogPosts = await this._blogRepository.GetBlogPosts(this.HttpContext.RequestAborted);
+            IEnumerable<BlogPost> blogPosts = await this._blogRepository.GetBlogPosts(category, tag, this.HttpContext.RequestAborted);
             FeedOptions feedOptions = this._feedOptions.Value;
 
             StringWriter stringWriter = new();
@@ -67,7 +67,7 @@ namespace Silvestre.App.Blog.Web.Controllers
                 await feedWriter.WriteTitle(feedOptions.BlogTitle);
                 await feedWriter.WriteSubtitle(feedOptions.BlogDescription);
                 await feedWriter.WriteGenerator(GeneratorName, feedOptions.BlogUrl, GeneratorVersion);
-                await feedWriter.WriteUpdated(new DateTimeOffset(blogPosts.Max(p => p.LastUpdate).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero));
+                await feedWriter.WriteUpdated(blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.LastUpdate).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
 
                 await GeneratePostEntries(feedOptions, blogPosts, feedWriter);
             }

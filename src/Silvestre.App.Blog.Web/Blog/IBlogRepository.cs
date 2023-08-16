@@ -8,7 +8,7 @@
 
         Task<BlogPost?> GetBlogPost(string postUri, CancellationToken cancellationToken = default);
 
-        Task<IEnumerable<BlogPost>> GetBlogPosts(CancellationToken cancellationToken = default);
+        Task<IEnumerable<BlogPost>> GetBlogPosts(string? category, string? tag, CancellationToken cancellationToken = default);
 
         Task<IEnumerable<BlogPost>> GetLatestBlogPosts(int count, CancellationToken cancellationToken = default);
 

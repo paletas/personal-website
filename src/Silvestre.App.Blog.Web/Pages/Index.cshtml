@@ -12,7 +12,7 @@
             @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
             {
                 <li class="list-group-item list-group-item-action bg-body-tertiary">
-                    <vc:blog-post-reader post="post" show-summary="true"></vc:blog-post-reader>
+                    <vc:blog-post-reader post="post" base-uri="this.HttpContext.BaseUri" show-summary="true"></vc:blog-post-reader>
                 </li>
             }
         </ul>

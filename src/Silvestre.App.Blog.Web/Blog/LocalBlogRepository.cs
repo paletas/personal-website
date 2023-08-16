@@ -5,16 +5,16 @@ namespace Silvestre.App.Blog.Web.Blog
 {
     public class LocalBlogRepository : IBlogRepository
     {
-        private readonly string _blogRootPath;
+        private readonly string _contentRootPath;
         private readonly bool _loadDrafts;
         private volatile bool _isInitialized;
 
         private readonly ConcurrentDictionary<string, BlogCategory> _blogCategories = new();
         private readonly ConcurrentDictionary<string, BlogPost> _blogPosts = new();
 
-        public LocalBlogRepository(string blogRootPath, bool loadDrafts = false)
+        public LocalBlogRepository(string contentRootPath, bool loadDrafts = false)
         {
-            this._blogRootPath = blogRootPath;
+            this._contentRootPath = contentRootPath;
             this._loadDrafts = loadDrafts;
         }
 
@@ -27,10 +27,20 @@ namespace Silvestre.App.Blog.Web.Blog
                 return null;
         }
 
-        public async Task<IEnumerable<BlogPost>> GetBlogPosts(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<BlogPost>> GetBlogPosts(string? category, string? tag, CancellationToken cancellationToken = default)
         {
             await EnsureInitialization();
-            return this._blogPosts.Values;
+            IEnumerable<BlogPost> posts = this._blogPosts.Values;
+            if (category is not null)
+            {
+                posts = posts.Where(p => p.Category.Uri == category);
+            }
+
+            if (tag is not null)
+            {
+                posts = posts.Where(p => p.Tags.Contains(tag));
+            }
+            return posts;
         }
 
         public async Task<IEnumerable<BlogCategory>> GetCategories(CancellationToken cancellationToken = default)
@@ -68,7 +78,7 @@ namespace Silvestre.App.Blog.Web.Blog
             if (this._isInitialized)
                 return;
 
-            await ParseDirectory(this._blogRootPath, this._loadDrafts, this._blogCategories, this._blogPosts);
+            await ParseDirectory(this._contentRootPath, this._loadDrafts, this._blogCategories, this._blogPosts);
             this._isInitialized = true;
         }
 

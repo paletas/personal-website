@@ -1,10 +1,17 @@
 ﻿@page "/{postUri}"
 @using Silvestre.App.Blog.Web.Blog;
+@using Silvestre.App.Blog.Web.Core;
 
 @model Silvestre.App.Blog.Web.Pages.BlogPostModel
 
 @{
     ViewBag.Title = this.Model.Post.Title;
+    ViewBag.Meta = new PageMeta
+            {
+                Description = this.Model.Post.Description ?? this.Model.Post.Summary,
+                Summary = this.Model.Post.Summary,
+                Tags = this.Model.Post.Tags,
+            };
 }
 
 <nav aria-label="breadcrumb">
@@ -17,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-8">
-            <vc:blog-post-reader post="this.Model.Post"></vc:blog-post-reader> 
+            <vc:blog-post-reader post="this.Model.Post" base-uri="this.HttpContext.BaseUri"></vc:blog-post-reader>
         </div>
 
         <div class="col-12 col-lg-4 mt-4 mt-lg-0">

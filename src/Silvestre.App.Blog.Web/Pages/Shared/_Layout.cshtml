@@ -4,6 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - João Silvestre's Blog</title>
+    <meta name="application-name" content="João Silvestre's Blog" />
+    <meta name="author" content="João Silvestre" />
+    @if (this.ViewBag.Meta is not null)
+    {
+        <meta name="description" content="@this.ViewBag.Meta.Description" />
+        <meta name="twitter:description" content="@this.ViewBag.Meta.Summary" />
+        <meta name="keywords" content="@string.Join(", ", this.ViewBag.Meta.Tags)" />
+    }
     <link rel="manifest" href="~/site.webmanifest" />
     <link rel="apple-touch-icon" href="~/favicon-180x180.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
@@ -36,10 +44,10 @@
                     </ul>
 
                     <div>
-                        <a href="~/feed/rss">
+                        <a asp-controller="Feeds" asp-action="GetRssFeed">
                             <i class="fa-solid fa-rss"></i>
                         </a>
-                        <a href="~/feed/atom">
+                        <a asp-controller="Feeds" asp-action="GetAtomFeed">
                             <i class="fa-solid fa-atom"></i>
                         </a>
                     </div>

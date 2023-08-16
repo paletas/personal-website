@@ -1,11 +1,32 @@
 ﻿@page "/tag/{uri}"
 @using Silvestre.App.Blog.Web.Blog;
+@using Silvestre.App.Blog.Web.Core;
 
 @model Silvestre.App.Blog.Web.Pages.TagModel
 
-<div class="row border-bottom">
+@{
+    ViewBag.Title = $"Tag:{this.Model.Tag}";
+    ViewBag.Meta = new PageMeta
+            {
+                Description = $"Collection of blog posts with the tag {this.Model.Tag}",
+                Summary = $"Collection of blog posts with the tag {this.Model.Tag}",
+                Tags = new[] { this.Model.Tag },
+            };
+}
+
+<div class="d-flex border-bottom justify-content-between align-items-end">
     <h1>Tag: @this.Model.Tag</h1>
+
+    <div>
+        <a asp-controller="Feeds" asp-action="GetRssFeed" asp-route-category="@this.Model.Tag">
+            <i class="fa-solid fa-rss"></i>
+        </a>
+        <a asp-controller="Feeds" asp-action="GetAtomFeed" asp-route-category="@this.Model.Tag">
+            <i class="fa-solid fa-atom"></i>
+        </a>
+    </div>
 </div>
+
 <div class="row mt-4">
     <div class="col-12 col-lg-8">
         <h2>Latest Posts</h2>
@@ -13,7 +34,7 @@
             @foreach (BlogPost post in this.Model.LatestPosts.OrderByDescending(p => p.CreatedAt))
             {
                 <li class="list-group-item list-group-item-action bg-body-tertiary">
-                    <vc:blog-post-reader post="post" show-summary="true"></vc:blog-post-reader>
+                    <vc:blog-post-reader post="post" base-uri="this.Model.BaseUri" show-summary="true"></vc:blog-post-reader>
                 </li>
             }
         </ul>

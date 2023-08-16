@@ -1,4 +1,5 @@
 ﻿@using Silvestre.App.Blog.Web.Blog;
+@using Silvestre.App.Blog.Web.Core.Parsers;
 
 @model BlogPost
 
@@ -9,7 +10,7 @@
     </div>
 </div>
 <div>
-    @Html.Raw(this.Model.HtmlContent)
+    @Html.Raw(PreparePost(this.Model.HtmlContent))
 </div>
 <div>
     <ul class="list-group list-group-horizontal">
@@ -23,3 +24,10 @@
         }
     </ul>
 </div>
+
+@{
+    string PreparePost(string rawContent)
+    {
+        return rawContent.Replace(Markdown.BaseUrlPlaceholder, this.ViewBag.BaseUrl);
+    }
+}
