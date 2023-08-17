@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.SyndicationFeed;
-using Microsoft.SyndicationFeed.Atom;
-using Microsoft.SyndicationFeed.Rss;
 using Silvestre.App.Blog.Web.Blog;
+using Silvestre.App.Blog.Web.Core.Parsers;
 using Silvestre.App.Blog.Web.Options;
 using System.Net.Mime;
+using System.ServiceModel.Syndication;
 using System.Text;
-using System.Threading;
 using System.Xml;
 
 namespace Silvestre.App.Blog.Web.Controllers
@@ -39,15 +35,9 @@ namespace Silvestre.App.Blog.Web.Controllers
             StringWriter stringWriter = new();
             using (XmlWriter xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Async = true, Indent = true, Encoding = Encoding.UTF8 }))
             {
-                RssFeedWriter feedWriter = new(xmlWriter);
-                await feedWriter.WriteTitle(feedOptions.BlogTitle);
-                await feedWriter.WriteDescription(feedOptions.BlogDescription);
-                await feedWriter.WriteGenerator(GeneratorName);
-                await feedWriter.WritePubDate(DateTimeOffset.Now);
-                await feedWriter.WriteLastBuildDate(blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.CreatedAt).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
-                await feedWriter.WriteValue("link", feedOptions.BlogUrl);
+                SyndicationFeed syndicationFeed = GenerateFeed(blogPosts, feedOptions);
 
-                await GeneratePostEntries(feedOptions, blogPosts, feedWriter);
+                syndicationFeed.SaveAsRss20(xmlWriter);
             }
 
             return Content(stringWriter.ToString(), MediaTypeNames.Application.Xml);
@@ -62,38 +52,50 @@ namespace Silvestre.App.Blog.Web.Controllers
             StringWriter stringWriter = new();
             using (XmlWriter xmlWriter = XmlWriter.Create(stringWriter, new XmlWriterSettings { Async = true, Indent = true, Encoding = Encoding.UTF8 }))
             {
-                AtomFeedWriter feedWriter = new(xmlWriter);
-                await feedWriter.WriteId(feedOptions.BlogUrl);
-                await feedWriter.WriteTitle(feedOptions.BlogTitle);
-                await feedWriter.WriteSubtitle(feedOptions.BlogDescription);
-                await feedWriter.WriteGenerator(GeneratorName, feedOptions.BlogUrl, GeneratorVersion);
-                await feedWriter.WriteUpdated(blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.LastUpdate).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
+                SyndicationFeed syndicationFeed = GenerateFeed(blogPosts, feedOptions);
 
-                await GeneratePostEntries(feedOptions, blogPosts, feedWriter);
+                syndicationFeed.SaveAsAtom10(xmlWriter);
             }
 
             return Content(stringWriter.ToString(), MediaTypeNames.Application.Xml);
         }
 
-        private async Task GeneratePostEntries(FeedOptions feedOptions, IEnumerable<BlogPost> blogPosts, XmlFeedWriter feedWriter)
+        private static SyndicationFeed GenerateFeed(IEnumerable<BlogPost> blogPosts, FeedOptions feedOptions)
+        {
+            SyndicationFeed syndicationFeed = new(
+                feedOptions.BlogTitle,
+                feedOptions.BlogDescription,
+                new Uri(feedOptions.BlogUrl),
+                $"{feedOptions.BlogUrl}/feeds/rss",
+                blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.CreatedAt).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
+
+            syndicationFeed.Generator = GeneratorName;
+            syndicationFeed.Links.Add(new SyndicationLink(new Uri(feedOptions.BlogUrl)));
+            syndicationFeed.Items = GeneratePostEntries(feedOptions, blogPosts);
+            return syndicationFeed;
+        }
+
+        private static IEnumerable<SyndicationItem> GeneratePostEntries(FeedOptions feedOptions, IEnumerable<BlogPost> blogPosts)
         {
             foreach (BlogPost post in blogPosts)
             {
-                AtomEntry postEntry = new()
+                Uri postAbsoluteUri = new(new Uri(feedOptions.BlogUrl, UriKind.Absolute), post.Uri);
+                SyndicationItem postEntry = new(
+                    post.Title,
+                    SyndicationContent.CreateHtmlContent(post.HtmlContent.Replace(Markdown.BaseUrlPlaceholder, feedOptions.BlogUrl)),
+                    null,
+                    post.Uri,
+                    new DateTimeOffset(post.LastUpdate.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero))
                 {
-                    Id = new Uri(new Uri("https://itssilvestre.com/blog"), post.Uri).ToString(),
-                    Title = post.Title,
-                    Summary = post.Summary,
-                    Published = new DateTimeOffset(post.CreatedAt.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero),
-                    LastUpdated = new DateTimeOffset(post.LastUpdate.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero),
-                    ContentType = "html",
+                    Summary = TextSyndicationContent.CreatePlaintextContent(post.Summary),
+                    PublishDate = new DateTimeOffset(post.CreatedAt.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero)
                 };
 
-                postEntry.AddCategory(new SyndicationCategory(post.Category.Title));
-                postEntry.AddContributor(new SyndicationPerson(feedOptions.AuthorName, feedOptions.AuthorEmail));
-                postEntry.AddLink(new SyndicationLink(new Uri($"https://itssilvestre.com/blog/{post.Uri}")));
+                postEntry.Authors.Add(new SyndicationPerson(feedOptions.AuthorEmail, feedOptions.AuthorName, null));
+                postEntry.Categories.Add(new SyndicationCategory(post.Category.Title));
+                postEntry.AddPermalink(postAbsoluteUri);
 
-                await feedWriter.Write(postEntry);
+                yield return postEntry;
             }
         }
     }
