@@ -2,7 +2,7 @@
 {
     public class FeedOptions
     {
-        public string? BlogUrl { get; set; }
+        public string BlogUrl { get; set; }
 
         public string BlogTitle { get; set; }
 

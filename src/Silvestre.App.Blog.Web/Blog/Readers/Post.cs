@@ -16,8 +16,8 @@
 
         public bool Draft { get; set; }
 
-        public DateOnly CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public DateOnly? UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }

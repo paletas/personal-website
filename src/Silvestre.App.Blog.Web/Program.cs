@@ -1,5 +1,4 @@
 using Silvestre.App.Blog.Web.Blog;
-using Silvestre.App.Blog.Web.Core.Parsers;
 using Silvestre.App.Blog.Web.Options;
 
 var builder = WebApplication.CreateBuilder(args);
