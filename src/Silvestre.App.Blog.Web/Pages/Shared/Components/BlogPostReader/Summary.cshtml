@@ -6,22 +6,23 @@
 <div class="container position-relative">
     <div class="row border-bottom">
         <div class="sticky-top">
-            <h2 class="d-inline float-start">@this.Model.Title</h2>
+            <h2>@this.Model.Title</h2>
 
-            <div class="d-inline row float-end">
-                <small class="col-6">Created At: @this.Model.CreatedAt.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
+            <div class="d-inline float-end">
+                <small class="d-block">Created At: @this.Model.CreatedAt.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
                 @if (this.Model.LastUpdate is not null)
                 {
-                    <small class="col-6">Last Updated: @this.Model.LastUpdate.Value.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
+                    <small class="d-block">Last Updated: @this.Model.LastUpdate.Value.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
                 }
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-2">
         <span class="overflow-hidden" style="max-height: 300px">
             @Html.Raw(PreparePost(this.Model.HtmlContent))
         </span>
-        <span>...</span>
+    </div>
+    <div class="row">
         <a href="/@this.Model.Uri" class="stretched-link">Continue reading</a>
     </div>
     <div class="row">
@@ -41,6 +42,6 @@
 @{
     string PreparePost(string rawContent)
     {
-        return rawContent.Replace(Markdown.BaseUrlPlaceholder, this.ViewBag.BaseUrl);
+        return $"{rawContent.Substring(0, 500).Replace(Markdown.BaseUrlPlaceholder, this.ViewBag.BaseUrl)}...";
     }
 }
