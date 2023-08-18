@@ -113,7 +113,7 @@ namespace Silvestre.App.Blog.Web.Blog
                 ArgumentNullException.ThrowIfNullOrEmpty(post.Title, nameof(post.Title));
                 ArgumentNullException.ThrowIfNullOrEmpty(post.Summary, nameof(post.Summary));
 
-                BlogPost blogPost = new(postUri, post.Title, post.Description, post.Summary, post.RawContent, post.HtmlContent, blogCategory, localTags.Concat(post.Tags).ToArray(), post.CreationDate, post.UpdateDate ?? post.CreationDate);
+                BlogPost blogPost = new(postUri, post.Title, post.Description, post.Summary, post.RawContent, post.HtmlContent, blogCategory, localTags.Concat(post.Tags).ToArray(), post.CreationDate, post.UpdateDate);
                 if (posts.TryAdd(postUri, blogPost) == false)
                 {
                     throw new InvalidOperationException($"duplicate post {postUri}");

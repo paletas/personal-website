@@ -7,8 +7,8 @@ tags:
   - cpu
   - how-does-it-work
 draft: false
-creationDate: 2023-08-15
-updateDate: 2023-08-15
+creationDate: 2023-08-15T00:00:00Z
+updateDate: 2023-08-18T20:00:00Z
 ---
 
 First things first, if you didn't know, CPU stands for central processing unit and it's far easier to type, a term I'll use for brevity.

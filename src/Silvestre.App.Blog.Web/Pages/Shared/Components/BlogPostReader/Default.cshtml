@@ -6,7 +6,14 @@
 <div class="row border-bottom">
     <div class="sticky-top">
         <h1 class="d-inline float-start">@this.Model.Title</h1>
-        <small class="float-end">@this.Model.CreatedAt.ToString("yyyy-MM-dd")</small>
+
+        <div class="d-inline row float-end">
+            <small class="col-6">Created At: @this.Model.CreatedAt.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
+            @if (this.Model.LastUpdate is not null)
+            {
+                <small class="col-6">Last Updated: @this.Model.LastUpdate.Value.ToString("yyyy-MM-dd hh:mm:ss (UTC)")</small>
+            }
+        </div>
     </div>
 </div>
 <div>

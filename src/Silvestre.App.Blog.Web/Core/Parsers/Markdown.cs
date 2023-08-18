@@ -50,10 +50,5 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
                 FrontMatter = metadata
             };
         }
-
-        private static bool IsRelativeUri(string path)
-        {
-            return !string.IsNullOrEmpty(path) && Uri.TryCreate(path, UriKind.Relative, out _);
-        }
     }
 }

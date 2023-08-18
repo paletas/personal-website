@@ -67,7 +67,7 @@ namespace Silvestre.App.Blog.Web.Controllers
                 feedOptions.BlogDescription,
                 new Uri(feedOptions.BlogUrl),
                 $"{feedOptions.BlogUrl}/feeds/rss",
-                blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.CreatedAt).ToDateTime(TimeOnly.MinValue), TimeSpan.Zero) : DateTimeOffset.UtcNow);
+                blogPosts.Any() ? new DateTimeOffset(blogPosts.Max(p => p.CreatedAt), TimeSpan.Zero) : DateTimeOffset.UtcNow);
 
             syndicationFeed.Generator = GeneratorName;
             syndicationFeed.Links.Add(new SyndicationLink(new Uri(feedOptions.BlogUrl)));
@@ -85,10 +85,10 @@ namespace Silvestre.App.Blog.Web.Controllers
                     SyndicationContent.CreateHtmlContent(post.HtmlContent.Replace(Markdown.BaseUrlPlaceholder, feedOptions.BlogUrl)),
                     null,
                     post.Uri,
-                    new DateTimeOffset(post.LastUpdate.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero))
+                    new DateTimeOffset(post.LastUpdate ?? post.CreatedAt, TimeSpan.Zero))
                 {
                     Summary = TextSyndicationContent.CreatePlaintextContent(post.Summary),
-                    PublishDate = new DateTimeOffset(post.CreatedAt.ToDateTime(TimeOnly.MinValue), TimeSpan.Zero)
+                    PublishDate = new DateTimeOffset(post.CreatedAt, TimeSpan.Zero)
                 };
 
                 postEntry.Authors.Add(new SyndicationPerson(feedOptions.AuthorEmail, feedOptions.AuthorName, null));
