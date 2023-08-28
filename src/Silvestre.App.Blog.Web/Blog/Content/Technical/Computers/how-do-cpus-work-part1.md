@@ -5,10 +5,11 @@ summary: "An introduction to concepts related to program execution on the CPU, d
 tags: 
   - processor
   - cpu
-  - how-does-it-work
+  - how does it work
+  - computer architecture
 draft: false
 creationDate: 2023-08-15T00:00:00Z
-updateDate: 2023-08-18T20:00:00Z
+updateDate: 2023-08-28T22:38:00Z
 ---
 
 First things first, if you didn't know, CPU stands for central processing unit and it's far easier to type, a term I'll use for brevity.
