@@ -25,7 +25,13 @@ namespace Silvestre.App.Blog.Web.Core.Parsers
             using StringWriter htmlWriter = new();
             Markdig.Renderers.HtmlRenderer htmlRenderer = new(htmlWriter)
             {
-                LinkRewriter = path => $"{BaseUrlPlaceholder}{(path.StartsWith("/") ? string.Empty : "/")}{path}"
+                LinkRewriter = path =>
+                {
+                    if (path.StartsWith("http://") || path.StartsWith("https://"))
+                        return path;
+                    else
+                        return $"{BaseUrlPlaceholder}{(path.StartsWith("/") ? string.Empty : "/")}{path}";
+                }
             };
 
             MarkdownPipeline pipeline = _PipelineBuilder.Build();

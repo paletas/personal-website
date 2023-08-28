@@ -71,6 +71,7 @@ namespace Silvestre.App.Blog.Web.Controllers
 
             syndicationFeed.Generator = GeneratorName;
             syndicationFeed.Links.Add(new SyndicationLink(new Uri(feedOptions.BlogUrl)));
+            syndicationFeed.Authors.Add(new SyndicationPerson(feedOptions.AuthorEmail, feedOptions.AuthorName, string.Empty));
             syndicationFeed.Items = GeneratePostEntries(feedOptions, blogPosts);
             return syndicationFeed;
         }
@@ -92,7 +93,7 @@ namespace Silvestre.App.Blog.Web.Controllers
                 };
 
                 postEntry.PublishDate = new DateTimeOffset(post.CreatedAt, TimeSpan.Zero);
-                postEntry.Authors.Add(new SyndicationPerson(feedOptions.AuthorEmail, feedOptions.AuthorName, null));
+                postEntry.Authors.Add(new SyndicationPerson(feedOptions.AuthorEmail, feedOptions.AuthorName, string.Empty));
                 postEntry.Categories.Add(new SyndicationCategory(post.Category.Title));
                 postEntry.AddPermalink(postAbsoluteUri);
 
