@@ -20,7 +20,7 @@
     @Html.Raw(PreparePost(this.Model.HtmlContent))
 </div>
 <div>
-    <ul class="list-group list-group-horizontal">
+    <ul class="list-group list-group-horizontal flex-wrap">
         @foreach (string tag in this.Model.Tags)
         {
             <li class="list-group-item border-0">
