@@ -32,8 +32,10 @@ jobs:
       run: |
         project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
         echo "tags=paletas/personal-website:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},paletas/personal-website:$project_majorminor${{ steps.suffix.outputs.version_suffix }}" >> $env:GITHUB_OUTPUT
-    - name: Print version
-      run: echo "The version is ${{ steps.version.outputs.project_version }}"
+    - name: Prints
+      run: |
+          echo "The version is ${{ steps.version.outputs.project_version }}"
+          echo "The tags are ${{ steps.tags.outputs.tags }}"
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
