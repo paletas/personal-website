@@ -1,5 +1,5 @@
 ﻿---
-title: "Understanding CPU Operation: A Programmer's Guide to program execution (Part 1)"
+title: "Understanding CPU Operation: A Programmer's Guide to Program Execution (Part 1)"
 description: "Discover the inner workings of the CPU and how it brings programs to life."
 summary: "An introduction to concepts related to program execution on the CPU, demystifying the process to programmers that don't know."
 tags: 
