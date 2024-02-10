@@ -42,8 +42,7 @@ jobs:
         fi
         echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
         echo "SHOULD_PUBLISH=$SHOULD_PUBLISH" >> $GITHUB_ENV
-        docker build -f src/Silvestre.App.Blog.Web/Dockerfile --tag ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX} --tag ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX} .
-        docker build -f src/Silvestre.App.Blog.Web/Dockerfile --tag ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX}-arm64 --tag ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}-arm64 --build-arg RUNTIME_IDENTIFIER=linux-arm64 .
+        docker buildx build --platform linux/amd64,linux/arm64/v8 -f src/Silvestre.App.Blog.Web/Dockerfile --tag ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX} --tag ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX} .
     - name: Log into GitHub Container Registry
       if: env.SHOULD_PUBLISH == 'true'
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -52,7 +51,5 @@ jobs:
       run: |
         docker push ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX}
         docker push ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}
-        docker push ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX}-arm64
-        docker push ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}-arm64
       env:
         VERSION_SUFFIX: ${{ env.VERSION_SUFFIX }}
