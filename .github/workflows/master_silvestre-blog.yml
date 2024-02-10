@@ -25,31 +25,22 @@ jobs:
       working-directory: src/Silvestre.App.Blog.Web
     - name: Print version
       run: echo "The version is ${{ steps.version.outputs.project_version }}"
-    - name: Build the Docker image
-      run: |
-        SHOULD_PUBLISH='true'
-        VERSION_SUFFIX=""
-        if [[ "$GITHUB_REF" == refs/heads/* ]]; then
-          if [ "$GITHUB_REF_NAME" == "master" ]; then
-            VERSION_SUFFIX=""
-          elif [ "$GITHUB_REF_NAME" == "dev" ]; then
-            VERSION_SUFFIX="-dev"
-          else
-            SHOULD_PUBLISH='false'
-          fi
-        else
-          SHOULD_PUBLISH='false'
-        fi
-        echo "VERSION_SUFFIX=$VERSION_SUFFIX" >> $GITHUB_ENV
-        echo "SHOULD_PUBLISH=$SHOULD_PUBLISH" >> $GITHUB_ENV
-        docker buildx build --platform linux/amd64,linux/arm64/v8 -f src/Silvestre.App.Blog.Web/Dockerfile --tag ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX} --tag ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX} .
-    - name: Log into GitHub Container Registry
-      if: env.SHOULD_PUBLISH == 'true'
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-    - name: Push Docker image
-      if: env.SHOULD_PUBLISH == 'true'
-      run: |
-        docker push ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX}
-        docker push ghcr.io/paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}
-      env:
-        VERSION_SUFFIX: ${{ env.VERSION_SUFFIX }}
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Login to GitHub Container Registry
+      if: github.ref == 'refs/heads/*' && (github.ref_name == "master" || github.ref_name == "dev"
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64/v8
+        file: src/Silvestre.App.Blog.Web/Dockerfile
+        push: ${{ github.ref == 'refs/heads/*' && (github.ref_name == "master" || github.ref_name == "dev") }}
+        tags: paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX},paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}
