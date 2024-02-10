@@ -28,9 +28,10 @@ jobs:
       id: suffix
       run: echo "version_suffix=dev" >> $env:GITHUB_OUTPUT
     - name: Docker tags
+      id: tags
       run: |
         project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
-        echo "tags=paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.version.outputs.version_suffix }},paletas/personal-blog:$project_majorminor${{ steps.version.outputs.version_suffix }}" >> $env:GITHUB_OUTPUT
+        echo "tags=paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}" >> $env:GITHUB_OUTPUT
     - name: Print version
       run: echo "The version is ${{ steps.version.outputs.project_version }}"
     - name: Set up QEMU
@@ -51,4 +52,4 @@ jobs:
         platforms: linux/amd64,linux/arm64/v8
         file: src/Silvestre.App.Blog.Web/Dockerfile
         push: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
-        tags: ${{ steps.suffix.outputs.tags }}
+        tags: ${{ steps.tags.outputs.tags }}
