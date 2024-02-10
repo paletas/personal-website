@@ -50,4 +50,4 @@ jobs:
         platforms: linux/amd64,linux/arm64/v8
         file: src/Silvestre.App.Blog.Web/Dockerfile
         push: ${{ github.ref == 'refs/heads/*' && (github.ref_name == 'master' || github.ref_name == 'dev') }}
-        tags: paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.version.outputs.version_suffix }},paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${{ steps.version.outputs.version_suffix }}
+        tags: paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.version.outputs.version_suffix }},paletas/personal-blog:${{ run echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2 }}${{ steps.version.outputs.version_suffix }}
