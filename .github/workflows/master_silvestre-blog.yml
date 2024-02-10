@@ -51,4 +51,4 @@ jobs:
         platforms: linux/amd64,linux/arm64/v8
         file: src/Silvestre.App.Blog.Web/Dockerfile
         push: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
-        tags: ${{ steps.version.outputs.tags }}
+        tags: ${{ steps.suffix.outputs.tags }}
