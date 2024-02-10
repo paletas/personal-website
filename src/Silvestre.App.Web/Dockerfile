@@ -14,7 +14,7 @@ RUN dotnet build "Silvestre.App.Web.csproj" -c $BUILD_CONFIGURATION -o /app/buil
 
 FROM build AS publish
 ARG RUNTIME_IDENTIFIER=linux-x64
-RUN dotnet publish "Silvestre.App.Web.csproj" -c $BUILD_CONFIGURATION -r $RUNTIME_IDENTIFIER --self-contained -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Silvestre.App.Web.csproj" -c $BUILD_CONFIGURATION -r $RUNTIME_IDENTIFIER --self-contained -o /app/publish
 
 FROM base AS final
 WORKDIR /app
