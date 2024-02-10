@@ -23,6 +23,13 @@ jobs:
         echo "project_version=$version" >> $env:GITHUB_OUTPUT
       shell: pwsh
       working-directory: src/Silvestre.App.Blog.Web
+    - name: Set suffix for dev version
+      if: github.ref == 'refs/heads/*' && github.ref_name == 'dev'
+      id: suffix
+      run: |
+        echo "version_suffix=dev" >> $env:GITHUB_OUTPUT
+      shell: pwsh
+      working-directory: src/Silvestre.App.Blog.Web
     - name: Print version
       run: echo "The version is ${{ steps.version.outputs.project_version }}"
     - name: Set up QEMU
@@ -43,4 +50,4 @@ jobs:
         platforms: linux/amd64,linux/arm64/v8
         file: src/Silvestre.App.Blog.Web/Dockerfile
         push: ${{ github.ref == 'refs/heads/*' && (github.ref_name == 'master' || github.ref_name == 'dev') }}
-        tags: paletas/personal-blog:${{ steps.version.outputs.project_version }}${VERSION_SUFFIX},paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${VERSION_SUFFIX}
+        tags: paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.version.outputs.version_suffix }},paletas/personal-blog:$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)${{ steps.version.outputs.version_suffix }}
