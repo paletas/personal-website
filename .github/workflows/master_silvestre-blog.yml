@@ -31,11 +31,11 @@ jobs:
       id: tags
       run: |
         project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
-        echo "tags=paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}" >> $env:GITHUB_OUTPUT
+        echo "::set-output name=DOCKER_TAGS::paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}"
     - name: Prints
       run: |
           echo "The version is ${{ steps.version.outputs.project_version }}"
-          echo "The tags are ${{ steps.tags.outputs.tags }}"
+          echo "The tags are ${{ steps.tags.outputs.DOCKER_TAGS }}"
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -54,4 +54,4 @@ jobs:
         platforms: linux/amd64,linux/arm64/v8
         file: src/Silvestre.App.Blog.Web/Dockerfile
         push: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
-        tags: ${{ steps.tags.outputs.tags }}
+        tags: ${{ steps.tags.outputs.DOCKER_TAGS }}
