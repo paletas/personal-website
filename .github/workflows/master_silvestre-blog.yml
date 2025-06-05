@@ -31,7 +31,7 @@ jobs:
       id: tags
       run: |
         project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
-        echo "::set-output name=DOCKER_TAGS::paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}"
+        echo "::set-output name=DOCKER_TAGS::ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},ghcr.io/paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}"
     - name: Prints
       run: |
           echo "The version is ${{ steps.version.outputs.project_version }}"
