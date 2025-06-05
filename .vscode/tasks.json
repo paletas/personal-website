@@ -7,7 +7,19 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj",
+                "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-blog",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +31,19 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj",
+                "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish-blog",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +56,20 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj",
+                "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch-blog",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -47,12 +84,29 @@
             "dockerBuild": {
                 "tag": "personalwebsite:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/Silvestre.App.Web/Dockerfile",
+                "dockerfile": "${workspaceFolder}\\src\\Silvestre.App.Web\\Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj"
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build-blog: debug",
+            "dependsOn": [
+                "build-blog"
+            ],
+            "dockerBuild": {
+                "tag": "personalwebsite-blog:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj"
             }
         },
         {
@@ -63,12 +117,28 @@
             ],
             "dockerBuild": {
                 "tag": "personalwebsite:latest",
-                "dockerfile": "${workspaceFolder}/Silvestre.App.Web/Dockerfile",
+                "dockerfile": "${workspaceFolder}\\src\\Silvestre.App.Web\\Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj"
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build-blog: release",
+            "dependsOn": [
+                "build-blog"
+            ],
+            "dockerBuild": {
+                "tag": "personalwebsite-blog:latest",
+                "dockerfile": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj"
             }
         },
         {
@@ -79,7 +149,19 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj",
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run-blog: debug",
+            "dependsOn": [
+                "docker-build-blog: debug"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj",
                 "enableDebugging": true
             }
         },
@@ -91,7 +173,18 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj"
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run-blog: release",
+            "dependsOn": [
+                "docker-build-blog: release"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj"
             }
         }
     ]

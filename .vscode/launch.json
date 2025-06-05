@@ -5,23 +5,45 @@
    "version": "0.2.0",
    "configurations": [
     {
-        "name": ".NET 6 Launch (web)",
+        "name": ".NET 9 Launch (Main Web)",
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/Silvestre.App.Web/bin/Debug/net6.0/Silvestre.App.Web.dll",
+        "program": "${workspaceFolder}\\src\\Silvestre.App.Web\\bin\\Debug\\net9.0\\Silvestre.App.Web.dll",
         "args": [],
-        "cwd": "${workspaceFolder}/Silvestre.App.Web",
+        "cwd": "${workspaceFolder}\\src\\Silvestre.App.Web",
         "stopAtEntry": false,
         "serverReadyAction": {
             "action": "openExternally",
             "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
         },
         "env": {
-            "ASPNETCORE_ENVIRONMENT": "Development"
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000"
         },
         "sourceFileMap": {
-            "/Views": "${workspaceFolder}/Views"
+            "/Views": "${workspaceFolder}\\src\\Silvestre.App.Web\\Views"
+        }
+    },
+    {
+        "name": ".NET 9 Launch (Blog Web)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\bin\\Debug\\net9.0\\Silvestre.App.Blog.Web.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web",
+        "stopAtEntry": false,
+        "serverReadyAction": {
+            "action": "openExternally",
+            "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+        },
+        "env": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "ASPNETCORE_URLS": "https://localhost:7149;http://localhost:5291"
+        },
+        "sourceFileMap": {
+            "/Views": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Views"
         }
     },
     {
@@ -31,12 +53,21 @@
         "processId": "${command:pickProcess}"
     },
     {
-        "name": "Docker .NET Core Launch",
+        "name": "Docker Main Web Launch",
         "type": "docker",
         "request": "launch",
         "preLaunchTask": "docker-run: debug",
         "netCore": {
-            "appProject": "${workspaceFolder}/Silvestre.App.Web/Silvestre.App.Web.csproj"
+            "appProject": "${workspaceFolder}\\src\\Silvestre.App.Web\\Silvestre.App.Web.csproj"
+        }
+    },
+    {
+        "name": "Docker Blog Web Launch",
+        "type": "docker",
+        "request": "launch",
+        "preLaunchTask": "docker-run: debug",
+        "netCore": {
+            "appProject": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\Silvestre.App.Blog.Web.csproj"
         }
     }
 ]
