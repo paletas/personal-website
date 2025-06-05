@@ -29,7 +29,7 @@
         "name": ".NET 9 Launch (Blog Web)",
         "type": "coreclr",
         "request": "launch",
-        "preLaunchTask": "build",
+        "preLaunchTask": "build-blog",
         "program": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web\\bin\\Debug\\net9.0\\Silvestre.App.Blog.Web.dll",
         "args": [],
         "cwd": "${workspaceFolder}\\src\\Silvestre.App.Blog.Web",
