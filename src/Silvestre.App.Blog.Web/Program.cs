@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.ResponseCompression;
 using Silvestre.App.Blog.Web.Blog;
 using Silvestre.App.Blog.Web.Options;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,11 @@ builder.Services.AddScoped<IBlogRepository, LocalBlogRepository>(sp => new Local
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "image/svg+xml" });
+});
 
 var app = builder.Build();
 
@@ -21,6 +29,14 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
+app.UseHttpsRedirection();
+app.UseResponseCompression();
 
 app.UseStaticFiles(new StaticFileOptions
 {

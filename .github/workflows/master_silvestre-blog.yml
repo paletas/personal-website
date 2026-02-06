@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Get version from csproj
       id: version
       run: |
@@ -31,7 +31,7 @@ jobs:
       id: tags
       run: |
         project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
-        echo "::set-output name=DOCKER_TAGS::ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},ghcr.io/paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}"
+        echo "DOCKER_TAGS=ghcr.io/paletas/personal-blog:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},ghcr.io/paletas/personal-blog:$project_majorminor${{ steps.suffix.outputs.version_suffix }}" >> $GITHUB_OUTPUT
     - name: Prints
       run: |
           echo "The version is ${{ steps.version.outputs.project_version }}"
