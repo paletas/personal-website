@@ -26,7 +26,7 @@ jobs:
           - { site: website, dockerfile: src/Silvestre.App.Web/Dockerfile }
           - { site: blog, dockerfile: src/Silvestre.App.Blog.Web/Dockerfile }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build the production image
         run: docker build -f "${{ matrix.dockerfile }}" -t "smoke:${{ matrix.site }}" .
