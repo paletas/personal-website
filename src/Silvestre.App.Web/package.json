@@ -2,7 +2,7 @@
   "name": "silvestre.website",
   "version": "1.0.0",
   "devDependencies": {
-    "eslint": "9.39.2",
+    "eslint": "10.11.0",
     "tailwindcss": "4.1.18",
     "browserslist": "4.29.3",
     "gulp": "5.0.1"
