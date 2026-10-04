@@ -1,0 +1,49 @@
+# Gate for every pull request (including Dependabot's): build the real production image of each site, run it
+# and require a real answer on /. There is no beta environment for these sites, so this is the check that
+# decides whether a change may reach dev and, later, master. Nothing is published from here.
+name: PR check
+
+on:
+  pull_request:
+    branches: [dev, master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: build + smoke (${{ matrix.site }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { site: website, dockerfile: src/Silvestre.App.Web/Dockerfile }
+          - { site: blog, dockerfile: src/Silvestre.App.Blog.Web/Dockerfile }
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the production image
+        run: docker build -f "${{ matrix.dockerfile }}" -t "smoke:${{ matrix.site }}" .
+
+      - name: Run it and probe /
+        run: |
+          docker run -d --name smoke -e ASPNETCORE_ENVIRONMENT=Production -e ASPNETCORE_URLS=http://+:80 -p 8080:80 "smoke:${{ matrix.site }}"
+          code=000
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /tmp/body -w '%{http_code}' http://localhost:8080/ || true)
+            [ "$code" = 200 ] && break
+            sleep 2
+          done
+          bytes=$(wc -c < /tmp/body)
+          echo "GET / -> $code ($bytes bytes)"
+          [ "$code" = 200 ] && [ "$bytes" -gt 500 ]
+
+      - name: Container logs
+        if: failure()
+        run: docker logs smoke || true
