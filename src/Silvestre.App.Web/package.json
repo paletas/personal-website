@@ -4,7 +4,7 @@
   "devDependencies": {
     "eslint": "9.39.2",
     "tailwindcss": "4.1.18",
-    "browserslist": "4.28.1",
+    "browserslist": "4.29.3",
     "gulp": "5.0.1"
   },
   "scripts": {
