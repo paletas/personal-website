@@ -43,6 +43,14 @@ jobs:
           bytes=$(wc -c < /tmp/body)
           echo "GET / -> $code ($bytes bytes)"
           [ "$code" = 200 ] && [ "$bytes" -gt 500 ]
+          # The website's stylesheet and charts.css are built/vendored in the image (npm), so they must be served.
+          if [ "${{ matrix.site }}" = website ]; then
+            for a in /css/site.css /vendor/charts.min.css; do
+              c=$(curl -s -o /tmp/asset -w '%{http_code}' "http://localhost:8080$a" || true)
+              echo "GET $a -> $c ($(wc -c < /tmp/asset) bytes)"
+              [ "$c" = 200 ] && [ "$(wc -c < /tmp/asset)" -gt 5000 ] || exit 1
+            done
+          fi
 
       - name: Container logs
         if: failure()

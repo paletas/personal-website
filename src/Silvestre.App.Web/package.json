@@ -1,18 +1,17 @@
 {
   "name": "silvestre.website",
   "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "charts.css": "^1.2.0"
+  },
   "devDependencies": {
-    "eslint": "9.39.2",
-    "tailwindcss": "4.1.18",
-    "browserslist": "4.29.3",
-    "gulp": "5.0.1"
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   },
   "scripts": {
-    "prepare": "npx browserslist@latest --update-db && npx tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css"
-  },
-  "-vs-binding": {
-    "BeforeBuild": [
-      "prepare"
-    ]
+    "build:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --minify && npm run vendor",
+    "watch:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
+    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/vendor',{recursive:true});fs.copyFileSync('node_modules/charts.css/dist/charts.min.css','wwwroot/vendor/charts.min.css')\""
   }
 }

@@ -7,28 +7,15 @@
     <link rel="manifest" href="~/site.webmanifest" />
     <link rel="apple-touch-icon" href="~/favicon-180x180.png" />
     <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
-    <link rel="stylesheet" href="https://unpkg.com/charts.css/dist/charts.min.css">
+    <link rel="stylesheet" href="~/vendor/charts.min.css">
     <meta name="keywords" content="silvestre" />
-
-    <environment include="Development">        
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: {
-                    extend: {
-                    }
-                }
-            }
-        </script>
-    </environment>
 </head>
 <body class="dark:bg-gray-600 dark:text-gray-300">
     <nav class="bg-sky-500 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-(--breakpoint-2xl) mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <div class="flex-shrink-0">
+                    <div class="shrink-0">
                         <img class="h-16 w-16" src="~/favicon-192x192.png" alt="João Silvestre">
                     </div>
                     <div class="hidden md:block">
@@ -42,7 +29,7 @@
                 </div>
                 <div class="-mr-2 flex md:hidden">
                     <!-- Mobile menu button -->
-                    <button class="navbar-burger bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <button class="navbar-burger bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span class="sr-only">Open main menu</span>
                         <!--
                         Heroicon name: menu
@@ -65,7 +52,7 @@
 
                 <label for="theme-toggle" class="hidden md:inline-flex relative items-center cursor-pointer" onclick="Silvestre.toggleDarkMode()">
                     <input type="checkbox" value="" class="sr-only peer theme-toggle">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                     <span class="ml-3 text-sm font-medium">Dark Mode</span>
                 </label>
             </div>
@@ -87,19 +74,19 @@
 
             <label for="theme-toggle" class="inline-flex relative items-center cursor-pointer" onclick="Silvestre.toggleDarkMode()">
                 <input type="checkbox" value="" class="sr-only peer theme-toggle">
-                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                 <span class="ml-3 text-sm font-medium">Dark Mode</span>
             </label>
         </div>
     </nav>
 
-    <header class="bg-white dark:bg-gray-700 shadow @(ViewData.ContainsKey("Subtitle") == false ? "hidden" : "")">
-        <div class="max-w-screen-2xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <header class="bg-white dark:bg-gray-700 shadow-sm @(ViewData.ContainsKey("Subtitle") == false ? "hidden" : "")">
+        <div class="max-w-(--breakpoint-2xl) mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 class="text-2xl font-bold leading-tight text-gray-900">@ViewData["Subtitle"]</h1>
         </div>
     </header>
     <main>
-        <div class="max-w-screen-2xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="max-w-(--breakpoint-2xl) mx-auto py-6 sm:px-6 lg:px-8">
             @RenderBody()
         </div>
         <a style="display: none" rel="me" href="https://hachyderm.io/@@paletas">Mastodon</a>
