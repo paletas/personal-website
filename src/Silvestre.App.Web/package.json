@@ -12,6 +12,6 @@
   "scripts": {
     "build:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --minify && npm run vendor",
     "watch:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
-    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/lib',{recursive:true});fs.copyFileSync('node_modules/charts.css/dist/charts.min.css','wwwroot/lib/charts.min.css')\""
+    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/vendor',{recursive:true});fs.copyFileSync('node_modules/charts.css/dist/charts.min.css','wwwroot/vendor/charts.min.css')\""
   }
 }

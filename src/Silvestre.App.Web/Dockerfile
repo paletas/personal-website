@@ -18,7 +18,7 @@ COPY ["src/Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
 RUN dotnet restore "Silvestre.App.Web/Silvestre.App.Web.csproj"
 COPY src/ .
 COPY --from=css /src/src/Silvestre.App.Web/wwwroot/css/site.css Silvestre.App.Web/wwwroot/css/site.css
-COPY --from=css /src/src/Silvestre.App.Web/wwwroot/lib/charts.min.css Silvestre.App.Web/wwwroot/lib/charts.min.css
+COPY --from=css /src/src/Silvestre.App.Web/wwwroot/vendor/charts.min.css Silvestre.App.Web/wwwroot/vendor/charts.min.css
 WORKDIR "/src/Silvestre.App.Web"
 RUN dotnet build "Silvestre.App.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
