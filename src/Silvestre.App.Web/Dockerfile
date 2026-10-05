@@ -4,7 +4,7 @@ EXPOSE 80
 EXPOSE 443
 
 # Tailwind CSS 4 build (scans Pages/**/*.cshtml) and vendored charts.css; site.css is generated, not committed.
-FROM node:24-slim AS css
+FROM node:26-slim AS css
 WORKDIR /src/src/Silvestre.App.Web
 COPY src/Silvestre.App.Web/package*.json ./
 RUN npm ci
