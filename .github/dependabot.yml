@@ -1,5 +1,5 @@
 # Public site: Dependabot version updates every other day (06:00 Lisbon). PRs go to dev; minor/patch grouped per ecosystem.
-# npm is intentionally not tracked: the npm toolchain is dormant (Docker build never runs npm).
+# npm (Tailwind CSS, charts.css) is built into the Docker image and tracked here.
 # Security fixes are raised by Dependabot separately and are not limited by this schedule.
 version: 2
 updates:
@@ -13,6 +13,18 @@ updates:
     open-pull-requests-limit: 5
     groups:
       nuget-minor-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: "/src/Silvestre.App.Web"
+    target-branch: dev
+    schedule:
+      interval: cron
+      cronjob: "0 6 */2 * *"
+      timezone: Europe/Lisbon
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor-patch:
         update-types: [minor, patch]
 
   - package-ecosystem: dotnet-sdk
