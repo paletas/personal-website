@@ -1,129 +1,109 @@
 @page "/ai"
 @model Silvestre.App.Web.Pages.AiModel
+@inject Silvestre.App.Web.Models.AiContent AiDoc
 @{
     var site = Content.Get(CultureInfo.CurrentUICulture);
     var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
     ViewData["Title"] = site.Meta.AiTitle;
     ViewData["Description"] = site.Meta.AiDescription;
 }
+@{
+    var doc = AiDoc.Get(CultureInfo.CurrentUICulture);
+    var isEn = !SiteContentProvider.IsPt(CultureInfo.CurrentUICulture);
+    var loop = doc.Section("loop");
+    var prototype = doc.Section("prototype");
+    var behaviour = doc.Section("behaviour");
+    var unbounded = doc.Section("unbounded");
+    var benefits = doc.Section("benefits");
+    var hood = doc.Section("under-the-hood");
+    var practice = doc.Section("in-practice");
+    var contact = doc.Section("contact");
+}
 
 <div class="page-head">
     <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / ai</div>
-    <h1 class="display !text-[clamp(36px,6vw,64px)] max-w-[20ch] mt-4 mb-4">I steer. The agents <span class="grad-text">do the typing</span>.</h1>
-    <p class="lead">I guide, Claude learns and understands, and we iterate on a written plan together. That is where most of the work happens. Then it implements, and we validate the result together.</p>
+    <h1 class="display !text-[clamp(36px,6vw,64px)] max-w-[20ch] mt-4 mb-4">@Html.Raw(doc.Head.HeadingHtml)</h1>
+    <div class="lead">@Html.Raw(doc.Head.IntroHtml)</div>
 </div>
 
 <section id="loop" class="py-7">
-    <div class="label">The loop</div>
+    <div class="label">@loop.Label</div>
     <div class="card span-12">
         <div class="steps">
-            <div class="step">
-                <div class="n">01</div>
-                <div><h3 class="text-[19px] mb-1.5">Learn<span class="who">Claude</span></h3><p class="muted">It reads the repo, the docs and the current state, and comes back with facts and where each one came from. No edits, no guessing.</p></div>
-            </div>
-            <div class="step">
-                <div class="n">02</div>
-                <div><h3 class="text-[19px] mb-1.5">Understand<span class="who">Claude + me</span></h3><p class="muted">It tells me how it read the request and asks what the code cannot answer: scope, trade-offs, what &ldquo;done&rdquo; means. I answer. Nothing moves on while a question is open.</p></div>
-            </div>
-            <div class="step step-hl">
-                <div class="n">03</div>
-                <div><h3 class="text-[19px] mb-1.5">Plan, together<span class="who who-me">where the bulk of the work is</span></h3><p class="muted">We iterate on a plan written in plain language: the batches, the decisions, and the scenarios that will prove it works. I read it, push back, change it. Nothing gets built until I approve that exact version.</p></div>
-            </div>
-            <div class="step">
-                <div class="n">04</div>
-                <div><h3 class="text-[19px] mb-1.5">Implement<span class="who">Claude</span></h3><p class="muted">Now it builds, with cheaper models taking the mechanical steps. If reality does not match the plan, it stops and says so instead of improvising a design.</p></div>
-            </div>
-            <div class="step">
-                <div class="n">05</div>
-                <div><h3 class="text-[19px] mb-1.5">Validate, together<span class="who">independent agent + me</span></h3><p class="muted">A separate agent runs the scenarios from the plan, unchanged, and shows evidence. I look at it and decide whether it is right.</p></div>
-            </div>
+            @for (var i = 0; i < loop.Items.Count; i++)
+            {
+                var step = loop.Items[i];
+                var hl = i == 2;
+                <div class="step@(hl ? " step-hl" : "")">
+                    <div class="n">@((i + 1).ToString("00"))</div>
+                    <div><h3 class="text-[19px] mb-1.5">@step.Title<span class="who@(hl ? " who-me" : "")">@step.Who</span></h3><p class="muted">@Html.Raw(step.BodyHtml)</p></div>
+                </div>
+            }
         </div>
     </div>
 </section>
 
 <section id="prototype" class="py-7">
-    <div class="label">Prototype fast</div>
+    <div class="label">@prototype.Label</div>
     <div class="card">
         <div class="split items-center">
             <div>
-                <h2 class="text-[26px] tracking-tight mb-2">Show, don&rsquo;t describe.</h2>
-                <p class="muted">Before I approve a plan, I want to see the thing. Claude turns an idea into a clickable prototype in minutes, I react to it, and we go again. Looking at a rough version teaches us more than a page of requirements, and changing it costs almost nothing.</p>
+                <h2 class="text-[26px] tracking-tight mb-2">@Html.Raw(prototype.HeadingHtml)</h2>
+                <div class="muted">@Html.Raw(prototype.IntroHtml)</div>
             </div>
-            <div class="scn"><span class="d"># this site, before any code was approved</span>
-<span class="kw">mockup v1</span>   direction + theme
-<span class="kw">mockup v2</span>   my photo, framed
-<span class="kw">mockup v3</span>   stack: add AI tooling
-<span class="kw">mockup v4</span>   WISC-III in the nav
-<span class="kw">mockup v5</span>   every page, clickable
-<span class="g">→</span> <span class="d">then the plan gets approved</span></div>
+            <div class="scn">@Html.Raw(AiContent.HighlightScenario(prototype.Code))</div>
         </div>
     </div>
 </section>
 
 <section id="behaviour" class="py-7">
-    <div class="label">Behaviour first</div>
+    <div class="label">@behaviour.Label</div>
     <div class="split">
         <div class="card">
-            <h2 class="text-[26px] tracking-tight mb-2">BDD is how we agree, and how I check.</h2>
-            <p class="muted">Every acceptance criterion becomes a scenario in plain language, in the Given / When / Then style of BDD, before a line of code exists. It is the contract between me and the agents: what the thing must do, described from the outside, in words I can read.</p>
-            <p class="muted mt-3">Scenarios do not replace tests. The agents still write unit, integration and end-to-end tests, because those catch what a sentence cannot. BDD is the layer I own: I read the scenarios, and I watch them pass next to the rest of the suite.</p>
+            <h2 class="text-[26px] tracking-tight mb-2">@Html.Raw(behaviour.HeadingHtml)</h2>
+            <div class="muted [&_p+p]:mt-3">@Html.Raw(behaviour.IntroHtml)</div>
         </div>
-        <div class="scn" aria-label="Example scenario"><span class="d"># from this site's own plan</span>
-<span class="kw">Scenario:</span> <span class="t">Old blog links still work</span>
-  <span class="kw">Given</span> a reader opens an old blog post URL
-  <span class="kw">When</span>  the request reaches the new site
-  <span class="kw">Then</span>  they are sent to the new page
-  <span class="kw">And</span>   the response is a permanent redirect
-
-<span class="kw">Scenario:</span> <span class="t">Works on a phone</span>
-  <span class="kw">Given</span> a 375px wide screen
-  <span class="kw">When</span>  I open any page
-  <span class="kw">Then</span>  nothing scrolls sideways
-
-<span class="d">─ validation, side by side ─</span>
-<span class="g">✓</span> scenarios    <span class="d">what I read and approve</span>
-<span class="g">✓</span> unit tests   <span class="d">logic, edge cases</span>
-<span class="g">✓</span> integration  <span class="d">parts working together</span>
-<span class="g">✓</span> end-to-end   <span class="d">a real browser, real flow</span></div>
+        <div class="scn" aria-label="@(isEn ? "Example scenario" : null)">@Html.Raw(AiContent.HighlightScenario(behaviour.Code))</div>
     </div>
 </section>
 
 <section id="unbounded" class="py-7">
-    <div class="label">Unbounded</div>
+    <div class="label">@unbounded.Label</div>
     <div class="card">
-        <div class="big">If I can <em>read</em> the behaviour, I can <em>use</em> it. The language and the technology become details.</div>
-        <p class="muted mt-4 max-w-[70ch]">The scenarios say what the system does, not how it is built. So the same way of working holds whether the answer is C#, Go, TypeScript or something I have never touched. I do not need to know the idiom to know the result is right, because I validate the behaviour, not the syntax.</p>
+        <div class="big">@Html.Raw(unbounded.HeadingHtml)</div>
+        <div class="muted mt-4 max-w-[70ch]">@Html.Raw(unbounded.IntroHtml)</div>
         <div class="tags"><span class="tag">C#</span><span class="tag">Go</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Rust</span><span class="tag">SQL</span><span class="tag">Bash</span><span class="tag tag-hl">...whatever it needs</span></div>
     </div>
 </section>
 
 <section id="benefits" class="py-7">
-    <div class="label">What this gives me</div>
+    <div class="label">@benefits.Label</div>
     <div class="three">
-        <div class="card"><h3 class="text-[19px] mb-1.5">Judgement stays mine</h3><p class="muted">I decide what gets built and when it is done. The agents never decide either.</p></div>
-        <div class="card"><h3 class="text-[19px] mb-1.5">Mistakes are cheap early</h3><p class="muted">Most of the effort goes into the plan, where a wrong turn costs a sentence, not a rewrite.</p></div>
-        <div class="card"><h3 class="text-[19px] mb-1.5">Proof, not promises</h3><p class="muted">&ldquo;Done&rdquo; is a scenario that passes. A separate agent checks it, and I see the evidence.</p></div>
+        @foreach (var item in benefits.Items)
+        {
+            <div class="card"><h3 class="text-[19px] mb-1.5">@item.Title</h3><p class="muted">@Html.Raw(item.BodyHtml)</p></div>
+        }
     </div>
 </section>
 
 <section id="under-the-hood" class="py-7">
-    <div class="label">Under the hood</div>
+    <div class="label">@hood.Label</div>
     <div class="card">
-        <p class="muted max-w-[60ch]">Stronger models (Opus) do the thinking and planning. Smaller and cheaper ones do the repetitive work, and a failed check is what escalates a step. Work happens in isolated git worktrees, lands through pull requests, and merging is my call. Secrets never go into prompts.</p>
+        <div class="muted max-w-[60ch]">@Html.Raw(hood.IntroHtml)</div>
         <div class="tags"><span class="tag tag-hl">Claude Code</span><span class="tag tag-hl">Subagents</span><span class="tag">Opus &amp; Sonnet</span><span class="tag">Local models</span><span class="tag">Git worktrees</span></div>
     </div>
 </section>
 
 <section id="in-practice" class="py-7">
-    <div class="label">In practice</div>
+    <div class="label">@practice.Label</div>
     <div class="card">
-        <h2 class="text-[26px] tracking-tight mb-2">This site was built this way.</h2>
-        <p class="muted">The redesign you are looking at went through the same loop: every question asked and answered, a plan iterated until I approved it, scenarios written before the code, and a design gate where I approved the look before the rest got built.</p>
+        <h2 class="text-[26px] tracking-tight mb-2">@Html.Raw(practice.HeadingHtml)</h2>
+        <div class="muted">@Html.Raw(practice.IntroHtml)</div>
     </div>
 </section>
 
 <section id="contact" class="contact">
-    <h2 class="text-[clamp(30px,5vw,48px)] tracking-tight">Curious how it works for your team?</h2>
-    <p class="muted mt-2.5 mb-6">Happy to talk about it.</p>
-    <div class="flex justify-center"><a class="btn btn-primary" href="@(prefix + "/#contact")">Get in touch →</a></div>
+    <h2 class="text-[clamp(30px,5vw,48px)] tracking-tight">@Html.Raw(contact.HeadingHtml)</h2>
+    <div class="muted mt-2.5 mb-6">@Html.Raw(contact.IntroHtml)</div>
+    <div class="flex justify-center"><a class="btn btn-primary" href="@(prefix + "/#contact")">@contact.Cta</a></div>
 </section>

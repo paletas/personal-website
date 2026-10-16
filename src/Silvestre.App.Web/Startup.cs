@@ -28,6 +28,8 @@ namespace Silvestre.App.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<SiteContentProvider>();
+            services.AddSingleton<WritingArchive>();
+            services.AddSingleton<AiContent>();
             services.AddRazorPages().AddRazorPagesOptions(o => o.Conventions.Add(new CulturePrefixConvention()));
             services.Configure<RequestLocalizationOptions>(o =>
             {
