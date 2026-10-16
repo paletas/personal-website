@@ -49,12 +49,12 @@ mockup v5   todas as páginas, clicáveis
 
 Cada critério de aceitação torna-se um cenário em linguagem simples, no estilo Given / When / Then do BDD, antes de existir uma linha de código. É o contrato entre mim e os agentes: o que a coisa tem de fazer, descrito de fora, em palavras que consigo ler.
 
-Os cenários não substituem os testes. Os agentes continuam a escrever testes unitários, de integração e de ponta a ponta, porque esses apanham o que uma frase não apanha. O BDD é a camada que me pertence: leio os cenários e vejo-os passar ao lado do resto da bateria de testes.
+Os cenários não substituem os testes. Os agentes continuam a escrever testes unitários, de integração e de ponta a ponta, porque esses apanham o que uma frase não apanha. O BDD é a camada que me pertence: leio os cenários e vejo-os passar juntamente com o resto da bateria de testes.
 
 ```
 # do plano deste mesmo site
-Cenário: Os links antigos do blogue continuam a funcionar
-  Dado que um leitor abre o URL de um artigo antigo do blogue
+Cenário: Os links dos artigos antigos continuam a funcionar
+  Dado que um leitor abre o URL de um artigo antigo
   Quando o pedido chega ao novo site
   Então é reencaminhado para a nova página
   E   a resposta é um redirecionamento permanente

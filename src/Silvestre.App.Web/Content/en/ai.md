@@ -49,12 +49,12 @@ mockup v5   every page, clickable
 
 Every acceptance criterion becomes a scenario in plain language, in the Given / When / Then style of BDD, before a line of code exists. It is the contract between me and the agents: what the thing must do, described from the outside, in words I can read.
 
-Scenarios do not replace tests. The agents still write unit, integration and end-to-end tests, because those catch what a sentence cannot. BDD is the layer I own: I read the scenarios, and I watch them pass next to the rest of the suite.
+Scenarios do not replace tests. The agents still write unit, integration and end-to-end tests, because those catch what a sentence cannot. BDD is the layer I own: I read the scenarios, and I watch them pass alongside the rest of the suite.
 
 ```
 # from this site's own plan
-Scenario: Old blog links still work
-  Given a reader opens an old blog post URL
+Scenario: Old post links still work
+  Given a reader opens an old post URL
   When  the request reaches the new site
   Then  they are sent to the new page
   And   the response is a permanent redirect

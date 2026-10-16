@@ -8,7 +8,7 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Version>1.2.0</Version>
+    <Version>2.0.0</Version>
     <DockerfileContext>..\..</DockerfileContext>
     <CompressionEnabled>false</CompressionEnabled>
     <GenerateStaticWebAssetsManifest>false</GenerateStaticWebAssetsManifest>
@@ -22,7 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="1.4.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
   </ItemGroup>
   <ItemGroup>

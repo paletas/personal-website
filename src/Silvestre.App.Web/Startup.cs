@@ -30,6 +30,7 @@ namespace Silvestre.App.Web
             services.AddSingleton<SiteContentProvider>();
             services.AddSingleton<WritingArchive>();
             services.AddSingleton<AiContent>();
+            services.AddWebEncoders(o => o.TextEncoderSettings = new System.Text.Encodings.Web.TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All));
             services.AddRazorPages().AddRazorPagesOptions(o => o.Conventions.Add(new CulturePrefixConvention()));
             services.Configure<RequestLocalizationOptions>(o =>
             {
@@ -54,9 +55,11 @@ namespace Silvestre.App.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {

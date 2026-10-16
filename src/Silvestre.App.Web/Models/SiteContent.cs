@@ -1,6 +1,6 @@
 namespace Silvestre.App.Web.Models
 {
-    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing);
+    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing, ErrorContent Error);
 
     public record MetaContent(string Title, string Description, string AiTitle, string AiDescription);
 
@@ -23,6 +23,8 @@ namespace Silvestre.App.Web.Models
     public record WritingContent(string Label, ProjectCard CpuPart1, ProjectCard CpuPart2);
 
     public record ContactContent(string Heading, string Body);
+
+    public record ErrorContent(string NotFoundTitle, string NotFoundBody, string Title, string Body, string Home);
 
     public record WritingPageContent(string Crumb, string Title, string Lead, string Back, string Updated);
 }

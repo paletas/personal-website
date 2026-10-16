@@ -81,8 +81,15 @@
   "writing": {
     "crumb": "escritos",
     "title": "Escritos.",
-    "lead": "Um pequeno arquivo. Não é um blogue, nem uma promessa de mais. Os artigos estão em inglês.",
+    "lead": "Um pequeno arquivo, não uma promessa de mais. Os artigos estão em inglês.",
     "back": "Todos os escritos",
     "updated": "Atualizado"
+  },
+  "error": {
+    "notFoundTitle": "Página não encontrada.",
+    "notFoundBody": "A página que procura não existe ou foi movida.",
+    "title": "Algo correu mal.",
+    "body": "Ocorreu um erro inesperado. Tente novamente dentro de instantes.",
+    "home": "Voltar ao início"
   }
 }

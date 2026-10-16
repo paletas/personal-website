@@ -1,0 +1,16 @@
+@page "/Error/{code:int?}"
+@model Silvestre.App.Web.Pages.ErrorModel
+@{
+    var site = Content.Get(CultureInfo.CurrentUICulture);
+    var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    var notFound = Model.Code == 404;
+    var title = notFound ? site.Error.NotFoundTitle : site.Error.Title;
+    ViewData["Title"] = title + " | " + site.Meta.Title;
+}
+
+<div class="page-head">
+    <h1 class="display !text-[clamp(30px,5vw,52px)] mt-2 mb-2 max-w-[24ch]">@title</h1>
+    <p class="lead">@(notFound ? site.Error.NotFoundBody : site.Error.Body)</p>
+</div>
+
+<div class="my-10"><a class="pill" href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">← @site.Error.Home</a></div>

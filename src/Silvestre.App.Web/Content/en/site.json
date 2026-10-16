@@ -81,8 +81,15 @@
   "writing": {
     "crumb": "writing",
     "title": "Writing.",
-    "lead": "A small archive. Not a blog, and not a promise of more. Posts are in English.",
+    "lead": "A small archive, not a promise of more. Posts are in English.",
     "back": "All writing",
     "updated": "Updated"
+  },
+  "error": {
+    "notFoundTitle": "Page not found.",
+    "notFoundBody": "The page you are looking for does not exist or has moved.",
+    "title": "Something went wrong.",
+    "body": "An unexpected error occurred. Please try again in a moment.",
+    "home": "Back home"
   }
 }

@@ -36,7 +36,7 @@
                 var hl = i == 2;
                 <div class="step@(hl ? " step-hl" : "")">
                     <div class="n">@((i + 1).ToString("00"))</div>
-                    <div><h3 class="text-[19px] mb-1.5">@step.Title<span class="who@(hl ? " who-me" : "")">@step.Who</span></h3><p class="muted">@Html.Raw(step.BodyHtml)</p></div>
+                    <div><h2 class="text-[19px] mb-1.5">@step.Title<span class="who@(hl ? " who-me" : "")">@step.Who</span></h2><p class="muted">@Html.Raw(step.BodyHtml)</p></div>
                 </div>
             }
         </div>
