@@ -1,101 +1,74 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-version="@App.AppVersion">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="manifest" href="~/site.webmanifest" />
     <link rel="apple-touch-icon" href="~/favicon-180x180.png" />
+    <script>
+        (function () {
+            var stored = null;
+            try { stored = localStorage.getItem('theme'); } catch (e) { }
+            document.documentElement.classList.toggle('dark', stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
+        })();
+    </script>
     <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
-    <link rel="stylesheet" href="~/vendor/charts.min.css">
     <meta name="keywords" content="silvestre" />
 </head>
-<body class="dark:bg-gray-600 dark:text-gray-300">
-    <nav class="bg-sky-500 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
-        <div class="max-w-(--breakpoint-2xl) mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="shrink-0">
-                        <img class="h-16 w-16" src="~/favicon-192x192.png" alt="João Silvestre">
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="/" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="https://blog.itssilvestre.com/" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Blog</a>
-                            <a href="https://f1.itssilvestre.com/" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">F1</a>
-                            <a href="https://psy.itssilvestre.com/WISC3" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">WISC-III</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button -->
-                    <button class="navbar-burger bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <!--
-                        Heroicon name: menu
-
-                        Menu open: "hidden", Menu closed: "block"
-                        -->
-                        <svg id="main-nav-button-closed" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <!--
-                        Heroicon name: x
-
-                        Menu open: "block", Menu closed: "hidden"
-                        -->
-                        <svg id="main-nav-button-open" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <label for="theme-toggle" class="hidden md:inline-flex relative items-center cursor-pointer" onclick="Silvestre.toggleDarkMode()">
-                    <input type="checkbox" value="" class="sr-only peer theme-toggle">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span class="ml-3 text-sm font-medium">Dark Mode</span>
-                </label>
+<body>
+    <nav class="site-nav">
+        <div class="wrap flex items-center gap-5 h-[60px]">
+            <a class="font-mono font-medium text-[15px]" href="/">joão<b class="text-(--accent)">.</b>silvestre</a>
+            <div class="hidden md:flex gap-1 ml-auto">
+                <a class="nav-link" href="/#about">About</a>
+                <a class="nav-link" href="/ai">AI</a>
+                <a class="nav-link" href="/#projects">Projects</a>
+                <a class="nav-link" href="/#writing">Writing</a>
+                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">WISC-III ↗</a>
+                <a class="nav-link" href="/#contact">Contact</a>
+            </div>
+            <div class="flex gap-2 ml-auto md:ml-0">
+                <button type="button" class="pill" onclick="Silvestre.toggleDarkMode()" aria-label="Toggle theme">◐ theme</button>
+                <button type="button" class="pill navbar-burger md:hidden" aria-controls="main-nav" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg id="main-nav-button-closed" class="block h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="main-nav-button-open" class="hidden h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
         </div>
-
-        <!--
-        Mobile menu, toggle classes based on menu state.
-
-        Open: "block", closed: "hidden"
-        -->
-        <div id="main-nav" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="/" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="https://blog.itssilvestre.com/" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Blog</a>
-                <a href="https://f1.itssilvestre.com/" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">F1</a>
-                <a href="https://psy.itssilvestre.com/WISC3" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">WISC-III</a>
+        <div id="main-nav" class="hidden md:hidden border-t border-(--line)">
+            <div class="wrap py-2 flex flex-col">
+                <a class="nav-link text-base!" href="/#about">About</a>
+                <a class="nav-link text-base!" href="/ai">AI</a>
+                <a class="nav-link text-base!" href="/#projects">Projects</a>
+                <a class="nav-link text-base!" href="/#writing">Writing</a>
+                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">WISC-III ↗</a>
+                <a class="nav-link text-base!" href="/#contact">Contact</a>
             </div>
-
-            <label for="theme-toggle" class="inline-flex relative items-center cursor-pointer" onclick="Silvestre.toggleDarkMode()">
-                <input type="checkbox" value="" class="sr-only peer theme-toggle">
-                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                <span class="ml-3 text-sm font-medium">Dark Mode</span>
-            </label>
         </div>
     </nav>
 
-    <header class="bg-white dark:bg-gray-700 shadow-sm @(ViewData.ContainsKey("Subtitle") == false ? "hidden" : "")">
-        <div class="max-w-(--breakpoint-2xl) mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-bold leading-tight text-gray-900">@ViewData["Subtitle"]</h1>
-        </div>
-    </header>
-    <main>
-        <div class="max-w-(--breakpoint-2xl) mx-auto py-6 sm:px-6 lg:px-8">
-            @RenderBody()
-        </div>
-        <a style="display: none" rel="me" href="https://hachyderm.io/@@paletas">Mastodon</a>
+    <main class="wrap">
+        @RenderBody()
     </main>
-    <footer class="bg-white border-2 pt-2 fixed bottom-0 left-0">
-        <CultureSelector />
+
+    <footer class="site-footer">
+        <div class="wrap flex flex-wrap justify-between gap-3">
+            <span>© @DateTime.Now.Year João Silvestre</span>
+            <span class="flex gap-4">
+                <a href="@SiteLinks.GitHub" rel="noopener">GitHub</a>
+                <a href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn</a>
+                <span class="font-mono">v@(App.AppVersion)</span>
+            </span>
+        </div>
     </footer>
 
-    <script src="~/js/site.js?v=@App.AppVersion" asp-append-version="true" ></script>
+    <script src="~/js/site.js?v=@App.AppVersion" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

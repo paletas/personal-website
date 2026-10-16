@@ -1,6 +1,6 @@
 {
-  "name": "João Silvestre's Web Palace",
-  "short_name": "Silvestre's Webpage",
+  "name": "João Silvestre",
+  "short_name": "João Silvestre",
   "icons": [
     {
       "src": "/favicon-16x16.png",
@@ -28,7 +28,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
   "display": "standalone"
 }

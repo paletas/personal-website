@@ -1,71 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace Silvestre.App.Web.Pages.Home
 {
+    public record StackContent(List<string> Stack, List<string> AiTooling);
+
     public class ProfileModel : PageModel
     {
-        public ProfileModel()
+        private static readonly object StackLock = new();
+        private static StackContent _stackContent;
+
+        private readonly IWebHostEnvironment _env;
+
+        public ProfileModel(IWebHostEnvironment env)
         {
-            this.ProgrammingLanguagesBackend = new Dictionary<string, uint>
-            {
-                { "C#", 10 },
-                { "Java", 7 },
-
-                { "C", 7 },
-                { "C++", 5 },
-
-                { "Rust", 2 }
-            };
-
-            this.ProgrammingLanguagesFrontend = new Dictionary<string, uint>
-            {
-                { "HTML", 6 },
-                { "CSS", 5 },
-                { "JavaScript", 6 },
-            };
-
-            this.TechnologiesBackend = new Dictionary<string, uint>
-            {
-                { "MSSQL", 8 },
-                { "Postgres", 6 },
-                { "MongoDB", 5 },
-
-                { ".NET", 9 },
-                { "ASP.NET MVC", 8 },
-                { "ASP.NET WebApi", 8 },
-                { "gRPC", 7 },
-                { "Dapr", 6 }
-            };
-
-            this.TechnologiesFrontend = new Dictionary<string, uint>
-            {
-                { "Bootstrap", 5 },
-                { "TailwindCSS", 5 },
-                { "KnockoutJS", 6 }
-            };
+            _env = env;
         }
 
-        public uint SkillsMax => 10;
+        public IReadOnlyList<string> Stack { get; private set; } = Array.Empty<string>();
 
-        public IDictionary<string, uint> ProgrammingLanguagesBackend
+        public IReadOnlyList<string> AiTooling { get; private set; } = Array.Empty<string>();
+
+        public void OnGet()
         {
-            get; init;
+            var content = LoadStack(_env.ContentRootPath);
+            Stack = content.Stack;
+            AiTooling = content.AiTooling;
         }
 
-        public IDictionary<string, uint> ProgrammingLanguagesFrontend
+        private static StackContent LoadStack(string contentRoot)
         {
-            get; init;
-        }
+            if (_stackContent != null)
+            {
+                return _stackContent;
+            }
 
-        public IDictionary<string, uint> TechnologiesBackend
-        {
-            get; init;
-        }
+            lock (StackLock)
+            {
+                if (_stackContent == null)
+                {
+                    var path = Path.Combine(contentRoot, "Content", "stack.json");
+                    var json = System.IO.File.ReadAllText(path);
+                    _stackContent = JsonSerializer.Deserialize<StackContent>(
+                        json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
 
-        public IDictionary<string, uint> TechnologiesFrontend
-        {
-            get; init;
+                return _stackContent;
+            }
         }
     }
 }
