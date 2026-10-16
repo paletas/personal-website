@@ -1,9 +1,30 @@
-﻿<!DOCTYPE html>
-<html lang="en" data-version="@App.AppVersion">
+﻿@{
+    var culture = CultureInfo.CurrentUICulture;
+    var site = Content.Get(culture);
+    var prefix = SiteContentProvider.Prefix(culture);
+    var isPt = SiteContentProvider.IsPt(culture);
+    var other = SiteContentProvider.AlternatePath(Context.Request.Path, isPt);
+    var thisPath = Context.Request.Path.Value;
+    var enPath = isPt ? other : thisPath;
+    var ptPath = isPt ? thisPath : other;
+    var canonical = SiteLinks.Origin + (thisPath == "/" ? "/" : thisPath!.TrimEnd('/'));
+}
+<!DOCTYPE html>
+<html lang="@SiteContentProvider.HtmlLang(culture)" data-version="@App.AppVersion">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <meta name="description" content="@(ViewData["Description"] ?? site.Meta.Description)" />
+    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:description" content="@(ViewData["Description"] ?? site.Meta.Description)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="@(isPt ? "pt_PT" : "en_US")" />
+    <meta property="og:url" content="@canonical" />
+    <link rel="canonical" href="@canonical" />
+    <link rel="alternate" hreflang="en" href="@(SiteLinks.Origin + enPath)" />
+    <link rel="alternate" hreflang="pt-PT" href="@(SiteLinks.Origin + ptPath)" />
+    <link rel="alternate" hreflang="x-default" href="@(SiteLinks.Origin + enPath)" />
     <link rel="manifest" href="~/site.webmanifest" />
     <link rel="apple-touch-icon" href="~/favicon-180x180.png" />
     <script>
@@ -14,24 +35,24 @@
         })();
     </script>
     <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
-    <meta name="keywords" content="silvestre" />
 </head>
 <body>
     <nav class="site-nav">
         <div class="wrap flex items-center gap-5 h-[60px]">
-            <a class="font-mono font-medium text-[15px]" href="/">joão<b class="text-(--accent)">.</b>silvestre</a>
+            <a class="font-mono font-medium text-[15px]" href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">joão<b class="text-(--accent)">.</b>silvestre</a>
             <div class="hidden md:flex gap-1 ml-auto">
-                <a class="nav-link" href="/#about">About</a>
-                <a class="nav-link" href="/ai">AI</a>
-                <a class="nav-link" href="/#projects">Projects</a>
-                <a class="nav-link" href="/#writing">Writing</a>
-                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">WISC-III ↗</a>
-                <a class="nav-link" href="/#contact">Contact</a>
+                <a class="nav-link" href="@(prefix + "/#about")">@site.Nav.About</a>
+                <a class="nav-link" href="@(prefix + "/ai")">@site.Nav.Ai</a>
+                <a class="nav-link" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
+                <a class="nav-link" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
+                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc ↗</a>
+                <a class="nav-link" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
             <div class="flex gap-2 ml-auto md:ml-0">
-                <button type="button" class="pill" onclick="Silvestre.toggleDarkMode()" aria-label="Toggle theme">◐ theme</button>
+                <button type="button" class="pill" onclick="Silvestre.toggleDarkMode()" aria-label="@site.Nav.ThemeLabel">◐ @site.Nav.Theme</button>
+                <a class="pill" href="@other" hreflang="@(isPt ? "en" : "pt-PT")" lang="@(isPt ? "en" : "pt-PT")">@site.Nav.LanguageSwitch</a>
                 <button type="button" class="pill navbar-burger md:hidden" aria-controls="main-nav" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
+                    <span class="sr-only">@site.Nav.OpenMenu</span>
                     <svg id="main-nav-button-closed" class="block h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -43,12 +64,12 @@
         </div>
         <div id="main-nav" class="hidden md:hidden border-t border-(--line)">
             <div class="wrap py-2 flex flex-col">
-                <a class="nav-link text-base!" href="/#about">About</a>
-                <a class="nav-link text-base!" href="/ai">AI</a>
-                <a class="nav-link text-base!" href="/#projects">Projects</a>
-                <a class="nav-link text-base!" href="/#writing">Writing</a>
-                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">WISC-III ↗</a>
-                <a class="nav-link text-base!" href="/#contact">Contact</a>
+                <a class="nav-link text-base!" href="@(prefix + "/#about")">@site.Nav.About</a>
+                <a class="nav-link text-base!" href="@(prefix + "/ai")">@site.Nav.Ai</a>
+                <a class="nav-link text-base!" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
+                <a class="nav-link text-base!" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
+                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc ↗</a>
+                <a class="nav-link text-base!" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
         </div>
     </nav>
@@ -59,7 +80,7 @@
 
     <footer class="site-footer">
         <div class="wrap flex flex-wrap justify-between gap-3">
-            <span>© @DateTime.Now.Year João Silvestre</span>
+            <span>© @DateTime.Now.Year @site.Footer.Rights</span>
             <span class="flex gap-4">
                 <a href="@SiteLinks.GitHub" rel="noopener">GitHub</a>
                 <a href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn</a>

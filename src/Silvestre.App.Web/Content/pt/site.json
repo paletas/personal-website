@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "title": "João Silvestre",
+    "description": "João Silvestre, Senior Lead Software Engineer em Lisboa. Como desenvolvo software com agentes de IA.",
+    "aiTitle": "Como desenvolvo com IA",
+    "aiDescription": "Como desenvolvo software com agentes de IA: um plano escrito, cenários como contrato e uma verificação independente."
+  },
+  "nav": {
+    "about": "Sobre",
+    "ai": "IA",
+    "projects": "Projetos",
+    "writing": "Escrita",
+    "wisc": "WISC-III",
+    "contact": "Contacto",
+    "theme": "tema",
+    "themeLabel": "Alternar tema",
+    "openMenu": "Abrir o menu principal",
+    "languageSwitch": "English"
+  },
+  "footer": {
+    "rights": "João Silvestre"
+  },
+  "home": {
+    "hero": {
+      "status": "Lisboa · a desenvolver com IA todos os dias",
+      "leadBefore": "Senior Lead Software Engineer na",
+      "leadAfter": ". Quinze anos de .NET, agora a trabalhar com agentes de IA como colegas de todos os dias.",
+      "primaryButton": "Como trabalho com IA →",
+      "secondaryButton": "Falar comigo",
+      "photoBadge": "📍 Lisboa"
+    },
+    "about": {
+      "label": "Sobre",
+      "heading": "Engenheiro de backend de coração.",
+      "body": "Sistemas bancários e de pagamentos, da SIBS ao J.P. Morgan. Gosto de software aborrecido e fiável e das ferramentas à sua volta. Ultimamente, essas ferramentas incluem agentes.",
+      "stackLabel": "Stack",
+      "aiToolingLabel": "Ferramentas de IA"
+    },
+    "aiTeaser": {
+      "label": "Fluxo de trabalho com IA",
+      "heading": "Eu oriento. Os agentes escrevem o código.",
+      "body": "Eu oriento, o Claude aprende e compreende, e iteramos o plano em conjunto. É aí que está o trabalho. Depois implementa e validamos.",
+      "phaseLearn": "aprender",
+      "phaseUnderstand": "compreender",
+      "phasePlan": "planear",
+      "phaseImplement": "implementar",
+      "phaseValidate": "validar",
+      "button": "Ler a explicação completa →"
+    },
+    "projects": {
+      "label": "Projetos",
+      "wisc": {
+        "meta": "psychology-tools",
+        "title": "Ferramenta de avaliação WISC-III",
+        "body": "Automatiza a cotação de testes psicológicos e a elaboração de relatórios para profissionais."
+      },
+      "f1": {
+        "meta": "f1 experience",
+        "title": "F1 experience",
+        "body": "Um projeto pessoal sobre dados de Fórmula 1 e diversão."
+      }
+    },
+    "writing": {
+      "label": "Escrita",
+      "cpuPart1": {
+        "meta": "2023 · 12 min",
+        "title": "How do CPUs work? Part 1",
+        "body": "Dos transístores às instruções."
+      },
+      "cpuPart2": {
+        "meta": "2023 · 14 min",
+        "title": "How do CPUs work? Part 2",
+        "body": "Pipelines, caches e porque é que importam."
+      }
+    },
+    "contact": {
+      "heading": "Vamos construir algo.",
+      "body": "Estou no GitHub e no LinkedIn."
+    }
+  }
+}

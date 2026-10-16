@@ -1,17 +1,20 @@
 ﻿@page "/"
 @model Silvestre.App.Web.Pages.Home.ProfileModel
 @{
-    ViewData["Title"] = "João Silvestre";
+    var site = Content.Get(CultureInfo.CurrentUICulture);
+    var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    ViewData["Title"] = site.Meta.Title;
+    ViewData["Description"] = site.Meta.Description;
 }
 
 <header class="grid gap-8 md:gap-12 md:grid-cols-[1fr_340px] items-center pt-10 md:pt-[72px] pb-14">
     <div class="min-w-0">
-        <span class="status"><span class="dot"></span>Lisbon · building with AI daily</span>
+        <span class="status"><span class="dot"></span>@site.Home.Hero.Status</span>
         <h1 class="display mt-6 mb-5 max-w-[14ch]">João <span class="grad-text">Silvestre</span></h1>
-        <p class="lead">Senior Lead Software Engineer at <strong>@SiteLinks.Employer</strong>. Fifteen years of .NET, now building with AI agents as a daily colleague.</p>
+        <p class="lead">@site.Home.Hero.LeadBefore <strong>@SiteLinks.Employer</strong>@site.Home.Hero.LeadAfter</p>
         <div class="flex flex-wrap gap-2.5 mt-8">
-            <a class="btn btn-primary" href="/ai">How I work with AI →</a>
-            <a class="btn" href="#contact">Get in touch</a>
+            <a class="btn btn-primary" href="@(prefix + "/ai")">@site.Home.Hero.PrimaryButton</a>
+            <a class="btn" href="#contact">@site.Home.Hero.SecondaryButton</a>
         </div>
     </div>
     <div class="hero-photo order-first md:order-none w-full max-w-[200px] md:max-w-[340px] md:justify-self-end">
@@ -20,26 +23,26 @@
             <source type="image/webp" srcset="/img/profile-480.webp 480w, /img/profile-960.webp 960w" sizes="(min-width: 768px) 340px, 200px" />
             <img src="/img/profile-960.webp" width="480" height="600" alt="João Silvestre" />
         </picture>
-        <span class="badge">📍 Lisbon</span>
+        <span class="badge">@site.Home.Hero.PhotoBadge</span>
     </div>
 </header>
 
 <section id="about" class="py-7">
     <div class="bento">
         <div class="card span-7">
-            <div class="label">About</div>
-            <h2 class="text-[26px] tracking-tight mb-2">Backend engineer at heart.</h2>
-            <p class="muted">Banking and payments systems, from SIBS to J.P. Morgan. I like boring, reliable software and the tooling around it. Lately that tooling includes agents.</p>
+            <div class="label">@site.Home.About.Label</div>
+            <h2 class="text-[26px] tracking-tight mb-2">@site.Home.About.Heading</h2>
+            <p class="muted">@site.Home.About.Body</p>
         </div>
         <div class="card span-5">
-            <div class="label">Stack</div>
+            <div class="label">@site.Home.About.StackLabel</div>
             <div class="tags !mt-0">
                 @for (var i = 0; i < Model.Stack.Count; i++)
                 {
                     <span class="tag @(i < 2 ? "tag-hl" : "")">@Model.Stack[i]</span>
                 }
             </div>
-            <div class="label !mt-5">AI tooling</div>
+            <div class="label !mt-5">@site.Home.About.AiToolingLabel</div>
             <div class="tags !mt-0">
                 @for (var i = 0; i < Model.AiTooling.Count; i++)
                 {
@@ -55,13 +58,13 @@
         <div class="card card-glow span-12">
             <div class="ai-grid">
                 <div>
-                    <div class="label">AI workflow</div>
-                    <h2 class="text-[26px] tracking-tight mb-2">I steer. The agents do the typing.</h2>
-                    <p class="muted">I guide, Claude learns and understands, and we iterate on the plan together. That is where the work is. Then it implements and we validate.</p>
+                    <div class="label">@site.Home.AiTeaser.Label</div>
+                    <h2 class="text-[26px] tracking-tight mb-2">@site.Home.AiTeaser.Heading</h2>
+                    <p class="muted">@site.Home.AiTeaser.Body</p>
                     <div class="phases">
-                        <span class="phase"><em>01</em>learn</span><span class="phase"><em>02</em>understand</span><span class="phase"><em>03</em>plan</span><span class="phase"><em>04</em>implement</span><span class="phase"><em>05</em>validate</span>
+                        <span class="phase"><em>01</em>@site.Home.AiTeaser.PhaseLearn</span><span class="phase"><em>02</em>@site.Home.AiTeaser.PhaseUnderstand</span><span class="phase"><em>03</em>@site.Home.AiTeaser.PhasePlan</span><span class="phase"><em>04</em>@site.Home.AiTeaser.PhaseImplement</span><span class="phase"><em>05</em>@site.Home.AiTeaser.PhaseValidate</span>
                     </div>
-                    <a class="btn" href="/ai">Read the full breakdown →</a>
+                    <a class="btn" href="@(prefix + "/ai")">@site.Home.AiTeaser.Button</a>
                 </div>
                 <div class="term" aria-hidden="true">
 <pre><span class="d">$</span> work <span class="y">"revamp my website"</span>
@@ -78,46 +81,46 @@
 </section>
 
 <section id="projects" class="py-7">
-    <div class="label">Projects</div>
+    <div class="label">@site.Home.Projects.Label</div>
     <div class="bento">
         <a class="card span-6" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">
             <span class="arrow">↗</span>
-            <div class="meta">psychology-tools</div>
-            <h3 class="text-xl mb-1.5">WISC-III evaluation tool</h3>
-            <p class="muted">Automates psychology test scoring and reports for practitioners.</p>
+            <div class="meta">@site.Home.Projects.Wisc.Meta</div>
+            <h3 class="text-xl mb-1.5">@site.Home.Projects.Wisc.Title</h3>
+            <p class="muted">@site.Home.Projects.Wisc.Body</p>
             <div class="tags"><span class="tag">React</span><span class="tag">ASP.NET</span><span class="tag">PWA</span></div>
         </a>
         <a class="card span-6" href="@SiteLinks.F1" rel="noopener">
             <span class="arrow">↗</span>
-            <div class="meta">f1 experience</div>
-            <h3 class="text-xl mb-1.5">F1 experience</h3>
-            <p class="muted">A side project for Formula 1 data and fun.</p>
+            <div class="meta">@site.Home.Projects.F1.Meta</div>
+            <h3 class="text-xl mb-1.5">@site.Home.Projects.F1.Title</h3>
+            <p class="muted">@site.Home.Projects.F1.Body</p>
             <div class="tags"><span class="tag">.NET</span><span class="tag">Data</span></div>
         </a>
     </div>
 </section>
 
 <section id="writing" class="py-7">
-    <div class="label">Writing</div>
+    <div class="label">@site.Home.Writing.Label</div>
     <div class="bento">
-        <a class="card span-6" href="/writing/how-do-cpus-work-part1">
+        <a class="card span-6" href="@(prefix + "/writing/how-do-cpus-work-part1")">
             <span class="arrow">↗</span>
-            <div class="meta">2023 · 12 min</div>
-            <h3 class="text-xl mb-1.5">How do CPUs work? Part 1</h3>
-            <p class="muted">From transistors to instructions.</p>
+            <div class="meta">@site.Home.Writing.CpuPart1.Meta</div>
+            <h3 class="text-xl mb-1.5">@site.Home.Writing.CpuPart1.Title</h3>
+            <p class="muted">@site.Home.Writing.CpuPart1.Body</p>
         </a>
-        <a class="card span-6" href="/writing/how-do-cpus-work-part2">
+        <a class="card span-6" href="@(prefix + "/writing/how-do-cpus-work-part2")">
             <span class="arrow">↗</span>
-            <div class="meta">2023 · 14 min</div>
-            <h3 class="text-xl mb-1.5">How do CPUs work? Part 2</h3>
-            <p class="muted">Pipelines, caches and why they matter.</p>
+            <div class="meta">@site.Home.Writing.CpuPart2.Meta</div>
+            <h3 class="text-xl mb-1.5">@site.Home.Writing.CpuPart2.Title</h3>
+            <p class="muted">@site.Home.Writing.CpuPart2.Body</p>
         </a>
     </div>
 </section>
 
 <section id="contact" class="contact">
-    <h2 class="text-[clamp(30px,5vw,48px)] tracking-tight">Let's build something.</h2>
-    <p class="muted mt-2.5 mb-6">Find me on GitHub or LinkedIn.</p>
+    <h2 class="text-[clamp(30px,5vw,48px)] tracking-tight">@site.Home.Contact.Heading</h2>
+    <p class="muted mt-2.5 mb-6">@site.Home.Contact.Body</p>
     <div class="flex flex-wrap gap-2.5 justify-center">
         <a class="btn btn-primary" href="@SiteLinks.GitHub" rel="noopener">GitHub ↗</a>
         <a class="btn" href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn ↗</a>
