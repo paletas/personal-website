@@ -9,7 +9,7 @@
 
 <header class="grid gap-8 md:gap-12 md:grid-cols-[1fr_340px] items-center pt-10 md:pt-[72px] pb-14">
     <div class="min-w-0">
-        <span class="status"><span class="dot"></span>@site.Home.Hero.Status</span>
+        <span class="status"><span class="dot" aria-hidden="true"></span>@site.Home.Hero.Status</span>
         <h1 class="display mt-6 mb-5 max-w-[14ch]">João <span class="grad-text">Silvestre</span></h1>
         <p class="lead">@site.Home.Hero.LeadBefore <strong>@SiteLinks.Employer</strong>@site.Home.Hero.LeadAfter</p>
         <div class="flex flex-wrap gap-2.5 mt-8">
@@ -19,9 +19,9 @@
     </div>
     <div class="hero-photo order-first md:order-none w-full max-w-[200px] md:max-w-[340px] md:justify-self-end">
         <picture>
-            <source type="image/avif" srcset="/img/profile-480.avif 480w, /img/profile-960.avif 960w" sizes="(min-width: 768px) 340px, 200px" />
-            <source type="image/webp" srcset="/img/profile-480.webp 480w, /img/profile-960.webp 960w" sizes="(min-width: 768px) 340px, 200px" />
-            <img src="/img/profile-960.webp" width="480" height="600" alt="João Silvestre" />
+            <source type="image/avif" srcset="/img/profile-240.avif 240w, /img/profile-400.avif 400w, /img/profile-480.avif 480w, /img/profile-680.avif 680w, /img/profile-960.avif 960w" sizes="(min-width: 768px) 340px, 200px" />
+            <source type="image/webp" srcset="/img/profile-240.webp 240w, /img/profile-400.webp 400w, /img/profile-480.webp 480w, /img/profile-680.webp 680w, /img/profile-960.webp 960w" sizes="(min-width: 768px) 340px, 200px" />
+            <img src="/img/profile-400.webp" srcset="/img/profile-240.webp 240w, /img/profile-400.webp 400w, /img/profile-480.webp 480w, /img/profile-680.webp 680w, /img/profile-960.webp 960w" sizes="(min-width: 768px) 340px, 200px" width="480" height="600" alt="João Silvestre" fetchpriority="high" decoding="async" />
         </picture>
         <span class="badge">@site.Home.Hero.PhotoBadge</span>
     </div>
@@ -84,18 +84,20 @@
     <div class="label">@site.Home.Projects.Label</div>
     <div class="bento">
         <a class="card span-6" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">
-            <span class="arrow">↗</span>
+            <span class="arrow" aria-hidden="true">↗</span>
             <div class="meta">@site.Home.Projects.Wisc.Meta</div>
             <h3 class="text-xl mb-1.5">@site.Home.Projects.Wisc.Title</h3>
             <p class="muted">@site.Home.Projects.Wisc.Body</p>
             <div class="tags"><span class="tag">React</span><span class="tag">ASP.NET</span><span class="tag">PWA</span></div>
+            <span class="sr-only"> @site.A11y.NewTab</span>
         </a>
         <a class="card span-6" href="@SiteLinks.F1" rel="noopener">
-            <span class="arrow">↗</span>
+            <span class="arrow" aria-hidden="true">↗</span>
             <div class="meta">@site.Home.Projects.F1.Meta</div>
             <h3 class="text-xl mb-1.5">@site.Home.Projects.F1.Title</h3>
             <p class="muted">@site.Home.Projects.F1.Body</p>
             <div class="tags"><span class="tag">.NET</span><span class="tag">Data</span></div>
+            <span class="sr-only"> @site.A11y.ExternalSite</span>
         </a>
     </div>
 </section>
@@ -104,13 +106,13 @@
     <div class="label">@site.Home.Writing.Label</div>
     <div class="bento">
         <a class="card span-6" href="@(prefix + "/writing/how-do-cpus-work-part1")">
-            <span class="arrow">↗</span>
+            <span class="arrow" aria-hidden="true">↗</span>
             <div class="meta">@site.Home.Writing.CpuPart1.Meta</div>
             <h3 class="text-xl mb-1.5">@site.Home.Writing.CpuPart1.Title</h3>
             <p class="muted">@site.Home.Writing.CpuPart1.Body</p>
         </a>
         <a class="card span-6" href="@(prefix + "/writing/how-do-cpus-work-part2")">
-            <span class="arrow">↗</span>
+            <span class="arrow" aria-hidden="true">↗</span>
             <div class="meta">@site.Home.Writing.CpuPart2.Meta</div>
             <h3 class="text-xl mb-1.5">@site.Home.Writing.CpuPart2.Title</h3>
             <p class="muted">@site.Home.Writing.CpuPart2.Body</p>
@@ -122,7 +124,7 @@
     <h2 class="text-[clamp(30px,5vw,48px)] tracking-tight">@site.Home.Contact.Heading</h2>
     <p class="muted mt-2.5 mb-6">@site.Home.Contact.Body</p>
     <div class="flex flex-wrap gap-2.5 justify-center">
-        <a class="btn btn-primary" href="@SiteLinks.GitHub" rel="noopener">GitHub ↗</a>
-        <a class="btn" href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-primary" href="@SiteLinks.GitHub" rel="noopener">GitHub <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.ExternalSite</span></a>
+        <a class="btn" href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.ExternalSite</span></a>
     </div>
 </section>

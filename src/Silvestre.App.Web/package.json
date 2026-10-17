@@ -5,9 +5,11 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3"
   },
   "scripts": {
+    "images": "node scripts/build-images.mjs",
     "build:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --minify && npm run vendor",
     "watch:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
     "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/vendor/fonts',{recursive:true});for(const p of ['geist','geist-mono']){fs.copyFileSync('node_modules/@fontsource-variable/'+p+'/files/'+p+'-latin-wght-normal.woff2','wwwroot/vendor/fonts/'+p+'-latin-wght-normal.woff2')}\""
