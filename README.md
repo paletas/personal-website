@@ -30,6 +30,10 @@ The `pr-check` workflow builds the production image and runs a smoke test agains
 
 Everything the site says lives in `src/Silvestre.App.Web/Content/`: `{en,pt}/site.json` and `{en,pt}/ai.md` per language, plus the shared `stack.json` and `writing/` posts.
 
+## Images
+
+`npm run images` (in `src/Silvestre.App.Web`) regenerates the 240, 400 and 680 px profile variants from `wwwroot/img/profile-960.webp`. The 480 and 960 files are committed as they are.
+
 ## Docker
 
 The container setup is in `build/docker`. The published image is `ghcr.io/paletas/personal-website`.
