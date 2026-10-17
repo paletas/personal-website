@@ -5,10 +5,11 @@
     var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
     ViewData["Title"] = Model.Post.Summary.Title + " | " + site.Meta.Title;
     ViewData["Description"] = Model.Post.Summary.Description;
+    var crumbs = new BreadcrumbItem[] { new BreadcrumbItem(site.A11y.Home, string.IsNullOrEmpty(prefix) ? "/" : prefix), new BreadcrumbItem(site.Writing.Crumb, prefix + "/writing"), new BreadcrumbItem(Model.Post.Summary.Slug, null) };
 }
 
 <div class="page-head">
-    <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / <a href="@(prefix + "/writing")">@site.Writing.Crumb</a> / @Model.Post.Summary.Slug</div>
+    <partial name="_Breadcrumb" model="crumbs" />
     <div class="meta" style="margin-top:22px">@Model.Post.Summary.Created.ToString("yyyy-MM-dd")@if (Model.Post.Summary.Updated.Date > Model.Post.Summary.Created.Date) { <text> · @site.Writing.Updated @Model.Post.Summary.Updated.ToString("yyyy-MM-dd")</text> }</div>
     <h1 class="display !text-[clamp(30px,5vw,52px)] mt-2 mb-2 max-w-[24ch]">@Model.Post.Summary.Title</h1>
 </div>

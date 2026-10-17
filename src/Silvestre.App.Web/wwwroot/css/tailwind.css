@@ -169,6 +169,8 @@
   .page-head { padding: 64px 0 24px; }
   .crumb { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
   .crumb a:hover { color: var(--accent); }
+  .crumb ol { display: inline; list-style: none; margin: 0; padding: 0; }
+  .crumb li { display: inline; }
   .steps { display: grid; gap: 14px; margin-top: 8px; }
   .step { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; }
   .step .n {
@@ -287,3 +289,8 @@
 .diagram .e { text-anchor: end; }
 .diagram .tb { fill: var(--text); font-family: var(--font-mono); font-size: 16px; font-weight: 600; }
 .diagram .tl { fill: var(--text); font-size: 13.5px; font-weight: 500; }
+
+:where(a,button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.skip-link{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip-link:focus{position:fixed;top:0;left:0;z-index:100;width:auto;height:auto;overflow:visible;clip:auto;padding:.5rem 1rem;background:var(--surface);color:var(--accent);border:1px solid var(--line)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.nav-link,.btn,a.card,.arrow{transition:none}.btn:hover,a.card:hover,a.card:hover .arrow{transform:none}}

@@ -91,5 +91,14 @@
     "title": "Something went wrong.",
     "body": "An unexpected error occurred. Please try again in a moment.",
     "home": "Back home"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "mainNav": "Main navigation",
+    "breadcrumb": "Breadcrumb",
+    "home": "home",
+    "newTab": "(opens in new tab)",
+    "externalSite": "(external site)",
+    "scenario": "Example scenario"
   }
 }
