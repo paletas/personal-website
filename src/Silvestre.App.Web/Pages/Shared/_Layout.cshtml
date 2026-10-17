@@ -8,6 +8,8 @@
     var enPath = isPt ? other : thisPath;
     var ptPath = isPt ? thisPath : other;
     var canonical = SiteLinks.Origin + (thisPath == "/" ? "/" : thisPath!.TrimEnd('/'));
+    var aiPath = prefix + "/ai";
+    var onAi = string.Equals((thisPath ?? "").TrimEnd('/'), aiPath, StringComparison.OrdinalIgnoreCase);
 }
 <!DOCTYPE html>
 <html lang="@SiteContentProvider.HtmlLang(culture)" data-version="@App.AppVersion">
@@ -37,15 +39,16 @@
     <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
 </head>
 <body>
-    <nav class="site-nav">
+    <a class="skip-link" href="#main">@site.A11y.SkipToContent</a>
+    <nav class="site-nav" aria-label="@site.A11y.MainNav">
         <div class="wrap flex items-center gap-5 h-[60px]">
             <a class="font-mono font-medium text-[15px]" href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">joão<b class="text-(--accent)">.</b>silvestre</a>
             <div class="hidden md:flex gap-1 ml-auto">
                 <a class="nav-link" href="@(prefix + "/#about")">@site.Nav.About</a>
-                <a class="nav-link" href="@(prefix + "/ai")">@site.Nav.Ai</a>
+                <a class="nav-link" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
                 <a class="nav-link" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
                 <a class="nav-link" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
-                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc ↗</a>
+                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
             <div class="flex gap-2 ml-auto md:ml-0">
@@ -65,16 +68,16 @@
         <div id="main-nav" class="hidden md:hidden border-t border-(--line)">
             <div class="wrap py-2 flex flex-col">
                 <a class="nav-link text-base!" href="@(prefix + "/#about")">@site.Nav.About</a>
-                <a class="nav-link text-base!" href="@(prefix + "/ai")">@site.Nav.Ai</a>
+                <a class="nav-link text-base!" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
                 <a class="nav-link text-base!" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
                 <a class="nav-link text-base!" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
-                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc ↗</a>
+                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link text-base!" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
         </div>
     </nav>
 
-    <main class="wrap">
+    <main id="main" tabindex="-1" class="wrap">
         @RenderBody()
     </main>
 
@@ -82,8 +85,8 @@
         <div class="wrap flex flex-wrap justify-between gap-3">
             <span>© @DateTime.Now.Year @site.Footer.Rights</span>
             <span class="flex gap-4">
-                <a href="@SiteLinks.GitHub" rel="noopener">GitHub</a>
-                <a href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn</a>
+                <a href="@SiteLinks.GitHub" rel="noopener">GitHub<span class="sr-only"> @site.A11y.ExternalSite</span></a>
+                <a href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn<span class="sr-only"> @site.A11y.ExternalSite</span></a>
                 <span class="font-mono">v@(App.AppVersion)</span>
             </span>
         </div>

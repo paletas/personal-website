@@ -18,10 +18,11 @@
     var hood = doc.Section("under-the-hood");
     var practice = doc.Section("in-practice");
     var contact = doc.Section("contact");
+    var crumbs = new BreadcrumbItem[] { new BreadcrumbItem(site.A11y.Home, string.IsNullOrEmpty(prefix) ? "/" : prefix), new BreadcrumbItem(site.Nav.Ai.ToLowerInvariant(), null) };
 }
 
 <div class="page-head">
-    <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / ai</div>
+    <partial name="_Breadcrumb" model="crumbs" />
     <h1 class="display !text-[clamp(36px,6vw,64px)] max-w-[20ch] mt-4 mb-4">@Html.Raw(doc.Head.HeadingHtml)</h1>
     <div class="lead">@Html.Raw(doc.Head.IntroHtml)</div>
 </div>
@@ -51,7 +52,7 @@
                 <h2 class="text-[26px] tracking-tight mb-2">@Html.Raw(prototype.HeadingHtml)</h2>
                 <div class="muted">@Html.Raw(prototype.IntroHtml)</div>
             </div>
-            <div class="scn">@Html.Raw(AiContent.HighlightScenario(prototype.Code))</div>
+            <div class="scn" role="group" aria-label="@site.A11y.Scenario">@Html.Raw(AiContent.HighlightScenario(prototype.Code))</div>
         </div>
     </div>
 </section>
@@ -63,7 +64,7 @@
             <h2 class="text-[26px] tracking-tight mb-2">@Html.Raw(behaviour.HeadingHtml)</h2>
             <div class="muted [&_p+p]:mt-3">@Html.Raw(behaviour.IntroHtml)</div>
         </div>
-        <div class="scn" aria-label="@(isEn ? "Example scenario" : null)">@Html.Raw(AiContent.HighlightScenario(behaviour.Code))</div>
+        <div class="scn" role="group" aria-label="@site.A11y.Scenario">@Html.Raw(AiContent.HighlightScenario(behaviour.Code))</div>
     </div>
 </section>
 

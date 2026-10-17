@@ -5,10 +5,11 @@
     var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
     ViewData["Title"] = site.Writing.Title.TrimEnd('.') + " | " + site.Meta.Title;
     ViewData["Description"] = site.Writing.Lead;
+    var crumbs = new BreadcrumbItem[] { new BreadcrumbItem(site.A11y.Home, string.IsNullOrEmpty(prefix) ? "/" : prefix), new BreadcrumbItem(site.Writing.Crumb, null) };
 }
 
 <div class="page-head">
-    <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / @site.Writing.Crumb</div>
+    <partial name="_Breadcrumb" model="crumbs" />
     <h1 class="display !text-[clamp(36px,6vw,64px)] mt-4 mb-4">@site.Writing.Title</h1>
     <p class="lead">@site.Writing.Lead</p>
 </div>
