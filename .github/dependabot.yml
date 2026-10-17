@@ -37,7 +37,7 @@ updates:
     open-pull-requests-limit: 5
 
   - package-ecosystem: docker
-    directories: ["/src/Silvestre.App.Blog.Web", "/src/Silvestre.App.Web"]
+    directories: ["/src/Silvestre.App.Web"]
     target-branch: dev
     schedule:
       interval: cron

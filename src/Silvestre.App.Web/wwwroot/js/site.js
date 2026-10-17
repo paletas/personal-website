@@ -1,76 +1,42 @@
-﻿// Navbar Toggle
+﻿// Menu toggle + theme handling. The initial theme class is set by the inline script in _Layout (no flash).
 document.addEventListener('DOMContentLoaded', function () {
+    var burger = document.querySelector('.navbar-burger');
+    if (!burger) { return; }
 
-    // Get all "navbar-burger" elements
-    var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    burger.addEventListener('click', function () {
+        var nav = document.getElementById('main-nav');
+        var open = nav.classList.toggle('hidden') === false;
+        document.getElementById('main-nav-button-open').classList.toggle('hidden', !open);
+        document.getElementById('main-nav-button-closed').classList.toggle('hidden', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
 
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
-        $navbarBurgers.forEach(function ($el) {
-            $el.addEventListener('click', function () {
-
-                // Get the "main-nav" element
-                var $target = document.getElementById('main-nav');
-                var $targetButtonOpen = document.getElementById('main-nav-button-open');
-                var $targetButtonClosed = document.getElementById('main-nav-button-closed');
-
-                // Toggle the class on "main-nav"
-                $target.classList.toggle('hidden');
-                $targetButtonOpen.classList.toggle('hidden');
-                $targetButtonClosed.classList.toggle('hidden');
-            });
+    // Close the menu after picking a link.
+    document.querySelectorAll('#main-nav a').forEach(function (a) {
+        a.addEventListener('click', function () {
+            if (!document.getElementById('main-nav').classList.contains('hidden')) { burger.click(); }
         });
-    }
-
+    });
 });
 
-
-
-
 Silvestre = function () {
-    var darkMode = false;
+    var root = document.documentElement;
+    var media = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-        darkMode = true;
-    } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
+    function stored() {
+        try { return localStorage.getItem('theme'); } catch (e) { return null; }
     }
 
-    function setCheckboxValue(className, enabled) {
-        var toggles = document.getElementsByClassName(className);
-        for (var ix = 0; ix < toggles.length; ix++) {
-            toggles[ix].checked = enabled;
-        }
-    }
-
-    setCheckboxValue("theme-toggle", darkMode);
+    // While the visitor has not chosen explicitly, follow the OS setting live.
+    media.addEventListener('change', function (e) {
+        if (!stored()) { root.classList.toggle('dark', e.matches); }
+    });
 
     return {
-        darkMode: darkMode,
-
         toggleDarkMode: function () {
-            this.darkMode = !this.darkMode;
-
-            if (this.darkMode) {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-            else {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            }
-
-            setCheckboxValue("theme-toggle", this.darkMode);
-        },
-
-        noAvifSupport: function (sender) {
-            sender.src = "~\wwwroot\img\profile.webp";
+            var dark = !root.classList.contains('dark');
+            root.classList.toggle('dark', dark);
+            try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) { }
         }
     };
 }();
