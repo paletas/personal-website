@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "title": "João Silvestre",
+    "description": "João Silvestre, Senior Lead Software Engineer in Lisbon. How he builds software with AI agents.",
+    "aiTitle": "How I build with AI",
+    "aiDescription": "How I build software with AI agents: a written plan, scenarios as the contract, and an independent check."
+  },
+  "nav": {
+    "about": "About",
+    "ai": "AI",
+    "projects": "Projects",
+    "writing": "Writing",
+    "wisc": "WISC-III",
+    "contact": "Contact",
+    "theme": "theme",
+    "themeLabel": "Toggle theme",
+    "openMenu": "Open main menu",
+    "languageSwitch": "Português"
+  },
+  "footer": {
+    "rights": "João Silvestre"
+  },
+  "home": {
+    "hero": {
+      "status": "Lisbon · building with AI daily",
+      "leadBefore": "Senior Lead Software Engineer at",
+      "leadAfter": ". Fifteen years of .NET, now building with AI agents as a daily colleague.",
+      "primaryButton": "How I work with AI →",
+      "secondaryButton": "Get in touch",
+      "photoBadge": "📍 Lisbon"
+    },
+    "about": {
+      "label": "About",
+      "heading": "Backend engineer at heart.",
+      "body": "Banking and payments systems, from SIBS to J.P. Morgan. I like boring, reliable software and the tooling around it. Lately that tooling includes agents.",
+      "stackLabel": "Stack",
+      "aiToolingLabel": "AI tooling"
+    },
+    "aiTeaser": {
+      "label": "AI workflow",
+      "heading": "I steer. The agents do the typing.",
+      "body": "I guide, Claude learns and understands, and we iterate on the plan together. That is where the work is. Then it implements and we validate.",
+      "phaseLearn": "learn",
+      "phaseUnderstand": "understand",
+      "phasePlan": "plan",
+      "phaseImplement": "implement",
+      "phaseValidate": "validate",
+      "button": "Read the full breakdown →"
+    },
+    "projects": {
+      "label": "Projects",
+      "wisc": {
+        "meta": "psychology-tools",
+        "title": "WISC-III evaluation tool",
+        "body": "Automates psychology test scoring and reports for practitioners."
+      },
+      "f1": {
+        "meta": "f1 experience",
+        "title": "F1 experience",
+        "body": "A side project for Formula 1 data and fun."
+      }
+    },
+    "writing": {
+      "label": "Writing",
+      "cpuPart1": {
+        "meta": "2023 · 12 min",
+        "title": "How do CPUs work? Part 1",
+        "body": "From transistors to instructions."
+      },
+      "cpuPart2": {
+        "meta": "2023 · 14 min",
+        "title": "How do CPUs work? Part 2",
+        "body": "Pipelines, caches and why they matter."
+      }
+    },
+    "contact": {
+      "heading": "Let's build something.",
+      "body": "Find me on GitHub or LinkedIn."
+    }
+  },
+  "writing": {
+    "crumb": "writing",
+    "title": "Writing.",
+    "lead": "A small archive, not a promise of more. Posts are in English.",
+    "back": "All writing",
+    "updated": "Updated"
+  },
+  "error": {
+    "notFoundTitle": "Page not found.",
+    "notFoundBody": "The page you are looking for does not exist or has moved.",
+    "title": "Something went wrong.",
+    "body": "An unexpected error occurred. Please try again in a moment.",
+    "home": "Back home"
+  }
+}

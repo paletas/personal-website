@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Tailwind CSS 4 build (scans Pages/**/*.cshtml) and vendored charts.css; site.css is generated, not committed.
+# Tailwind CSS 4 build (scans Pages/**/*.cshtml) and self-hosted fonts; site.css is generated, not committed.
 FROM node:26-slim AS css
 WORKDIR /src/src/Silvestre.App.Web
 COPY src/Silvestre.App.Web/package*.json ./
@@ -18,7 +18,7 @@ COPY ["src/Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
 RUN dotnet restore "Silvestre.App.Web/Silvestre.App.Web.csproj"
 COPY src/ .
 COPY --from=css /src/src/Silvestre.App.Web/wwwroot/css/site.css Silvestre.App.Web/wwwroot/css/site.css
-COPY --from=css /src/src/Silvestre.App.Web/wwwroot/vendor/charts.min.css Silvestre.App.Web/wwwroot/vendor/charts.min.css
+COPY --from=css /src/src/Silvestre.App.Web/wwwroot/vendor Silvestre.App.Web/wwwroot/vendor
 WORKDIR "/src/Silvestre.App.Web"
 RUN dotnet build "Silvestre.App.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

@@ -2,16 +2,18 @@
   "name": "silvestre.website",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "charts.css": "^1.2.0"
-  },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
     "tailwindcss": "^4.3.3"
   },
   "scripts": {
     "build:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --minify && npm run vendor",
     "watch:css": "tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
-    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/vendor',{recursive:true});fs.copyFileSync('node_modules/charts.css/dist/charts.min.css','wwwroot/vendor/charts.min.css')\""
+    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('wwwroot/vendor/fonts',{recursive:true});for(const p of ['geist','geist-mono']){fs.copyFileSync('node_modules/@fontsource-variable/'+p+'/files/'+p+'-latin-wght-normal.woff2','wwwroot/vendor/fonts/'+p+'-latin-wght-normal.woff2')}\""
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0"
   }
 }

@@ -1,0 +1,30 @@
+@page "/writing"
+@inject Silvestre.App.Web.Models.WritingArchive Archive
+@{
+    var site = Content.Get(CultureInfo.CurrentUICulture);
+    var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    ViewData["Title"] = site.Writing.Title.TrimEnd('.') + " | " + site.Meta.Title;
+    ViewData["Description"] = site.Writing.Lead;
+}
+
+<div class="page-head">
+    <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / @site.Writing.Crumb</div>
+    <h1 class="display !text-[clamp(36px,6vw,64px)] mt-4 mb-4">@site.Writing.Title</h1>
+    <p class="lead">@site.Writing.Lead</p>
+</div>
+
+<section class="py-7">
+    <div class="grid gap-3.5">
+        @foreach (var post in Archive.List())
+        {
+            <a class="card grid gap-3 sm:grid-cols-[64px_1fr_auto] items-start" href="@(prefix + "/writing/" + post.Slug)">
+                <div class="meta !mb-0">@post.Created.Year</div>
+                <div class="min-w-0">
+                    <h3 class="text-[19px] mb-1.5">@post.Title</h3>
+                    <p class="muted">@post.Description</p>
+                </div>
+                <span class="muted font-mono" aria-hidden="true">↗</span>
+            </a>
+        }
+    </div>
+</section>

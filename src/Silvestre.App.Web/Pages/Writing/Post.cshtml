@@ -1,0 +1,18 @@
+@page "/writing/{slug:regex(^[a-z0-9-]+$)}"
+@model Silvestre.App.Web.Pages.Writing.PostModel
+@{
+    var site = Content.Get(CultureInfo.CurrentUICulture);
+    var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    ViewData["Title"] = Model.Post.Summary.Title + " | " + site.Meta.Title;
+    ViewData["Description"] = Model.Post.Summary.Description;
+}
+
+<div class="page-head">
+    <div class="crumb"><a href="@(string.IsNullOrEmpty(prefix) ? "/" : prefix)">home</a> / <a href="@(prefix + "/writing")">@site.Writing.Crumb</a> / @Model.Post.Summary.Slug</div>
+    <div class="meta" style="margin-top:22px">@Model.Post.Summary.Created.ToString("yyyy-MM-dd")@if (Model.Post.Summary.Updated.Date > Model.Post.Summary.Created.Date) { <text> · @site.Writing.Updated @Model.Post.Summary.Updated.ToString("yyyy-MM-dd")</text> }</div>
+    <h1 class="display !text-[clamp(30px,5vw,52px)] mt-2 mb-2 max-w-[24ch]">@Model.Post.Summary.Title</h1>
+</div>
+
+<article class="prose dark:prose-invert max-w-none">@Html.Raw(Model.Post.Html)</article>
+
+<div class="my-10"><a class="btn" href="@(prefix + "/writing")">← @site.Writing.Back</a></div>
