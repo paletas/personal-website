@@ -1,6 +1,6 @@
 namespace Silvestre.App.Web.Models
 {
-    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing, ErrorContent Error);
+    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing, ErrorContent Error, A11yContent A11y);
 
     public record MetaContent(string Title, string Description, string AiTitle, string AiDescription);
 
@@ -25,6 +25,8 @@ namespace Silvestre.App.Web.Models
     public record ContactContent(string Heading, string Body);
 
     public record ErrorContent(string NotFoundTitle, string NotFoundBody, string Title, string Body, string Home);
+
+    public record A11yContent(string SkipToContent, string MainNav, string Breadcrumb, string Home, string NewTab, string ExternalSite, string Scenario);
 
     public record WritingPageContent(string Crumb, string Title, string Lead, string Back, string Updated);
 }

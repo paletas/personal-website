@@ -91,5 +91,14 @@
     "title": "Algo correu mal.",
     "body": "Ocorreu um erro inesperado. Tente novamente dentro de instantes.",
     "home": "Voltar ao início"
+  },
+  "a11y": {
+    "skipToContent": "Saltar para o conteúdo",
+    "mainNav": "Navegação principal",
+    "breadcrumb": "Caminho de navegação",
+    "home": "início",
+    "newTab": "(abre num novo separador)",
+    "externalSite": "(site externo)",
+    "scenario": "Cenário de exemplo"
   }
 }
