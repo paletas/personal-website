@@ -237,3 +237,53 @@
 .prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) { max-width: 100%; height: auto; }
 .prose :where(table):not(:where([class~="not-prose"], [class~="not-prose"] *)) { display: block; overflow-x: auto; max-width: 100%; }
 .prose a { text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+
+/* Post polish: reading rhythm, inline code, lists, section headings. */
+.prose { font-size: 17px; line-height: 1.75; max-width: 72ch; }
+.prose :where(h1, h2, h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) { letter-spacing: -.02em; line-height: 1.25; }
+.prose :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+.prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: clamp(24px, 3.2vw, 30px); margin-top: 2.6em; margin-bottom: .7em;
+  padding-top: 1.1em; border-top: 1px solid var(--line);
+}
+.prose :where(h1:first-child, h1 + h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) { margin-top: 0; padding-top: 0; border-top: 0; }
+.prose :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) { font-size: 20px; margin-top: 2em; color: var(--accent); }
+.prose :where(:not(pre) > code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: .1em .4em; font-size: .88em; font-weight: 500;
+}
+.prose :where(:not(pre) > code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(:not(pre) > code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after { content: none; }
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) { padding: 18px 20px; font-size: 13.5px; line-height: 1.8; box-shadow: 0 1px 0 var(--line); }
+.prose :where(ol > li, ul > li):not(:where([class~="not-prose"], [class~="not-prose"] *)) { padding-left: .3em; }
+.prose :where(li > p:first-child):not(:where([class~="not-prose"], [class~="not-prose"] *)) { margin-top: 0; }
+.prose :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) { border-radius: 12px; border: 1px solid var(--line); display: block; margin: 1.6em auto; }
+.prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) { font-weight: 600; }
+
+/* Diagrams: inline SVG figures drawn with the theme tokens, so they follow light/dark. */
+.prose figure.diagram {
+  margin: 2.2em 0; padding: 22px 18px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+}
+.prose figure.diagram svg { display: block; width: 100%; height: auto; max-width: 680px; margin: 0 auto; font-family: var(--font-sans); }
+.prose figure.diagram figcaption {
+  margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; color: var(--muted);
+}
+.diagram .b { fill: var(--surface-2); stroke: var(--line); stroke-width: 1.5; }
+.diagram .ba { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.diagram .bd { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.diagram .s1 { fill: var(--accent); fill-opacity: .22; stroke: var(--accent); stroke-width: 1.5; }
+.diagram .s2 { fill: var(--color-accent-from); fill-opacity: .22; stroke: var(--color-accent-from); stroke-width: 1.5; }
+.diagram .s3 { fill: var(--ok); fill-opacity: .22; stroke: var(--ok); stroke-width: 1.5; }
+.diagram .t { fill: var(--text); font-size: 15px; font-weight: 600; }
+.diagram .ts { fill: var(--muted); font-size: 12.5px; }
+.diagram .tm { fill: var(--text); font-family: var(--font-mono); font-size: 13.5px; }
+.diagram .tms { fill: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+.diagram .ta { fill: var(--accent); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
+.diagram .ln { fill: none; stroke: var(--muted); stroke-width: 1.8; }
+.diagram .lna { fill: none; stroke: var(--accent); stroke-width: 2; }
+.diagram .bus { fill: none; stroke: var(--accent); stroke-opacity: .35; stroke-width: 9; stroke-linecap: butt; }
+.diagram .mk { fill: var(--muted); }
+.diagram .mka { fill: var(--accent); }
+.diagram .c { text-anchor: middle; }
+.diagram .e { text-anchor: end; }
+.diagram .tb { fill: var(--text); font-family: var(--font-mono); font-size: 16px; font-weight: 600; }
+.diagram .tl { fill: var(--text); font-size: 13.5px; font-weight: 500; }
