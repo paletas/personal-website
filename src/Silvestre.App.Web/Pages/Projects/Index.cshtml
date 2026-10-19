@@ -1,0 +1,49 @@
+@page "/projects"
+@inject Silvestre.App.Web.Models.ProjectArchive Archive
+@{
+    var site = Content.Get(CultureInfo.CurrentUICulture);
+    var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    var isPt = SiteContentProvider.IsPt(CultureInfo.CurrentUICulture);
+    ViewData["Title"] = site.Meta.ProjectsTitle;
+    ViewData["Description"] = site.Meta.ProjectsDescription;
+    var crumbs = new BreadcrumbItem[] { new BreadcrumbItem(site.A11y.Home, string.IsNullOrEmpty(prefix) ? "/" : prefix), new BreadcrumbItem(site.ProjectsPage.Crumb, null) };
+    var all = Archive.All(isPt);
+    string StatusText(string status) => status switch
+    {
+        "active" => site.ProjectsPage.StatusActive,
+        "maintenance" => site.ProjectsPage.StatusMaintenance,
+        "dormant" => site.ProjectsPage.StatusDormant,
+        _ => status
+    };
+}
+
+<div class="page-head">
+    <partial name="_Breadcrumb" model="crumbs" />
+    <h1 class="display !text-[clamp(36px,6vw,64px)] mt-4 mb-4">@site.ProjectsPage.Title</h1>
+    <p class="lead">@site.ProjectsPage.Lead</p>
+</div>
+
+<section class="py-7">
+    <div class="grid gap-3.5">
+        @foreach (var workflow in all.Where(p => p.Kind == "workflow"))
+        {
+            <a class="card card-glow" href="@(prefix + "/projects/workflow")">
+                <div class="meta">@site.ProjectsPage.WorkflowCardLabel</div>
+                <h3 class="text-[19px] mb-1.5">@workflow.Title</h3>
+                <p class="muted">@workflow.Tagline</p>
+            </a>
+        }
+        @foreach (var project in all.Where(p => p.Kind == "project"))
+        {
+            var facts = Archive.Facts(project.Slug);
+            <a class="card" href="@(prefix + "/projects/" + project.Slug)">
+                @if (facts is not null)
+                {
+                    <div class="meta">@StatusText(facts.Status) · @string.Join(", ", facts.Stack) · @facts.LastActive</div>
+                }
+                <h3 class="text-[19px] mb-1.5">@project.Title</h3>
+                <p class="muted">@project.Tagline</p>
+            </a>
+        }
+    </div>
+</section>

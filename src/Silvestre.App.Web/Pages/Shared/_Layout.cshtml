@@ -10,6 +10,8 @@
     var canonical = SiteLinks.Origin + (thisPath == "/" ? "/" : thisPath!.TrimEnd('/'));
     var aiPath = prefix + "/ai";
     var onAi = string.Equals((thisPath ?? "").TrimEnd('/'), aiPath, StringComparison.OrdinalIgnoreCase);
+    var projectsPath = prefix + "/projects";
+    var onProjects = (thisPath ?? "").TrimEnd('/').StartsWith(projectsPath, StringComparison.OrdinalIgnoreCase);
 }
 <!DOCTYPE html>
 <html lang="@SiteContentProvider.HtmlLang(culture)" data-version="@App.AppVersion">
@@ -46,7 +48,7 @@
             <div class="hidden md:flex gap-1 ml-auto">
                 <a class="nav-link" href="@(prefix + "/#about")">@site.Nav.About</a>
                 <a class="nav-link" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
-                <a class="nav-link" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
+                <a class="nav-link" href="@(prefix + "/projects")" aria-current="@(onProjects ? "page" : null)">@site.Nav.Projects</a>
                 <a class="nav-link" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
                 <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
@@ -69,7 +71,7 @@
             <div class="wrap py-2 flex flex-col">
                 <a class="nav-link text-base!" href="@(prefix + "/#about")">@site.Nav.About</a>
                 <a class="nav-link text-base!" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
-                <a class="nav-link text-base!" href="@(prefix + "/#projects")">@site.Nav.Projects</a>
+                <a class="nav-link text-base!" href="@(prefix + "/projects")" aria-current="@(onProjects ? "page" : null)">@site.Nav.Projects</a>
                 <a class="nav-link text-base!" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
                 <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link text-base!" href="@(prefix + "/#contact")">@site.Nav.Contact</a>

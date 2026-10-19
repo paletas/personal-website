@@ -3,7 +3,9 @@
     "title": "João Silvestre",
     "description": "João Silvestre, Senior Lead Software Engineer in Lisbon. How he builds software with AI agents.",
     "aiTitle": "How I build with AI",
-    "aiDescription": "How I build software with AI agents: a written plan, scenarios as the contract, and an independent check."
+    "aiDescription": "How I build software with AI agents: a written plan, scenarios as the contract, and an independent check.",
+    "projectsTitle": "Projects | João Silvestre",
+    "projectsDescription": "Case studies of the projects I build and run, and how I build with AI agents."
   },
   "nav": {
     "about": "About",
@@ -58,7 +60,8 @@
         "meta": "f1 experience",
         "title": "F1 experience",
         "body": "A side project for Formula 1 data and fun."
-      }
+      },
+      "seeAll": "See all projects"
     },
     "writing": {
       "label": "Writing",
@@ -84,6 +87,21 @@
     "lead": "A small archive, not a promise of more. Posts are in English.",
     "back": "All writing",
     "updated": "Updated"
+  },
+  "projectsPage": {
+    "crumb": "projects",
+    "title": "Projects.",
+    "lead": "What I build and run, one short case study each.",
+    "back": "All projects",
+    "statusLabel": "Status",
+    "stackLabel": "Stack",
+    "lastActiveLabel": "Last active",
+    "workflowCardLabel": "How I build",
+    "aiLink": "How I build with AI",
+    "workflowLink": "Read the workflow case study",
+    "statusActive": "active",
+    "statusMaintenance": "maintenance",
+    "statusDormant": "dormant"
   },
   "error": {
     "notFoundTitle": "Page not found.",

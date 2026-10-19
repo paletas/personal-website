@@ -3,7 +3,9 @@
     "title": "João Silvestre",
     "description": "João Silvestre, Senior Lead Software Engineer em Lisboa. Como desenvolvo software com agentes de IA.",
     "aiTitle": "Como desenvolvo com IA",
-    "aiDescription": "Como desenvolvo software com agentes de IA: um plano escrito, cenários como contrato e uma verificação independente."
+    "aiDescription": "Como desenvolvo software com agentes de IA: um plano escrito, cenários como contrato e uma verificação independente.",
+    "projectsTitle": "Projetos | João Silvestre",
+    "projectsDescription": "Casos de estudo dos projetos que construo e mantenho, e como desenvolvo com agentes de IA."
   },
   "nav": {
     "about": "Sobre",
@@ -58,7 +60,8 @@
         "meta": "f1 experience",
         "title": "F1 experience",
         "body": "Um projeto pessoal sobre dados de Fórmula 1 e diversão."
-      }
+      },
+      "seeAll": "Ver todos"
     },
     "writing": {
       "label": "Escrita",
@@ -84,6 +87,21 @@
     "lead": "Um pequeno arquivo, não uma promessa de mais. Os artigos estão em inglês.",
     "back": "Todos os escritos",
     "updated": "Atualizado"
+  },
+  "projectsPage": {
+    "crumb": "projetos",
+    "title": "Projetos.",
+    "lead": "O que construo e mantenho, com um pequeno caso de estudo para cada um.",
+    "back": "Todos os projetos",
+    "statusLabel": "Estado",
+    "stackLabel": "Tecnologias",
+    "lastActiveLabel": "Última atividade",
+    "workflowCardLabel": "Como construo",
+    "aiLink": "Como desenvolvo com IA",
+    "workflowLink": "Ler o caso de estudo do fluxo de trabalho",
+    "statusActive": "ativo",
+    "statusMaintenance": "em manutenção",
+    "statusDormant": "inativo"
   },
   "error": {
     "notFoundTitle": "Página não encontrada.",
