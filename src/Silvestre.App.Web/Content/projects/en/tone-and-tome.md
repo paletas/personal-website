@@ -28,7 +28,7 @@ A small orchestrator keeps the queue and the state of every chapter as a series 
 <path class="ln" d="M260 44L280 44" marker-end="url(#m1)"/>
 <rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Generation</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">stills, motion, music</text>
 <path class="ln" d="M390 44L410 44" marker-end="url(#m1)"/>
-<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Video</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">assembled, reviewed</text>
+<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Video</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">edited, reviewed</text>
 </svg>
 <figcaption>Text is only analysed; the output is images, motion and music</figcaption>
 </figure>

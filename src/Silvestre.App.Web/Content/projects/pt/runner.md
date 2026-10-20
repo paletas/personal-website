@@ -22,13 +22,13 @@ Cada tarefa corre sob um perfil com nome que descreve o que o agente pode fazer 
 <figure class="diagram">
 <svg viewBox="0 0 540 90" role="img" aria-label="Fluxo do Runner: agendador ou linha de comandos, execução isolada, remoção de segredos, notificação e histórico">
 <defs><marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk"/></marker></defs>
-<rect class="b" x="20" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="75.0" y="40.0">Agendador / CLI</text><text class="ts" text-anchor="middle" x="75.0" y="58.0">iniciar uma tarefa</text>
+<rect class="b" x="20" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="75.0" y="40.0">Agendador/CLI</text><text class="ts" text-anchor="middle" x="75.0" y="58.0">iniciar uma tarefa</text>
 <path class="ln" d="M130 44L150 44" marker-end="url(#m1)"/>
-<rect class="b" x="150" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="205.0" y="40.0">Ambiente isolado</text><text class="ts" text-anchor="middle" x="205.0" y="58.0">execução por perfil</text>
+<rect class="b" x="150" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="205.0" y="40.0">Isolamento</text><text class="ts" text-anchor="middle" x="205.0" y="58.0">execução por perfil</text>
 <path class="ln" d="M260 44L280 44" marker-end="url(#m1)"/>
-<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Remoção de segredos</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">segredos removidos</text>
+<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Limpeza</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">segredos limpos</text>
 <path class="ln" d="M390 44L410 44" marker-end="url(#m1)"/>
-<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Notificar + histórico</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">resultado e registo</text>
+<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Notificação</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">resultado e registo</text>
 </svg>
 <figcaption>Cada execução é delimitada, limpa e registada</figcaption>
 </figure>

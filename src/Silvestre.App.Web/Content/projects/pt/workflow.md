@@ -24,9 +24,9 @@ O trabalho flui através de um pipeline fixo: aprender, compreender, planear, pl
 <path class="ln" d="M130 44L150 44" marker-end="url(#m1)"/>
 <rect class="b" x="150" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="205.0" y="40.0">Planear</text><text class="ts" text-anchor="middle" x="205.0" y="58.0">modelo forte</text>
 <path class="ln" d="M260 44L280 44" marker-end="url(#m1)"/>
-<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Executar</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">intermédio, gratuito primeiro</text>
+<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Executar</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">modelo médio</text>
 <path class="ln" d="M390 44L410 44" marker-end="url(#m1)"/>
-<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Verificar</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">agente independente</text>
+<rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Verificar</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">agente isolado</text>
 </svg>
 <figcaption>O modelo caro planeia, modelos mais baratos constroem, e um agente separado verifica</figcaption>
 </figure>

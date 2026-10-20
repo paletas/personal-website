@@ -24,7 +24,7 @@ Work flows through a fixed pipeline: learn, understand, plan, plan in batches, e
 <path class="ln" d="M130 44L150 44" marker-end="url(#m1)"/>
 <rect class="b" x="150" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="205.0" y="40.0">Plan</text><text class="ts" text-anchor="middle" x="205.0" y="58.0">strong model</text>
 <path class="ln" d="M260 44L280 44" marker-end="url(#m1)"/>
-<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Execute</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">mid-tier, free first</text>
+<rect class="b" x="280" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="335.0" y="40.0">Execute</text><text class="ts" text-anchor="middle" x="335.0" y="58.0">mid-tier model</text>
 <path class="ln" d="M390 44L410 44" marker-end="url(#m1)"/>
 <rect class="ba" x="410" y="14" width="110" height="60" rx="10"/><text class="t" text-anchor="middle" x="465.0" y="40.0">Verify</text><text class="ts" text-anchor="middle" x="465.0" y="58.0">independent agent</text>
 </svg>
