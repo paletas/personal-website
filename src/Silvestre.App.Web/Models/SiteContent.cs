@@ -1,8 +1,8 @@
 namespace Silvestre.App.Web.Models
 {
-    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing, ErrorContent Error, A11yContent A11y);
+    public record SiteContent(MetaContent Meta, NavContent Nav, FooterContent Footer, HomeContent Home, WritingPageContent Writing, ProjectsPageContent ProjectsPage, ErrorContent Error, A11yContent A11y);
 
-    public record MetaContent(string Title, string Description, string AiTitle, string AiDescription);
+    public record MetaContent(string Title, string Description, string AiTitle, string AiDescription, string ProjectsTitle, string ProjectsDescription);
 
     public record NavContent(string About, string Ai, string Projects, string Writing, string Wisc, string Contact, string Theme, string ThemeLabel, string OpenMenu, string LanguageSwitch);
 
@@ -18,7 +18,7 @@ namespace Silvestre.App.Web.Models
 
     public record ProjectCard(string Meta, string Title, string Body);
 
-    public record ProjectsContent(string Label, ProjectCard Wisc, ProjectCard F1);
+    public record ProjectsContent(string Label, ProjectCard Wisc, ProjectCard F1, string SeeAll);
 
     public record WritingContent(string Label, ProjectCard CpuPart1, ProjectCard CpuPart2);
 
@@ -29,4 +29,6 @@ namespace Silvestre.App.Web.Models
     public record A11yContent(string SkipToContent, string MainNav, string Breadcrumb, string Home, string NewTab, string ExternalSite, string Scenario);
 
     public record WritingPageContent(string Crumb, string Title, string Lead, string Back, string Updated);
+
+    public record ProjectsPageContent(string Crumb, string Title, string Lead, string Back, string StatusLabel, string StackLabel, string LastActiveLabel, string WorkflowCardLabel, string AiLink, string WorkflowLink, string StatusActive, string StatusMaintenance, string StatusDormant);
 }

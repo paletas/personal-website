@@ -1,8 +1,10 @@
 ﻿@page "/"
 @model Silvestre.App.Web.Pages.Home.ProfileModel
+@inject Silvestre.App.Web.Models.ProjectArchive ProjectArchive
 @{
     var site = Content.Get(CultureInfo.CurrentUICulture);
     var prefix = SiteContentProvider.Prefix(CultureInfo.CurrentUICulture);
+    var isPt = SiteContentProvider.IsPt(CultureInfo.CurrentUICulture);
     ViewData["Title"] = site.Meta.Title;
     ViewData["Description"] = site.Meta.Description;
 }
@@ -99,7 +101,15 @@
             <div class="tags"><span class="tag">.NET</span><span class="tag">Data</span></div>
             <span class="sr-only"> @site.A11y.ExternalSite</span>
         </a>
+        @foreach (var p in ProjectArchive.All(isPt).Where(p => p.Kind == "project").Take(3))
+        {
+            <a class="card span-6" href="@(prefix + "/projects/" + p.Slug)">
+                <h3 class="text-xl mb-1.5">@p.Title</h3>
+                <p class="muted">@p.Tagline</p>
+            </a>
+        }
     </div>
+    <div class="mt-4"><a class="btn" href="@(prefix + "/projects")">@site.Home.Projects.SeeAll →</a></div>
 </section>
 
 <section id="writing" class="py-7">

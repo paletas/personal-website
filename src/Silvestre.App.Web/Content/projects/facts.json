@@ -1,0 +1,74 @@
+{
+  "projects": {
+    "crypto-agent": {
+      "lastActive": "2026-09",
+      "stack": [
+        ".NET 10",
+        "CLI/TUI",
+        "SQLite"
+      ],
+      "status": "active"
+    },
+    "homelab": {
+      "lastActive": "2026-10",
+      "stack": [
+        "Ansible",
+        "Proxmox",
+        "TrueNAS",
+        "Tailscale"
+      ],
+      "status": "active"
+    },
+    "homeos": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "EF Core",
+        "SQLite"
+      ],
+      "status": "active"
+    },
+    "planahead": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "PostgreSQL",
+        "Aspire"
+      ],
+      "status": "active"
+    },
+    "runner": {
+      "lastActive": "2026-10",
+      "stack": [
+        "Python",
+        "Docker",
+        "GitHub Actions"
+      ],
+      "status": "active"
+    },
+    "savvori": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Aspire",
+        "EF Core",
+        "SQLite",
+        "Ollama"
+      ],
+      "status": "active"
+    },
+    "tone-and-tome": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "ASP.NET Core",
+        "xUnit"
+      ],
+      "status": "active"
+    }
+  }
+}

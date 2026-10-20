@@ -29,6 +29,7 @@ namespace Silvestre.App.Web
         {
             services.AddSingleton<SiteContentProvider>();
             services.AddSingleton<WritingArchive>();
+            services.AddSingleton<ProjectArchive>();
             services.AddSingleton<AiContent>();
             services.AddWebEncoders(o => o.TextEncoderSettings = new System.Text.Encodings.Web.TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All));
             services.AddRazorPages().AddRazorPagesOptions(o => o.Conventions.Add(new CulturePrefixConvention()));
