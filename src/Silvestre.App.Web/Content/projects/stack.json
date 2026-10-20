@@ -1,15 +1,4 @@
 {
-  "crypto-agent": [
-    ".NET 10",
-    "CLI/TUI",
-    "SQLite"
-  ],
-  "homelab": [
-    "Ansible",
-    "Proxmox",
-    "TrueNAS",
-    "Tailscale"
-  ],
   "homeos": [
     ".NET 10",
     "Razor Pages",
@@ -23,11 +12,6 @@
     "HTMX",
     "PostgreSQL",
     "Aspire"
-  ],
-  "runner": [
-    "Python",
-    "Docker",
-    "GitHub Actions"
   ],
   "savvori": [
     ".NET 10",
