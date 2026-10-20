@@ -1,6 +1,6 @@
 # Gate for every pull request (including Dependabot's): build the real production image of each site, run it
-# and require a real answer on /. There is no beta environment for these sites, so this is the check that
-# decides whether a change may reach dev and, later, master. Nothing is published from here.
+# and require a real answer on /. PRs only build + smoke the image; nothing is published from here.
+# The beta (dev branch, image tag :beta) runs on the homelab, see HomeLab docs/website-beta.md.
 name: PR check
 
 on:
