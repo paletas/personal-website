@@ -1,6 +1,6 @@
 ---
 title: "PlanAhead"
-tagline: "Uma aplicação de planeamento para organizar a semana."
+tagline: "Um planeador de finanças pessoais para orçamento, poupança, impostos e investimentos."
 order: 1
 kind: project
 ---
