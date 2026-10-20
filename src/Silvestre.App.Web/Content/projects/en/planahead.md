@@ -1,6 +1,6 @@
 ---
 title: "PlanAhead"
-tagline: "A planning app for organising the week ahead."
+tagline: "A personal-finance planner for budgets, savings, taxes and investments."
 order: 1
 kind: project
 ---

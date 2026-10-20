@@ -1,6 +1,6 @@
 # Gate for every pull request (including Dependabot's): build the real production image of each site, run it
 # and require a real answer on /. PRs only build + smoke the image; nothing is published from here.
-# The beta (dev branch, image tag :beta) runs on the homelab, see HomeLab docs/website-beta.md.
+# The beta (dev branch, image tag :beta) runs on a private beta host.
 name: PR check
 
 on:
