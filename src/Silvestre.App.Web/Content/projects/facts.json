@@ -1,39 +1,74 @@
 {
   "projects": {
     "crypto-agent": {
-      "status": "active",
-      "stack": [".NET 10", "CLI/TUI", "SQLite"],
-      "lastActive": "2026-09"
+      "lastActive": "2026-09",
+      "stack": [
+        ".NET 10",
+        "CLI/TUI",
+        "SQLite"
+      ],
+      "status": "active"
     },
     "homelab": {
-      "status": "active",
-      "stack": ["Ansible", "Proxmox", "TrueNAS", "Tailscale"],
-      "lastActive": "2026-10"
+      "lastActive": "2026-10",
+      "stack": [
+        "Ansible",
+        "Proxmox",
+        "TrueNAS",
+        "Tailscale"
+      ],
+      "status": "active"
     },
     "homeos": {
-      "status": "active",
-      "stack": [".NET 10", "Razor Pages", "HTMX", "EF Core", "SQLite"],
-      "lastActive": "2026-09"
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "EF Core",
+        "SQLite"
+      ],
+      "status": "active"
     },
     "planahead": {
-      "status": "active",
-      "stack": [".NET 10", "Razor Pages", "HTMX", "PostgreSQL", "Aspire"],
-      "lastActive": "2026-07"
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "PostgreSQL",
+        "Aspire"
+      ],
+      "status": "active"
     },
     "runner": {
-      "status": "active",
-      "stack": ["Python", "Docker", "GitHub Actions"],
-      "lastActive": "2026-10"
+      "lastActive": "2026-10",
+      "stack": [
+        "Python",
+        "Docker",
+        "GitHub Actions"
+      ],
+      "status": "active"
     },
     "savvori": {
-      "status": "active",
-      "stack": [".NET 10", "Aspire", "EF Core", "SQLite", "Ollama"],
-      "lastActive": "2026-09"
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Aspire",
+        "EF Core",
+        "SQLite",
+        "Ollama"
+      ],
+      "status": "active"
     },
     "tone-and-tome": {
-      "status": "active",
-      "stack": [".NET 10", "ASP.NET Core", "xUnit"],
-      "lastActive": "2026-10"
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "ASP.NET Core",
+        "xUnit"
+      ],
+      "status": "active"
     }
   }
 }
