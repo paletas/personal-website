@@ -13,11 +13,20 @@ Os salários em Portugal têm as suas próprias regras de impostos e contribuiç
 
 ## O que faz
 
-A aplicação cobre o ciclo financeiro do dia a dia. Uma calculadora de salário transforma o vencimento bruto em líquido segundo as regras locais. Contas, transações e itens recorrentes compõem uma imagem do que entra e sai, e orçamentos e fundos de reserva reservam dinheiro para custos futuros conhecidos. O acompanhamento de crédito hipotecário e de ativos adiciona os itens maiores e mais lentos, e os relatórios reúnem tudo numa visão de para onde as coisas caminham. Extratos podem ser importados em massa, e uma sincronização bancária opcional pode alimentar transações automaticamente.
+A aplicação cobre o ciclo financeiro do dia a dia e vai mais além.
+
+- **Calculadoras públicas.** Salário (bruto para líquido segundo as regras locais), amortização antecipada e comparação de refinanciamento funcionam sem conta, e são a porta de entrada.
+- **Acompanhamento.** Contas, transações, categorias, transferências entre contas e receitas e despesas recorrentes compõem uma imagem do que entra e sai.
+- **Planeamento.** Orçamentos e fundos de reserva separam dinheiro para custos futuros conhecidos: um fundo de reserva calcula o valor mensal de uma fatura anual ou semestral a partir das próprias despesas recorrentes.
+- **Crédito habitação e património.** Contas de crédito com projeções e uma visão de património líquido que reúne tudo.
+- **Investimentos.** Posições, compras e vendas, splits de ações, lotes de custo de aquisição e uma estimativa de mais-valias, com preços e taxas de câmbio vindos de várias fontes de dados de mercado que se apoiam umas às outras.
+- **Impostos.** Um estimador da declaração anual de impostos que explica o resultado escalão a escalão e compara cenários. Os rendimentos de trabalho estão cobertos para 2025; as outras categorias estão no roteiro, e o desenho permite que cada país acrescente as suas regras.
+- **Importação.** Importação em massa a partir de ficheiros genéricos, mais conversores que transformam o extrato de cada banco ou corretora nesse mesmo formato, para que todas as fontes passem por um único circuito validado. Uma sincronização bancária opcional pode alimentar transações automaticamente.
+- **Duas línguas.** Todo o texto visível ao utilizador existe em português e inglês.
 
 ## Como é construído
 
-O PlanAhead é uma aplicação .NET em camadas. Um cliente web renderizado no servidor fala apenas com uma API sem estado, nunca com a base de dados diretamente. A API entrega o trabalho a uma camada de handlers que contêm as regras de negócio, independentes de como o pedido chega, e esses handlers leem e escrevem numa base de dados relacional através de uma camada de dados. Manter as regras numa camada neutra em termos de transporte significa que a mesma lógica serve o cliente web e qualquer cliente futuro. As páginas favorecem pequenas atualizações dirigidas pelo servidor em vez de código pesado no lado do cliente, e toda a solução é coberta por testes de ponta a ponta ao nível do browser.
+O PlanAhead é uma aplicação em camadas sobre .NET 10. Um cliente web renderizado no servidor (Razor Pages com HTMX) fala apenas com uma API REST sem estado, nunca com a base de dados diretamente. A API entrega o trabalho a uma camada de handlers que contêm as regras de negócio, independentes de como o pedido chega, e esses handlers leem e escrevem em PostgreSQL através de uma camada de dados. Manter as regras numa camada neutra em termos de transporte significa que a mesma lógica serve o cliente web e qualquer cliente futuro. O Aspire liga as peças em desenvolvimento e nos testes.
 
 <figure class="diagram">
 <svg viewBox="0 0 520 330" role="img" aria-label="Camadas do PlanAhead: um cliente web chama uma API, que chama handlers, que usam armazenamento; sincronização bancária é uma entrada opcional para os handlers">
@@ -26,6 +35,21 @@ O PlanAhead é uma aplicação .NET em camadas. Um cliente web renderizado no se
 <figcaption>os pedidos descem pelas camadas; a sincronização bancária é uma entrada opcional</figcaption>
 </figure>
 
+## Escolhas de engenharia
+
+- **CQRS leve, feito em casa.** Comandos e consultas passam por um pequeno mediador próprio em vez de uma biblioteca de terceiros, o que mantém o circuito simples e totalmente nosso para alterar.
+- **Resultados, não exceções.** As falhas esperadas, como uma regra não cumprida, voltam como resultados explícitos de operação em vez de exceções, e os handlers lêem-se como uma história clara de sucesso ou falha.
+- **Dinheiro é sempre decimal.** Todos os valores usam aritmética decimal exata, nunca vírgula flutuante.
+- **Isolamento por utilizador por omissão.** Cada consulta é limitada ao utilizador autenticado por filtros globais, e um teste que entra como dois utilizadores diferentes verifica que um nunca vê os dados do outro.
+- **HTMX primeiro.** Pequenas atualizações dirigidas pelo servidor mantêm as páginas rápidas sem uma framework pesada no cliente.
+
+## Testes
+
+Testes de ponta a ponta ao nível do browser percorrem a aplicação real sobre uma base de dados nova e descartável, com a fronteira dos dados de mercado simulada para que os resultados sejam repetíveis. Verificam valores calculados, não apenas que a página abre, e já apanharam erros reais do produto. Uma funcionalidade só é dada como concluída quando tem cobertura de ponta a ponta.
+
+## Como foi crescendo
+
+O PlanAhead começou em 2024 como um projeto escrito à mão, antes de eu trabalhar com agentes de IA. Desde então a forma de trabalhar mudou. Hoje o repositório inclui instruções para agentes e algumas skills do projeto para tarefas repetíveis, como acrescentar um importador de banco. Cada funcionalidade tem um pequeno documento de desenho que explica o que faz e porquê; os agentes leem-no antes de começar e atualizam-no no fim. A arquitetura e os testes continuam a ser meus de definir, e os agentes trabalham dentro deles. O ritmo nota-se: a maior parte dos commits do projeto foi em 2026.
 ## O que se segue
 
-O roteiro foca-se mais em profundidade do que em amplitude: categorização mais inteligente de transações, períodos de orçamento mais flexíveis com alertas, relatórios mais ricos, e opções de autenticação mais fortes. A visão de longo prazo é o suporte para outros países, cada um com o seu próprio enquadramento fiscal.
+O roteiro é sobretudo sobre profundidade e não sobre largura: categorização mais inteligente das transações, períodos de orçamento mais flexíveis com alertas, relatórios mais ricos, mais categorias de rendimento no estimador de impostos e opções de autenticação mais fortes. A visão a mais longo prazo é suportar outros países, cada um com o seu quadro fiscal.
