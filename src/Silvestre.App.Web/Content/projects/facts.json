@@ -32,15 +32,6 @@
         "Ollama"
       ],
       "status": "active"
-    },
-    "tone-and-tome": {
-      "lastActive": "2026-10",
-      "stack": [
-        ".NET 10",
-        "ASP.NET Core",
-        "xUnit"
-      ],
-      "status": "active"
     }
   }
 }
