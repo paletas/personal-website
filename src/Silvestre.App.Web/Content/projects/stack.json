@@ -19,10 +19,5 @@
     "EF Core",
     "SQLite",
     "Ollama"
-  ],
-  "tone-and-tome": [
-    ".NET 10",
-    "ASP.NET Core",
-    "xUnit"
   ]
 }
