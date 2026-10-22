@@ -266,6 +266,10 @@
   margin: 2.2em 0; padding: 22px 18px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
 }
 .prose figure.diagram svg { display: block; width: 100%; height: auto; max-width: 680px; margin: 0 auto; font-family: var(--font-sans); }
+@media (max-width: 40rem) {
+  .prose figure.diagram { overflow-x: auto; }
+  .prose figure.diagram svg { min-width: 520px; max-width: none; }
+}
 .prose figure.diagram figcaption {
   margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; color: var(--muted);
 }

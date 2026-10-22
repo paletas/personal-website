@@ -1,0 +1,23 @@
+{
+  "homeos": [
+    ".NET 10",
+    "Razor Pages",
+    "HTMX",
+    "EF Core",
+    "SQLite"
+  ],
+  "planahead": [
+    ".NET 10",
+    "Razor Pages",
+    "HTMX",
+    "PostgreSQL",
+    "Aspire"
+  ],
+  "savvori": [
+    ".NET 10",
+    "Aspire",
+    "EF Core",
+    "SQLite",
+    "Ollama"
+  ]
+}

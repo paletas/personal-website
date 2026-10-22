@@ -23,15 +23,19 @@ jobs:
         echo "project_version=$version" >> $env:GITHUB_OUTPUT
       shell: pwsh
       working-directory: src/Silvestre.App.Web
-    - name: Set suffix for dev version
-      if: github.ref == 'refs/heads/dev'
-      id: suffix
-      run: echo "version_suffix=dev" >> $env:GITHUB_OUTPUT
     - name: Docker tags
       id: tags
+      shell: bash
       run: |
-        project_majorminor=$(echo ${{ steps.version.outputs.project_version }} | cut -d. -f1,2)
-        echo "DOCKER_TAGS=ghcr.io/paletas/personal-website:${{ steps.version.outputs.project_version }}${{ steps.suffix.outputs.version_suffix }},ghcr.io/paletas/personal-website:$project_majorminor${{ steps.suffix.outputs.version_suffix }}" >> $GITHUB_OUTPUT
+        version='${{ steps.version.outputs.project_version }}'
+        majorminor=$(echo "$version" | cut -d. -f1,2)
+        image=ghcr.io/paletas/personal-website
+        if [ "${{ github.ref }}" = "refs/heads/dev" ]; then
+          tags="$image:${version}dev,$image:${majorminor}dev,$image:beta"
+        else
+          tags="$image:$version,$image:$majorminor"
+        fi
+        echo "DOCKER_TAGS=$tags" >> "$GITHUB_OUTPUT"
     - name: Prints
       run: |
           echo "The version is ${{ steps.version.outputs.project_version }}"

@@ -1,0 +1,37 @@
+{
+  "projects": {
+    "homeos": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "EF Core",
+        "SQLite"
+      ],
+      "status": "active"
+    },
+    "planahead": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Razor Pages",
+        "HTMX",
+        "PostgreSQL",
+        "Aspire"
+      ],
+      "status": "active"
+    },
+    "savvori": {
+      "lastActive": "2026-10",
+      "stack": [
+        ".NET 10",
+        "Aspire",
+        "EF Core",
+        "SQLite",
+        "Ollama"
+      ],
+      "status": "active"
+    }
+  }
+}

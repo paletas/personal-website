@@ -1,6 +1,6 @@
 # Gate for every pull request (including Dependabot's): build the real production image of each site, run it
-# and require a real answer on /. There is no beta environment for these sites, so this is the check that
-# decides whether a change may reach dev and, later, master. Nothing is published from here.
+# and require a real answer on /. PRs only build + smoke the image; nothing is published from here.
+# The beta (dev branch, image tag :beta) runs on a private beta host.
 name: PR check
 
 on:
@@ -47,7 +47,15 @@ jobs:
             echo "GET $a -> $c ($(wc -c < /tmp/asset) bytes)"
             [ "$c" = 200 ] && [ "$(wc -c < /tmp/asset)" -gt 5000 ] || exit 1
           done
-          for r in /ai /pt /writing/how-do-cpus-work-part1; do c=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$r" || true); echo "GET $r -> $c"; [ "$c" = 200 ] || exit 1; done
+          for r in /ai /pt /writing/how-do-cpus-work-part1 /projects /pt/projects; do c=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$r" || true); echo "GET $r -> $c"; [ "$c" = 200 ] || exit 1; done
+
+      - name: Leak scan
+        run: |
+          mkdir -p /tmp/scan
+          for r in /projects /pt/projects; do
+            curl -fsS "http://localhost:8080$r" -o "/tmp/scan/$(echo "$r" | tr '/' '_').html"
+          done
+          bash tools/deny-scan.sh /tmp/scan/*.html
 
       - name: Container logs
         if: failure()
