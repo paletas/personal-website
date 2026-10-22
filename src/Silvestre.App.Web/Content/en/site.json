@@ -5,7 +5,7 @@
     "aiTitle": "How I build with AI",
     "aiDescription": "How I build software with AI agents: a written plan, scenarios as the contract, and an independent check.",
     "projectsTitle": "Projects | João Silvestre",
-    "projectsDescription": "Case studies of the projects I build and run, and how I build with AI agents."
+    "projectsDescription": "The projects I build and run, and how I work with AI agents."
   },
   "nav": {
     "about": "About",
@@ -91,14 +91,14 @@
   "projectsPage": {
     "crumb": "projects",
     "title": "Projects.",
-    "lead": "What I build and run, one short case study each.",
-    "back": "All projects",
+    "lead": "What I build and run, in a few lines each.",
     "statusLabel": "Status",
     "stackLabel": "Stack",
     "lastActiveLabel": "Last active",
-    "workflowCardLabel": "How I build",
-    "aiLink": "How I build with AI",
-    "workflowLink": "Read the workflow case study",
+    "workflowTitle": "How I work with AI agents",
+    "workflowBody": "Every project starts as an idea that I talk through with the agent. We then open a workspace and write a plan, and I approve it before any code is written. The agent develops it and writes the tests, and the work ships through a pull request that I review.",
+    "workflowLink": "More on how I build with AI",
+    "projectsLink": "See what I build",
     "statusActive": "active",
     "statusMaintenance": "maintenance",
     "statusDormant": "dormant"
