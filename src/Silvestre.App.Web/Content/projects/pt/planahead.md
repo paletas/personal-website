@@ -5,19 +5,7 @@ order: 1
 kind: project
 ---
 
-As ferramentas financeiras costumam olhar para trás: registam o que foi gasto e deixam o planeamento para uma folha de cálculo. O PlanAhead parte da direção oposta. É um planeador de finanças pessoais para utilizadores portugueses, construído em torno da questão de como devem ser os próximos meses, e o registo existe para alimentar essa resposta.
-
-## Problema
-
-Os salários em Portugal têm as suas próprias regras de impostos e contribuições, e a maioria das aplicações de orçamento ignora-as ou obriga a uma solução manual. Queria um único sítio que entenda o salário líquido, os compromissos recorrentes e os objetivos de longo prazo, para que um plano feito hoje continue a valer daqui a alguns meses.
-
-## O que faz
-
-A aplicação cobre o ciclo financeiro do dia a dia. Uma calculadora de salário transforma o vencimento bruto em líquido segundo as regras locais. Contas, transações e itens recorrentes compõem uma imagem do que entra e sai, e orçamentos e fundos de reserva reservam dinheiro para custos futuros conhecidos. O acompanhamento de crédito hipotecário e de ativos adiciona os itens maiores e mais lentos, e os relatórios reúnem tudo numa visão de para onde as coisas caminham. Extratos podem ser importados em massa, e uma sincronização bancária opcional pode alimentar transações automaticamente.
-
-## Como é construído
-
-O PlanAhead é uma aplicação .NET em camadas. Um cliente web renderizado no servidor fala apenas com uma API sem estado, nunca com a base de dados diretamente. A API entrega o trabalho a uma camada de handlers que contêm as regras de negócio, independentes de como o pedido chega, e esses handlers leem e escrevem numa base de dados relacional através de uma camada de dados. Manter as regras numa camada neutra em termos de transporte significa que a mesma lógica serve o cliente web e qualquer cliente futuro. As páginas favorecem pequenas atualizações dirigidas pelo servidor em vez de código pesado no lado do cliente, e toda a solução é coberta por testes de ponta a ponta ao nível do browser.
+O PlanAhead é um planeador de finanças pessoais para utilizadores portugueses, construído em torno da questão de como devem ser os próximos meses, e não apenas do que foi gasto. Converte o salário bruto em líquido segundo as regras locais, acompanha contas, itens recorrentes, orçamentos e fundos de poupança, e mostra para onde as coisas caminham. É uma aplicação .NET em camadas, com as regras de negócio separadas do cliente web.
 
 <figure class="diagram">
 <svg viewBox="0 0 520 330" role="img" aria-label="Camadas do PlanAhead: um cliente web chama uma API, que chama handlers, que usam armazenamento; sincronização bancária é uma entrada opcional para os handlers">
@@ -25,7 +13,3 @@ O PlanAhead é uma aplicação .NET em camadas. Um cliente web renderizado no se
 </svg>
 <figcaption>os pedidos descem pelas camadas; a sincronização bancária é uma entrada opcional</figcaption>
 </figure>
-
-## O que se segue
-
-O roteiro foca-se mais em profundidade do que em amplitude: categorização mais inteligente de transações, períodos de orçamento mais flexíveis com alertas, relatórios mais ricos, e opções de autenticação mais fortes. A visão de longo prazo é o suporte para outros países, cada um com o seu próprio enquadramento fiscal.

@@ -5,7 +5,7 @@
     "aiTitle": "Como desenvolvo com IA",
     "aiDescription": "Como desenvolvo software com agentes de IA: um plano escrito, cenários como contrato e uma verificação independente.",
     "projectsTitle": "Projetos | João Silvestre",
-    "projectsDescription": "Casos de estudo dos projetos que construo e mantenho, e como desenvolvo com agentes de IA."
+    "projectsDescription": "Os projetos que construo e mantenho, e como trabalho com agentes de IA."
   },
   "nav": {
     "about": "Sobre",
@@ -91,14 +91,14 @@
   "projectsPage": {
     "crumb": "projetos",
     "title": "Projetos.",
-    "lead": "O que construo e mantenho, com um pequeno caso de estudo para cada um.",
-    "back": "Todos os projetos",
+    "lead": "O que construo e mantenho, em poucas linhas cada.",
     "statusLabel": "Estado",
     "stackLabel": "Tecnologias",
     "lastActiveLabel": "Última atividade",
-    "workflowCardLabel": "Como construo",
-    "aiLink": "Como desenvolvo com IA",
-    "workflowLink": "Ler o caso de estudo do fluxo de trabalho",
+    "workflowTitle": "Como trabalho com agentes de IA",
+    "workflowBody": "Cada projeto começa como uma ideia que discuto com o agente. Depois abrimos um espaço de trabalho e escrevemos um plano, que aprovo antes de ser escrito qualquer código. O agente desenvolve e escreve os testes, e o trabalho segue num pull request que reviso.",
+    "workflowLink": "Mais sobre como desenvolvo com IA",
+    "projectsLink": "Ver o que construo",
     "statusActive": "ativo",
     "statusMaintenance": "em manutenção",
     "statusDormant": "inativo"

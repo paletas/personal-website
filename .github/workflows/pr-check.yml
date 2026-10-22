@@ -47,12 +47,12 @@ jobs:
             echo "GET $a -> $c ($(wc -c < /tmp/asset) bytes)"
             [ "$c" = 200 ] && [ "$(wc -c < /tmp/asset)" -gt 5000 ] || exit 1
           done
-          for r in /ai /pt /writing/how-do-cpus-work-part1 /projects /pt/projects /projects/planahead /projects/workflow /pt/projects/workflow; do c=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$r" || true); echo "GET $r -> $c"; [ "$c" = 200 ] || exit 1; done
+          for r in /ai /pt /writing/how-do-cpus-work-part1 /projects /pt/projects; do c=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:8080$r" || true); echo "GET $r -> $c"; [ "$c" = 200 ] || exit 1; done
 
       - name: Leak scan
         run: |
           mkdir -p /tmp/scan
-          for r in /projects /pt/projects /projects/planahead /projects/workflow /pt/projects/workflow; do
+          for r in /projects /pt/projects; do
             curl -fsS "http://localhost:8080$r" -o "/tmp/scan/$(echo "$r" | tr '/' '_').html"
           done
           bash tools/deny-scan.sh /tmp/scan/*.html

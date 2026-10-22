@@ -30,5 +30,5 @@ namespace Silvestre.App.Web.Models
 
     public record WritingPageContent(string Crumb, string Title, string Lead, string Back, string Updated);
 
-    public record ProjectsPageContent(string Crumb, string Title, string Lead, string Back, string StatusLabel, string StackLabel, string LastActiveLabel, string WorkflowCardLabel, string AiLink, string WorkflowLink, string StatusActive, string StatusMaintenance, string StatusDormant);
+    public record ProjectsPageContent(string Crumb, string Title, string Lead, string StatusLabel, string StackLabel, string LastActiveLabel, string WorkflowTitle, string WorkflowBody, string WorkflowLink, string ProjectsLink, string StatusActive, string StatusMaintenance, string StatusDormant);
 }

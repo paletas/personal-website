@@ -25,25 +25,22 @@
 
 <section class="py-7">
     <div class="grid gap-3.5">
-        @foreach (var workflow in all.Where(p => p.Kind == "workflow"))
-        {
-            <a class="card card-glow" href="@(prefix + "/projects/workflow")">
-                <div class="meta">@site.ProjectsPage.WorkflowCardLabel</div>
-                <h3 class="text-[19px] mb-1.5">@workflow.Title</h3>
-                <p class="muted">@workflow.Tagline</p>
-            </a>
-        }
         @foreach (var project in all.Where(p => p.Kind == "project"))
         {
             var facts = Archive.Facts(project.Slug);
-            <a class="card" href="@(prefix + "/projects/" + project.Slug)">
+            <article id="@project.Slug" class="card scroll-mt-24">
                 @if (facts is not null)
                 {
                     <div class="meta">@StatusText(facts.Status) · @string.Join(", ", facts.Stack) · @facts.LastActive</div>
                 }
-                <h3 class="text-[19px] mb-1.5">@project.Title</h3>
-                <p class="muted">@project.Tagline</p>
-            </a>
+                <h2 class="text-[19px] mb-1.5">@project.Title</h2>
+                <div class="prose dark:prose-invert max-w-none muted">@Html.Raw(project.Html)</div>
+            </article>
         }
+        <article class="card card-glow">
+            <h2 class="text-[19px] mb-1.5">@site.ProjectsPage.WorkflowTitle</h2>
+            <p class="muted">@site.ProjectsPage.WorkflowBody</p>
+            <p class="mt-3"><a class="underline" href="@(prefix + "/ai")">@site.ProjectsPage.WorkflowLink</a></p>
+        </article>
     </div>
 </section>

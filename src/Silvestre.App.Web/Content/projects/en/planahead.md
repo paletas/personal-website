@@ -5,19 +5,7 @@ order: 1
 kind: project
 ---
 
-Money tools usually look backwards: they record what was spent and leave the planning to a spreadsheet. PlanAhead starts from the other direction. It is a personal finance planner for Portuguese users, built around the question of what the coming months should look like, and tracking is there to feed that answer.
-
-## Problem
-
-Salaries in Portugal come with their own tax and contribution rules, and most budgeting apps either ignore them or force a manual workaround. I wanted one place that understands take-home pay, recurring commitments and long-term goals, so a plan made today still holds up a few months from now.
-
-## What it does
-
-The app covers the everyday finance loop. A salary calculator turns gross pay into net pay under local rules. Accounts, transactions and recurring items build up a picture of what is coming in and going out, and budgets and sinking funds set money aside for known future costs. Mortgage and asset tracking add the bigger, slower items, and reports pull everything into a view of where things are heading. Statements can be imported in bulk, and an optional bank sync can feed transactions in automatically.
-
-## How it's built
-
-PlanAhead is a layered .NET application. A server-rendered web client talks only to a stateless API, never to the database directly. The API hands work to a layer of handlers that hold the business rules, independent of how a request arrives, and those handlers read and write a relational database through a data layer. Keeping the rules in one transport-neutral layer means the same logic serves the web client and any future client. The pages favour small server-driven updates over heavy client-side code, and the whole solution is covered by browser-level end-to-end tests.
+PlanAhead is a personal finance planner for Portuguese users, built around the question of what the coming months should look like rather than only what was spent. It turns gross pay into net pay under local rules, tracks accounts, recurring items, budgets and sinking funds, and reports where things are heading. It is a layered .NET application, with the business rules kept apart from the web client.
 
 <figure class="diagram">
 <svg viewBox="0 0 520 330" role="img" aria-label="Layers of PlanAhead: a web client calls an API, which calls handlers, which use storage; bank sync is an optional input to the handlers">
@@ -25,7 +13,3 @@ PlanAhead is a layered .NET application. A server-rendered web client talks only
 </svg>
 <figcaption>requests flow down the layers; bank sync is an optional input</figcaption>
 </figure>
-
-## What's next
-
-The roadmap is mostly about depth rather than breadth: smarter categorisation of transactions, more flexible budget periods with alerts, richer reports, and stronger sign-in options. The longer view is support for other countries, each with its own tax framework.

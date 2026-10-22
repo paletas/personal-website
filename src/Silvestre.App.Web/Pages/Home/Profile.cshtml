@@ -103,7 +103,7 @@
         </a>
         @foreach (var p in ProjectArchive.All(isPt).Where(p => p.Kind == "project").Take(3))
         {
-            <a class="card span-6" href="@(prefix + "/projects/" + p.Slug)">
+            <a class="card span-6" href="@(prefix + "/projects#" + p.Slug)">
                 <h3 class="text-xl mb-1.5">@p.Title</h3>
                 <p class="muted">@p.Tagline</p>
             </a>

@@ -15,7 +15,7 @@ namespace Silvestre.App.Web.Models
 
     public record ProjectFacts(string Status, IReadOnlyList<string> Stack, string LastActive);
 
-    // Renders the Markdown case studies under Content/projects/{en,pt} and the shared facts.json once at start-up.
+    // Renders the short Markdown project overviews under Content/projects/{en,pt} and the shared facts.json once at start-up.
     public class ProjectArchive
     {
         private readonly Dictionary<string, ProjectEntry> _en = new(StringComparer.Ordinal);
@@ -54,8 +54,6 @@ namespace Silvestre.App.Web.Models
 
         public IReadOnlyList<ProjectEntry> All(bool pt) =>
             (pt ? _pt : _en).Values.OrderBy(p => p.Order).ThenBy(p => p.Slug, StringComparer.Ordinal).ToList();
-
-        public ProjectEntry? Get(string slug, bool pt) => (pt ? _pt : _en).TryGetValue(slug, out var entry) ? entry : null;
 
         public ProjectFacts? Facts(string slug) => _facts.TryGetValue(slug, out var facts) ? facts : null;
 
