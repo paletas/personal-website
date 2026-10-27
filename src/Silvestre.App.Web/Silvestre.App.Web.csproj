@@ -8,7 +8,7 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Version>2.1.3</Version>
+    <Version>2.1.4</Version>
     <DockerfileContext>..\..</DockerfileContext>
     <CompressionEnabled>false</CompressionEnabled>
     <GenerateStaticWebAssetsManifest>false</GenerateStaticWebAssetsManifest>
