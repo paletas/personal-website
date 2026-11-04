@@ -6,7 +6,7 @@ namespace Silvestre.App.Web.Models
 
     public record NavContent(string About, string Ai, string Projects, string Writing, string Wisc, string Contact, string Theme, string ThemeLabel, string OpenMenu, string LanguageSwitch);
 
-    public record FooterContent(string Rights);
+    public record FooterContent(string Rights, string Privacy);
 
     public record HomeContent(HeroContent Hero, AboutContent About, AiTeaserContent AiTeaser, ProjectsContent Projects, WritingContent Writing, ContactContent Contact);
 

@@ -20,7 +20,8 @@
     "languageSwitch": "English"
   },
   "footer": {
-    "rights": "João Silvestre"
+    "rights": "João Silvestre",
+    "privacy": "Estatísticas de utilização anónimas e sem cookies, via Umami (auto-alojado) e Cloudflare Web Analytics."
   },
   "home": {
     "hero": {
