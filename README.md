@@ -1,8 +1,12 @@
 # personal-website
 
-The personal site of João Silvestre: ASP.NET Core 10 Razor Pages, Tailwind CSS, English and Portuguese, and no third-party requests.
+The personal site of João Silvestre: ASP.NET Core 10 Razor Pages, Tailwind CSS, English and Portuguese, no ads and no cookies. Anonymous usage stats come from self-hosted Umami (`stats.itssilvestre.com`, loaded only when `Analytics__WebsiteId` is set) and Cloudflare Web Analytics.
 
-Version 2.0.0.
+Version 2.2.0.
+
+## Analytics
+
+The Umami snippet renders only when config key `Analytics:WebsiteId` (env `Analytics__WebsiteId`) is non-empty, is restricted by `data-domains` to itssilvestre.com and joaosilvestre.com (with www), is disabled for a browser with `localStorage.setItem('umami.disabled','1')`, and tracked events are `outbound` (target psy|f1|github|linkedin, place nav|nav_mobile|card|footer|contact) and `lang_switch` (to en|pt).
 
 ## Requirements
 

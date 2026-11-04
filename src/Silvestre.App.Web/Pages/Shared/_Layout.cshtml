@@ -13,6 +13,9 @@
     var projectsPath = prefix + "/projects";
     var onProjects = (thisPath ?? "").TrimEnd('/').StartsWith(projectsPath, StringComparison.OrdinalIgnoreCase);
 }
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Config
+@{ var analyticsId = Config["Analytics:WebsiteId"]?.Trim(); }
 <!DOCTYPE html>
 <html lang="@SiteContentProvider.HtmlLang(culture)" data-version="@App.AppVersion">
 <head>
@@ -38,6 +41,10 @@
             document.documentElement.classList.toggle('dark', stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
         })();
     </script>
+    @if (!string.IsNullOrEmpty(analyticsId))
+    {
+        <script defer src="https://stats.itssilvestre.com/script.js" data-website-id="@analyticsId" data-domains="itssilvestre.com,www.itssilvestre.com,joaosilvestre.com,www.joaosilvestre.com"></script>
+    }
     <link rel="stylesheet" href="~/css/site.css?v=@App.AppVersion" />
 </head>
 <body>
@@ -50,12 +57,12 @@
                 <a class="nav-link" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
                 <a class="nav-link" href="@(prefix + "/projects")" aria-current="@(onProjects ? "page" : null)">@site.Nav.Projects</a>
                 <a class="nav-link" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
-                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
+                <a class="nav-link" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener" data-umami-event="outbound" data-umami-event-target="psy" data-umami-event-place="nav">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
             <div class="flex gap-2 ml-auto md:ml-0">
                 <button type="button" class="pill" onclick="Silvestre.toggleDarkMode()" aria-label="@site.Nav.ThemeLabel">◐ @site.Nav.Theme</button>
-                <a class="pill" href="@other" hreflang="@(isPt ? "en" : "pt-PT")" lang="@(isPt ? "en" : "pt-PT")">@site.Nav.LanguageSwitch</a>
+                <a class="pill" href="@other" hreflang="@(isPt ? "en" : "pt-PT")" lang="@(isPt ? "en" : "pt-PT")" data-umami-event="lang_switch" data-umami-event-to="@(isPt ? "en" : "pt")">@site.Nav.LanguageSwitch</a>
                 <button type="button" class="pill navbar-burger md:hidden" aria-controls="main-nav" aria-expanded="false">
                     <span class="sr-only">@site.Nav.OpenMenu</span>
                     <svg id="main-nav-button-closed" class="block h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -73,7 +80,7 @@
                 <a class="nav-link text-base!" href="@(prefix + "/ai")" aria-current="@(onAi ? "page" : null)">@site.Nav.Ai</a>
                 <a class="nav-link text-base!" href="@(prefix + "/projects")" aria-current="@(onProjects ? "page" : null)">@site.Nav.Projects</a>
                 <a class="nav-link text-base!" href="@(prefix + "/#writing")">@site.Nav.Writing</a>
-                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
+                <a class="nav-link text-base!" href="@SiteLinks.PsyRoot" target="_blank" rel="noopener" data-umami-event="outbound" data-umami-event-target="psy" data-umami-event-place="nav_mobile">@site.Nav.Wisc <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a>
                 <a class="nav-link text-base!" href="@(prefix + "/#contact")">@site.Nav.Contact</a>
             </div>
         </div>
@@ -87,10 +94,11 @@
         <div class="wrap flex flex-wrap justify-between gap-3">
             <span>© @DateTime.Now.Year @site.Footer.Rights</span>
             <span class="flex gap-4">
-                <a href="@SiteLinks.GitHub" rel="noopener">GitHub<span class="sr-only"> @site.A11y.ExternalSite</span></a>
-                <a href="@SiteLinks.LinkedIn" rel="noopener">LinkedIn<span class="sr-only"> @site.A11y.ExternalSite</span></a>
+                <a href="@SiteLinks.GitHub" rel="noopener" data-umami-event="outbound" data-umami-event-target="github" data-umami-event-place="footer">GitHub<span class="sr-only"> @site.A11y.ExternalSite</span></a>
+                <a href="@SiteLinks.LinkedIn" rel="noopener" data-umami-event="outbound" data-umami-event-target="linkedin" data-umami-event-place="footer">LinkedIn<span class="sr-only"> @site.A11y.ExternalSite</span></a>
                 <span class="font-mono">v@(App.AppVersion)</span>
             </span>
+            <p class="w-full text-xs muted">@site.Footer.Privacy</p>
         </div>
     </footer>
 
