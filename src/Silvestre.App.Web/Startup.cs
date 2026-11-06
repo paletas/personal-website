@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Silvestre.App.Web.Models;
+using Silvestre.App.Web.Telemetry;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -27,6 +28,8 @@ namespace Silvestre.App.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
+            services.AddAppTelemetry(Configuration);
             services.AddSingleton<SiteContentProvider>();
             services.AddSingleton<WritingArchive>();
             services.AddSingleton<ProjectArchive>();
@@ -88,6 +91,7 @@ namespace Silvestre.App.Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapRazorPages();
             });
         }
