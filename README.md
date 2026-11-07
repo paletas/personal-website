@@ -2,7 +2,7 @@
 
 The personal site of João Silvestre: ASP.NET Core 10 Razor Pages, Tailwind CSS, English and Portuguese, no ads and no cookies. Anonymous usage stats come from self-hosted Umami (`stats.itssilvestre.com`, loaded only when `Analytics__WebsiteId` is set) and Cloudflare Web Analytics.
 
-Version 2.2.0.
+Version 2.3.0.
 
 ## Analytics
 
