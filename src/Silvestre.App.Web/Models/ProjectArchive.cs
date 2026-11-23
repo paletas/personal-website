@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace Silvestre.App.Web.Models
 {
-    public record ProjectEntry(string Slug, string Title, string Tagline, int Order, string Kind, string Html);
+    public record ProjectEntry(string Slug, string Title, string Tagline, int Order, string Kind, string Html, string? Url);
 
     public record ProjectFacts(string Status, IReadOnlyList<string> Stack, string LastActive);
 
@@ -74,8 +74,13 @@ namespace Silvestre.App.Web.Models
                 var order = meta.TryGetValue("order", out var o) && !string.IsNullOrWhiteSpace(o)
                     ? int.Parse(o, CultureInfo.InvariantCulture) : 0;
 
+                meta.TryGetValue("url", out var url);
+                if (string.IsNullOrWhiteSpace(url)) url = null;
+                else if (!url.StartsWith("https://", StringComparison.Ordinal))
+                    throw new InvalidOperationException($"Project '{slug}' has a url that does not start with https://: {file}");
+
                 target[slug] = new ProjectEntry(slug, title ?? slug, tagline ?? "", order,
-                    string.IsNullOrWhiteSpace(kind) ? "project" : kind, Markdown.ToHtml(doc, pipeline));
+                    string.IsNullOrWhiteSpace(kind) ? "project" : kind, Markdown.ToHtml(doc, pipeline), url);
             }
         }
 

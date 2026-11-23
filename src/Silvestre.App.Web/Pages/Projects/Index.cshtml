@@ -35,6 +35,10 @@
                 }
                 <h2 class="text-[19px] mb-1.5">@project.Title</h2>
                 <div class="prose dark:prose-invert max-w-none muted">@Html.Raw(project.Html)</div>
+                @if (!string.IsNullOrEmpty(project.Url))
+                {
+                    <p class="mt-3"><a class="underline" href="@project.Url" target="_blank" rel="noopener" data-umami-event="outbound" data-umami-event-target="@project.Slug" data-umami-event-place="projects">@site.ProjectsPage.OpenApp <span aria-hidden="true">↗</span><span class="sr-only"> @site.A11y.NewTab</span></a></p>
+                }
             </article>
         }
         <article class="card card-glow">
