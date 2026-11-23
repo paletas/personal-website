@@ -1,7 +1,26 @@
 {
   "projects": {
+    "baby-play": {
+      "lastActive": "2026-11",
+      "stack": [
+        "Godot 4",
+        "GDScript",
+        "WebAssembly"
+      ],
+      "status": "active"
+    },
+    "bolinha-play": {
+      "lastActive": "2026-11",
+      "stack": [
+        "Vite",
+        "TypeScript",
+        "PixiJS",
+        "YouTube IFrame API"
+      ],
+      "status": "active"
+    },
     "homeos": {
-      "lastActive": "2026-10",
+      "lastActive": "2026-11",
       "stack": [
         ".NET 10",
         "Razor Pages",
@@ -12,7 +31,7 @@
       "status": "active"
     },
     "planahead": {
-      "lastActive": "2026-10",
+      "lastActive": "2026-11",
       "stack": [
         ".NET 10",
         "Razor Pages",
@@ -23,7 +42,7 @@
       "status": "active"
     },
     "savvori": {
-      "lastActive": "2026-10",
+      "lastActive": "2026-11",
       "stack": [
         ".NET 10",
         "Aspire",

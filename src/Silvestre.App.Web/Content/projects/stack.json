@@ -1,4 +1,15 @@
 {
+  "baby-play": [
+    "Godot 4",
+    "GDScript",
+    "WebAssembly"
+  ],
+  "bolinha-play": [
+    "Vite",
+    "TypeScript",
+    "PixiJS",
+    "YouTube IFrame API"
+  ],
   "homeos": [
     ".NET 10",
     "Razor Pages",

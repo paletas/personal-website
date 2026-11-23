@@ -102,7 +102,8 @@
     "projectsLink": "See what I build",
     "statusActive": "active",
     "statusMaintenance": "maintenance",
-    "statusDormant": "dormant"
+    "statusDormant": "dormant",
+    "openApp": "Open the app"
   },
   "error": {
     "notFoundTitle": "Page not found.",
