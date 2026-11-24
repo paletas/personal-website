@@ -11,7 +11,7 @@ RUN npm ci
 COPY src/Silvestre.App.Web/ ./
 RUN npm run build:css
 
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:11.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/Silvestre.App.Web/Silvestre.App.Web.csproj", "Silvestre.App.Web/"]
